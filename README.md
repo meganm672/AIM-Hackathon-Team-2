@@ -2,12 +2,10 @@
 
 ## Getting Started
 
-1. Make a new repository using this template
-2. Add your teammates as collaborators on the repository
-3. Clone your repository locally
-4. Run `npm install` to install all the dependencies
-5. Setup your `.env` file locally - you can use the `.env.example` as a guideline. In particular, you will need to setup `PORT` and `DATABASE_URL` environment variables. But you may as well at a `JWT_SECRET` while you're in there.
-6. Run `npm run dev` to run locally
+1. Clone your repository locally
+2. Run `npm install` to install all the dependencies
+3. Setup your `.env` file locally - you can use the `.env.example` as a guideline. In particular, you will need to setup `PORT` and `DATABASE_URL` environment variables. But you may as well at a `JWT_SECRET` while you're in there.
+4. Run `npm run dev` to run locally
 
 
 ### Starting the App
@@ -63,9 +61,7 @@ Whichever provider you use, you will need to set the following settings:
 .
 ├── client/
 ├── dist (ignored by git)
-├── mocks/
 ├── node_modules (ignored by git)
-├── prisma/
 ├── server/
 ├── .gitignore
 ├── index.html
@@ -80,24 +76,6 @@ Whichever provider you use, you will need to set the following settings:
 ```
 .
 ├── client/
-│   ├── components/
-│   │   ├── __tests__/
-│   │   │   └── MyComponent.test.js
-│   │   ├── MyComponent.jsx
-│   │   ├── ... (etc, with as many nested folders as needed to keep organized)
-│   │   └── profile/
-│   │       ├── Profile.jsx
-│   │       ├── ProfileImage.jsx
-│   │       └── ProfileHeader.jsx
-│   ├── app/
-│   │   └── store.js
-│   ├── features/
-│   │   ├── api/
-│   │   │   └── apiSlice.js
-│   │   ├── auth/
-│   │   │   └── authSlice.js
-│   │   └── counter/
-│   │       └── counterSlice.js
 │   ├── App.jsx
 │   ├── index.css
 │   └── main.jsx
@@ -111,17 +89,11 @@ Whichever provider you use, you will need to set the following settings:
 │   ├── __tests__/
 │   │   └── app.test.js
 │   ├── api/
-│   │   ├── __tests__/
-│   │   │   └── user.test.js
 │   │   ├── index.js
-│   │   ├── user.js
 │   │   └── // ... (etc, with nested folders for sub-routes as needed to keep organized)
 │   ├── auth/
-│   │   ├── __tests__/
-│   │   │   └── auth.test.js
 │   │   └── index.js (used for authenticating with your app)
 │   ├── db/
-│   │   ├── client.js
 │   │   ├── seed.js
 │   │   └── // ... (optionally, add files / sub-folders with helper methods for accessing the DB with Prisma)
 │   ├── app.js (configure the app)

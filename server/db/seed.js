@@ -1,1 +1,1 @@
-// TODO: seed the DB using Prisma
+// TODO: seed the DB 
