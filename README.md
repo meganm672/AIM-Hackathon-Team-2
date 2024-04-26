@@ -1,3 +1,5 @@
+# AIM Hackathon Team 2
+
 # React + Express Boilerplate
 
 ## Getting Started
