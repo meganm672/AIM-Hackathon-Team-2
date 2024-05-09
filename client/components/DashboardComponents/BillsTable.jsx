@@ -6,12 +6,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+import { Button } from '@mui/material';
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 const BillsTable = () => {
     function createData(bills, totalAmount, deadline, priority, badges) {
         return { bills, totalAmount, deadline, priority, badges };
       }
-
+//dummy data for now we will have to map the rows to the file once we have the forms created
       const rows = [
         createData('Rent', "$1250.00", "November 03,2024", "Critical", "new account badge"),
         createData('Utilites', "$500.00", "September 13,2024", "High", "new account badge"),
@@ -49,6 +50,10 @@ const BillsTable = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    <Button>
+        <AddBoxOutlinedIcon/> 
+        Add New Goal
+    </Button>
         </div>
     );
 };
