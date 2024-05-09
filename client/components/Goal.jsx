@@ -22,7 +22,7 @@ export default function Goal() {
     >
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Typography>Goals</Typography>
+        <Typography>Goal</Typography>
         <Grid container spacing={1}>
           {/* Tabs */}
           <Grid item xs={12} md={12} lg={9}>
