@@ -8,12 +8,12 @@ import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import BudgetAccordian from './BudgetAccordian';
-
+import Button from '@mui/material/Button';
 const DashboardTabs = () => {
   return (
     <>
       <Tabs defaultValue={0}>
-        <TabList underlinePlacement={top}>
+        <TabList underlinePlacement={"left"}>
           <Tab>Goals</Tab>
           <Tab>Challenges</Tab>
         </TabList>
@@ -21,9 +21,9 @@ const DashboardTabs = () => {
           <Box sx={{height:"65vh"}}>
             <Paper elevation={2}  >
               <Typography>Catagories</Typography>
-
+              {/* <Button variant="contained" sx={{borderRadius:"1em", }}>Catagories</Button> */}
               <Divider />
-              <Typography>Total Balance:</Typography>
+              <Typography>Total Balance: $0</Typography>
               <BudgetAccordian />
             </Paper>
           </Box>

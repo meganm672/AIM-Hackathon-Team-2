@@ -5,12 +5,14 @@ import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import { Typography } from '@mui/material';
-const BillsTable = () => {
+import BillsTable from './BillsTable';
+
+const BudgetAccordian = () => {
 
     return (
         <div>
-            <Accordion>
                 <Typography>Bills</Typography>
+            <Accordion>
                 <AccordionSummary
                     sx={{ flexDirection: "row-reverse" }}
                     expandIcon={<ArrowDropDownIcon />}
@@ -20,8 +22,7 @@ const BillsTable = () => {
                     Bills
                 </AccordionSummary>
                 <AccordionDetails>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                    malesuada lacus ex, sit amet blandit leo lobortis eget.
+                   <BillsTable />
                 </AccordionDetails>
             </Accordion>
             <Typography>Needs</Typography>
@@ -61,4 +62,4 @@ const BillsTable = () => {
     );
 };
 
-export default BillsTable;
+export default BudgetAccordian;
