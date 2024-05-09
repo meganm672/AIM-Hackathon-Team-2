@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Tabs = () => {
+const WantsTable = () => {
     return (
         <div>
-            hello
+            
         </div>
     );
 };
 
-export default Tabs;
+export default WantsTable;

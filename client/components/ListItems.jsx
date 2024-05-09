@@ -8,30 +8,34 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import SettingsIcon from '@mui/icons-material/Settings';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import { IoChatbubbles } from "react-icons/io5";
+
 
 export const mainListItems = (
   <>
     <ListItemButton>
       <ListItemIcon>
-        <DashboardIcon />
+        <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <AccountBalanceIcon />
       </ListItemIcon>
       <ListItemText primary="Bank" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <PeopleIcon />
+        <IoChatbubbles />
       </ListItemIcon>
       <ListItemText primary="Messaging" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <BarChartIcon />
+        <SettingsIcon/>
       </ListItemIcon>
       <ListItemText primary="Settings" />
     </ListItemButton>
