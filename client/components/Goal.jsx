@@ -21,10 +21,14 @@ export default function Goal({ goalData }) {
   });
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
-  const handleAddMoneyPush = (value) => {
-    setAddMoney(value);
-    console.log(value);
+  const handleAddMoneyPush = (value) => setAddMoney(value);
+
+  const handleSubmitAddMoney = (e) => {
+    e.preventDefault();
+    handleCloseModal();
+    currentGoal[0].currentAmount += addMoney;
   };
+
   return (
     <Box
       component="main"
@@ -40,8 +44,6 @@ export default function Goal({ goalData }) {
     >
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Typography>Goal</Typography>
-        <Typography>ID:{currentGoal[0].bills} </Typography>
         <Grid container spacing={1}>
           {/* Tabs */}
           <Grid item xs={12} md={12} lg={9}>
@@ -88,72 +90,77 @@ export default function Goal({ goalData }) {
                   aria-labelledby="modal-modal-title"
                   aria-describedby="modal-modal-description"
                 >
-                  <Box sx={style}>
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h6"
-                      component="h2"
-                    >
-                      Add Money
-                    </Typography>
-                    <TextField
-                      id="filled-basic"
-                      label="$0.00"
-                      variant="outlined"
-                      value={addMoney}
-                      onChange={(e) => setAddMoney(e.target.value)}
-                    />
-                    <Box>
-                      <Button
-                        variant="outlined"
-                        onClick={() => handleAddMoneyPush(5)}
+                  <form onSubmit={handleSubmitAddMoney}>
+                    <Box sx={style}>
+                      <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
                       >
-                        $5
-                      </Button>
-                      <Button
+                        Add Money
+                      </Typography>
+                      <TextField
+                        id="filled-basic"
+                        placeholder="$0.00"
                         variant="outlined"
-                        onClick={() => handleAddMoneyPush(10)}
-                      >
-                        $10
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        onClick={() => handleAddMoneyPush(25)}
-                      >
-                        $25
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        onClick={() => handleAddMoneyPush(50)}
-                      >
-                        $50
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        onClick={() => handleAddMoneyPush(100)}
-                      >
-                        $100
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        onClick={() => handleAddMoneyPush(500)}
-                      >
-                        $500
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        onClick={() => handleAddMoneyPush(1000)}
-                      >
-                        $1000
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        onClick={() => handleAddMoneyPush(10000)}
-                      >
-                        $10000
+                        value={addMoney}
+                        onChange={(e) => setAddMoney(e.target.value)}
+                      />
+                      <Box>
+                        <Button
+                          variant="outlined"
+                          onClick={() => handleAddMoneyPush(5)}
+                        >
+                          $5
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          onClick={() => handleAddMoneyPush(10)}
+                        >
+                          $10
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          onClick={() => handleAddMoneyPush(25)}
+                        >
+                          $25
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          onClick={() => handleAddMoneyPush(50)}
+                        >
+                          $50
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          onClick={() => handleAddMoneyPush(100)}
+                        >
+                          $100
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          onClick={() => handleAddMoneyPush(500)}
+                        >
+                          $500
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          onClick={() => handleAddMoneyPush(1000)}
+                        >
+                          $1000
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          onClick={() => handleAddMoneyPush(10000)}
+                        >
+                          $10000
+                        </Button>
+                      </Box>
+                      <Button variant="outlined" type="submit">
+                        Add Money
                       </Button>
                     </Box>
-                  </Box>
+                  </form>
                 </Modal>
               </Paper>
             </Paper>
