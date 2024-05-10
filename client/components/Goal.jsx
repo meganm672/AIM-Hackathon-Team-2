@@ -2,23 +2,29 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
 import { useParams } from "react-router";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function Goal({ goalData }) {
   let [open, setOpen] = useState(false);
+  let [addMoney, setAddMoney] = useState(0);
   let { goalID } = useParams();
   let currentGoal = goalData.filter((data) => {
     return data.id === goalID;
   });
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
-
+  const handleAddMoneyPush = (value) => {
+    setAddMoney(value);
+    console.log(value);
+  };
   return (
     <Box
       component="main"
@@ -88,12 +94,65 @@ export default function Goal({ goalData }) {
                       variant="h6"
                       component="h2"
                     >
-                      Text in a modal
+                      Add Money
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      Duis mollis, est non commodo luctus, nisi erat porttitor
-                      ligula.
-                    </Typography>
+                    <TextField
+                      id="filled-basic"
+                      label="$0.00"
+                      variant="outlined"
+                      value={addMoney}
+                      onChange={(e) => setAddMoney(e.target.value)}
+                    />
+                    <Box>
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleAddMoneyPush(5)}
+                      >
+                        $5
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleAddMoneyPush(10)}
+                      >
+                        $10
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleAddMoneyPush(25)}
+                      >
+                        $25
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleAddMoneyPush(50)}
+                      >
+                        $50
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleAddMoneyPush(100)}
+                      >
+                        $100
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleAddMoneyPush(500)}
+                      >
+                        $500
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleAddMoneyPush(1000)}
+                      >
+                        $1000
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleAddMoneyPush(10000)}
+                      >
+                        $10000
+                      </Button>
+                    </Box>
                   </Box>
                 </Modal>
               </Paper>
