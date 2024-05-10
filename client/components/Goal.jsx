@@ -6,6 +6,8 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { useParams } from "react-router";
+import { Fab } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function Goal({ goalData }) {
   let { goalID } = useParams();
@@ -45,9 +47,26 @@ export default function Goal({ goalData }) {
                 <h2>{currentGoal[0].bills}</h2>
                 <p>{currentGoal[0].priority}</p>
               </div>
-              <div>
-                <p>${}</p>
-              </div>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "50vh",
+                }}
+              >
+                <p>${currentGoal[0].currentAmount}</p>
+                <div>
+                  <p>{currentGoal[0].totalAmount}</p>
+                  <p>{currentGoal[0].deadline}</p>
+                </div>
+                <div>
+                  <Fab size="small" color="primary" aria-label="add">
+                    <AddIcon />
+                  </Fab>
+                  <p>Add Money</p>
+                </div>
+              </Paper>
             </Paper>
           </Grid>
           {/* Tabs /> */}
