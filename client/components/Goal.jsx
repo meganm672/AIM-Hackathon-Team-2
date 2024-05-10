@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Modal from "@mui/material/Modal";
 import { useParams } from "react-router";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function Goal({ goalData }) {
+  let [open, setOpen] = useState(false);
   let { goalID } = useParams();
   let currentGoal = goalData.filter((data) => {
     return data.id === goalID;
   });
+  const handleOpenModal = () => setOpen(true);
+  const handleCloseModal = () => setOpen(false);
+
   return (
     <Box
       component="main"
@@ -61,11 +66,36 @@ export default function Goal({ goalData }) {
                   <p>{currentGoal[0].deadline}</p>
                 </div>
                 <div>
-                  <Fab size="small" color="primary" aria-label="add">
+                  <Fab
+                    size="small"
+                    color="primary"
+                    aria-label="add"
+                    onClick={handleOpenModal}
+                  >
                     <AddIcon />
                   </Fab>
                   <p>Add Money</p>
                 </div>
+                <Modal
+                  open={open}
+                  onClose={handleCloseModal}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography
+                      id="modal-modal-title"
+                      variant="h6"
+                      component="h2"
+                    >
+                      Text in a modal
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Duis mollis, est non commodo luctus, nisi erat porttitor
+                      ligula.
+                    </Typography>
+                  </Box>
+                </Modal>
               </Paper>
             </Paper>
           </Grid>
@@ -75,3 +105,14 @@ export default function Goal({ goalData }) {
     </Box>
   );
 }
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
