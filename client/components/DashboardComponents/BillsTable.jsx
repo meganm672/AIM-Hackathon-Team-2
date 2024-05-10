@@ -39,15 +39,13 @@ const BillsTable = ({ goalData }) => {
                 key={row.bills}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <Link to={`/goal/${row.bills}`}>
-                  <TableCell component="th" scope="row">
-                    {row.bills}
-                  </TableCell>
-                  <TableCell align="right">{row.totalAmount}</TableCell>
-                  <TableCell align="right">{row.deadline}</TableCell>
-                  <TableCell align="right">{row.priority}</TableCell>
-                  <TableCell align="right">{row.badges}</TableCell>
-                </Link>
+                <TableCell component="th" scope="row">
+                  <Link to={`/goal/${row.bills}`}>{row.bills}</Link>
+                </TableCell>
+                <TableCell align="right">{row.totalAmount}</TableCell>
+                <TableCell align="right">{row.deadline}</TableCell>
+                <TableCell align="right">{row.priority}</TableCell>
+                <TableCell align="right">{row.badges}</TableCell>
               </TableRow>
             ))}
           </TableBody>
