@@ -17,7 +17,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 export default function Goal({ goalData }) {
   let [open, setOpen] = useState(false);
-  let [addMoney, setAddMoney] = useState(0);
+  let [addMoney, setAddMoney] = useState();
   let { goalID } = useParams();
   let currentGoal = goalData.filter((data) => {
     return data.id === goalID;
@@ -30,6 +30,7 @@ export default function Goal({ goalData }) {
     e.preventDefault();
     handleCloseModal();
     currentGoal[0].currentAmount += addMoney;
+    setAddMoney();
   };
 
   return (
@@ -53,7 +54,7 @@ export default function Goal({ goalData }) {
         <Link underline="hover" color="inherit" href="/">
           Goals
         </Link>
-        <Typography color="text.primary">Breadcrumbs</Typography>
+        <Typography color="text.primary">Bills</Typography>
       </Breadcrumbs>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={1}>
