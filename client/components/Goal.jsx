@@ -40,7 +40,15 @@ export default function Goal({ goalData }) {
                 height: "80vh",
                 width: "79vw",
               }}
-            ></Paper>
+            >
+              <div>
+                <h2>{currentGoal[0].bills}</h2>
+                <p>{currentGoal[0].priority}</p>
+              </div>
+              <div>
+                <p>${}</p>
+              </div>
+            </Paper>
           </Grid>
           {/* Tabs /> */}
         </Grid>
