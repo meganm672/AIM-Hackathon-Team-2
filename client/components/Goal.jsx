@@ -5,8 +5,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import { useParams } from "react-router";
 
-export default function Goal() {
+export default function Goal({ goalData }) {
+  let { goalID } = useParams();
   return (
     <Box
       component="main"
@@ -23,6 +25,7 @@ export default function Goal() {
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Typography>Goal</Typography>
+        <Typography>ID:{goalID} </Typography>
         <Grid container spacing={1}>
           {/* Tabs */}
           <Grid item xs={12} md={12} lg={9}>
