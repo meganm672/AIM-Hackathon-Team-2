@@ -9,6 +9,9 @@ import { useParams } from "react-router";
 
 export default function Goal({ goalData }) {
   let { goalID } = useParams();
+  let currentGoal = goalData.filter((data) => {
+    return data.id === goalID;
+  });
   return (
     <Box
       component="main"
@@ -25,7 +28,7 @@ export default function Goal({ goalData }) {
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Typography>Goal</Typography>
-        <Typography>ID:{goalID} </Typography>
+        <Typography>ID:{currentGoal[0].bills} </Typography>
         <Grid container spacing={1}>
           {/* Tabs */}
           <Grid item xs={12} md={12} lg={9}>

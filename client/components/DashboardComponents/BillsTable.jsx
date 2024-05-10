@@ -10,16 +10,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 const BillsTable = ({ goalData }) => {
-  //     function createData(bills, totalAmount, deadline, priority, badges) {
-  //         return { bills, totalAmount, deadline, priority, badges };
-  //       }
-  // //dummy data for now we will have to map the rows to the file once we have the forms created
-  //       const rows = [
-  //         createData('Rent', "$1250.00", "November 03,2024", "Critical", "new account badge"),
-  //         createData('Utilites', "$500.00", "September 13,2024", "High", "new account badge"),
-  //         createData('Car Insurance', "$300.00", "December 03,2024", "Low", "new account badge"),
-  //         createData('Student Loans', "$650.00", "July 03,2024", "Critical", "new account badge"),
-  //       ];
   return (
     <div>
       <TableContainer component={Paper}>
@@ -40,7 +30,7 @@ const BillsTable = ({ goalData }) => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <Link to={`/goal/${row.bills}`}>{row.bills}</Link>
+                  <Link to={`/goal/${row.id}`}>{row.bills}</Link>
                 </TableCell>
                 <TableCell align="right">{row.totalAmount}</TableCell>
                 <TableCell align="right">{row.deadline}</TableCell>
