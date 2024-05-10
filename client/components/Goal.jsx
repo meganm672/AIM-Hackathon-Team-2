@@ -5,12 +5,15 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Paper from "@mui/material/Paper";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { useParams } from "react-router";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 export default function Goal({ goalData }) {
   let [open, setOpen] = useState(false);
@@ -43,6 +46,15 @@ export default function Goal({ goalData }) {
       }}
     >
       <Toolbar />
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        separator={<NavigateNextIcon fontSize="small" />}
+      >
+        <Link underline="hover" color="inherit" href="/">
+          Goals
+        </Link>
+        <Typography color="text.primary">Breadcrumbs</Typography>
+      </Breadcrumbs>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Grid container spacing={1}>
           {/* Tabs */}
