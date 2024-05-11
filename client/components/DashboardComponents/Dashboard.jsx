@@ -123,39 +123,39 @@ export default function Dashboard() {
   const mockData = [
     createData(
       "Rent",
-      "$1250.00",
+      1250.00,
       "November 03,2024",
       "Critical",
       "new account badge",
       "1",
-      0
+      250.00
     ),
     createData(
       "Utilites",
-      "$500.00",
+      500.00,
       "September 13,2024",
       "High",
       "new account badge",
       "2",
-      0
+       100.00,
     ),
     createData(
       "Car Insurance",
-      "$300.00",
+      300.00,
       "December 03,2024",
       "Low",
       "new account badge",
       "3",
-      0
+       75.00,
     ),
     createData(
       "Student Loans",
-      "$650.00",
+      650.00,
       "July 03,2024",
       "Critical",
       "new account badge",
       "4",
-      0
+      460.00,
     ),
   ];
 
