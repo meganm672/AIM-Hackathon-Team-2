@@ -32,6 +32,24 @@ const DashboardTabs = ({ goalData }) => {
     const { value } = event.target;
     setSelectedCategories(Array.isArray(value) ? value : [value]);
   };
+  
+  const calculateTotalSaved = (category) => {
+    return goalData.reduce((total, goal) => {
+      if (selectedCategories.includes(category)) {
+        return total + goal.amountPaid;
+      }
+      return total;
+    }, 0);
+  };
+
+  const calculateTotalBalance = () => {
+    let totalBalance = 0;
+    selectedCategories.forEach(category => {
+      totalBalance += calculateTotalSaved(category);
+    });
+    return totalBalance;
+  };
+
   return (
     <>
       <Tabs defaultValue={0}>
@@ -75,7 +93,7 @@ const DashboardTabs = ({ goalData }) => {
                 </DialogActions>
               </Dialog>
               <Divider />
-              <Typography>Total Balance: $0</Typography>
+              <Typography>Total Amount Saved: ${calculateTotalBalance()}</Typography>
               <BudgetAccordian goalData={goalData} selectedCategories={selectedCategories} />
             </Paper>
           </Box>
