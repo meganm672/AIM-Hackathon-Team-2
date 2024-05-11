@@ -13,7 +13,6 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 const BillsTable = ({ goalData }) => {
 
-
     return (
         <div>
             <TableContainer component={Paper}>
@@ -35,7 +34,7 @@ const BillsTable = ({ goalData }) => {
                             >
                                 <TableCell component="th" scope="row">
                                     <Link to={`/goal/${row.bills}`}>{row.bills}</Link>
-                                    <LinearProgress variant="determinate" value={(row.amountPaid / row.totalAmount) * 100} />
+                                    <LinearProgress variant="determinate" value={(row.currentAmount / row.totalAmount) * 100} />
                                 </TableCell>
                                 <TableCell align="right">${row.totalAmount}</TableCell>
                                 <TableCell align="right">{row.deadline}</TableCell>
