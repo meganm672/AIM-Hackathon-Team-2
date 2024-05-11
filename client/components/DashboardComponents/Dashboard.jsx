@@ -125,7 +125,7 @@ export default function Dashboard() {
     ),
     createData(
       "Car Insurance",
-       75.00,
+      75.00,
       300.00,
       "December 03,2024",
       "Low",
@@ -134,7 +134,7 @@ export default function Dashboard() {
     ),
     createData(
       "Student Loans",
-       460.00,
+      460.00,
       650.00,
       "July 03,2024",
       "Critical",
