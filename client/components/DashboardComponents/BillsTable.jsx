@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,17 +9,11 @@ import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import LinearProgress from '@mui/material/LinearProgress';
+
 const BillsTable = ({ goalData }) => {
-  //     function createData(bills, totalAmount, deadline, priority, badges) {
-  //         return { bills, totalAmount, deadline, priority, badges };
-  //       }
-  // //dummy data for now we will have to map the rows to the file once we have the forms created
-  //       const rows = [
-  //         createData('Rent', "$1250.00", "November 03,2024", "Critical", "new account badge"),
-  //         createData('Utilites', "$500.00", "September 13,2024", "High", "new account badge"),
-  //         createData('Car Insurance', "$300.00", "December 03,2024", "Low", "new account badge"),
-  //         createData('Student Loans', "$650.00", "July 03,2024", "Critical", "new account badge"),
-  //       ];
+
+
   return (
     <div>
       <TableContainer component={Paper}>
@@ -35,14 +29,15 @@ const BillsTable = ({ goalData }) => {
           </TableHead>
           <TableBody>
             {goalData.map((row) => (
-              <TableRow
+                <TableRow
                 key={row.bills}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
+                >
                 <TableCell component="th" scope="row">
                   <Link to={`/goal/${row.bills}`}>{row.bills}</Link>
+                  <LinearProgress variant="determinate" value={(row.amountPaid / row.totalAmount) * 100} />
                 </TableCell>
-                <TableCell align="right">{row.totalAmount}</TableCell>
+                <TableCell align="right">${row.totalAmount}</TableCell>
                 <TableCell align="right">{row.deadline}</TableCell>
                 <TableCell align="right">{row.priority}</TableCell>
                 <TableCell align="right">{row.badges}</TableCell>

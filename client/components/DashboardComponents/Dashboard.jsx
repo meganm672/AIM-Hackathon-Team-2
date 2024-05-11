@@ -100,14 +100,15 @@ export default function Dashboard() {
     setOpen(!open);
   };
 
-  function createData(bills, totalAmount, deadline, priority, badges, id) {
-    return { bills, totalAmount, deadline, priority, badges, id };
+  function createData(bills, amountPaid, totalAmount, deadline, priority, badges, id) {
+    return { bills, amountPaid, totalAmount, deadline, priority, badges, id };
   }
   //dummy data for now we will have to map the rows to the file once we have the forms created
   const mockData = [
     createData(
       "Rent",
-      "$1250.00",
+      250.00,
+      1250.00,
       "November 03,2024",
       "Critical",
       "new account badge",
@@ -115,7 +116,8 @@ export default function Dashboard() {
     ),
     createData(
       "Utilites",
-      "$500.00",
+      100.00,
+      500.00,
       "September 13,2024",
       "High",
       "new account badge",
@@ -123,7 +125,8 @@ export default function Dashboard() {
     ),
     createData(
       "Car Insurance",
-      "$300.00",
+       75.00,
+      300.00,
       "December 03,2024",
       "Low",
       "new account badge",
@@ -131,7 +134,8 @@ export default function Dashboard() {
     ),
     createData(
       "Student Loans",
-      "$650.00",
+       460.00,
+      650.00,
       "July 03,2024",
       "Critical",
       "new account badge",
