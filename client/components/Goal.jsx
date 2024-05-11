@@ -28,8 +28,11 @@ export default function Goal({ goalData }) {
 
   const handleSubmitAddMoney = (e) => {
     e.preventDefault();
+    if (typeof addMoney !== "number") {
+      return;
+    }
     handleCloseModal();
-    currentGoal[0].currentAmount += Number(addMoney);
+    currentGoal[0].currentAmount += addMoney;
     setAddMoney(0);
   };
 
@@ -117,7 +120,13 @@ export default function Goal({ goalData }) {
                         placeholder="$0.00"
                         variant="outlined"
                         value={addMoney}
-                        onChange={(e) => setAddMoney(e.target.value)}
+                        onChange={(e) => {
+                          let num = Number(e.target.value);
+                          if (isNaN(num)) {
+                            return setAddMoney(0);
+                          }
+                          return setAddMoney(num);
+                        }}
                       />
                       <Box>
                         <Button
