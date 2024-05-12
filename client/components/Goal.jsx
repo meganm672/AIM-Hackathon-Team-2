@@ -14,6 +14,7 @@ import { useParams } from "react-router";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export default function Goal({ goalData }) {
   let [open, setOpen] = useState(false);
@@ -72,34 +73,63 @@ export default function Goal({ goalData }) {
                 width: "79vw",
               }}
             >
-              <div>
-                <h2>{currentGoal[0].bills}</h2>
-                <p>{currentGoal[0].priority}</p>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+              }}>
+                <Typography variant="h4">{currentGoal[0].bills}</Typography>
+                <Typography>{currentGoal[0].priority}</Typography>
               </div>
+              <LinearProgress
+                variant="determinate"
+                value={(currentGoal[0].amountPaid / currentGoal[0].totalAmount) * 100}
+              />
+              <br></br>
               <Paper
                 sx={{
                   p: 2,
                   display: "flex",
                   flexDirection: "column",
-                  height: "50vh",
+                  height: "20vh",
                 }}
               >
-                <p>${currentGoal[0].amountPaid}</p>
-                <div>
-                  <p>{currentGoal[0].totalAmount}</p>
-                  <p>{currentGoal[0].deadline}</p>
+                <Typography>${currentGoal[0].amountPaid}</Typography>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                }}>
+                  <div >
+                    <Typography sx={{ margin: 1 }} variant="caption">${currentGoal[0].totalAmount}</Typography>
+                    <Typography variant="caption">{currentGoal[0].deadline}</Typography>
+                  </div>
+                  <div style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center'
+                  }}>
+
+                    <Fab
+                      size="small"
+                      color="primary"
+                      aria-label="add"
+                      onClick={handleOpenModal}
+                    >
+                      <AddIcon />
+                    </Fab>
+                    <Typography>Add Money</Typography>
+                  </div>
                 </div>
-                <div>
-                  <Fab
-                    size="small"
-                    color="primary"
-                    aria-label="add"
-                    onClick={handleOpenModal}
-                  >
-                    <AddIcon />
-                  </Fab>
-                  <p>Add Money</p>
-                </div>
+                  <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  }}>
+                    <Typography variant="caption" sx={{margin: 1}}>Goal</Typography>
+                    <Typography variant="caption">Date</Typography>
+                  </div>
                 <Modal
                   open={open}
                   onClose={handleCloseModal}
@@ -195,6 +225,7 @@ export default function Goal({ goalData }) {
 }
 const style = {
   position: "absolute",
+  padding: 2,
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -202,5 +233,5 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4,
+  Typography: 4,
 };
