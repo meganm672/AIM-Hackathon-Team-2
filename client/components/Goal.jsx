@@ -32,7 +32,7 @@ export default function Goal({ goalData }) {
       return;
     }
     handleCloseModal();
-    currentGoal[0].currentAmount += addMoney;
+    currentGoal[0].amountPaid += addMoney;
     setAddMoney(0);
   };
 
@@ -84,7 +84,7 @@ export default function Goal({ goalData }) {
                   height: "50vh",
                 }}
               >
-                <p>${currentGoal[0].currentAmount}</p>
+                <p>${currentGoal[0].amountPaid}</p>
                 <div>
                   <p>{currentGoal[0].totalAmount}</p>
                   <p>{currentGoal[0].deadline}</p>
