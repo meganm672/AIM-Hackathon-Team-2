@@ -35,7 +35,7 @@ const BillsTable = ({ goalData }) => {
                   <Link to={`/goal/${row.id}`}>{row.bills}</Link>
                   <LinearProgress
                     variant="determinate"
-                    value={(row.currentAmount / row.totalAmount) * 100}
+                    value={(row.amountPaid / row.totalAmount) * 100}
                   />
                 </TableCell>
                 <TableCell align="right">${row.totalAmount}</TableCell>
