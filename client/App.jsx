@@ -1,9 +1,13 @@
 import Dashboard from "./components/DashboardComponents/Dashboard";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 const App = () => {
   return (
-    <div className="App">
-      <Dashboard />
-    </div>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <div className="App">
+        <Dashboard />
+      </div>
+    </LocalizationProvider>
   );
 };
 

@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
+import { DatePicker } from "@mui/x-date-pickers";
 import BudgetAccordian from "./BudgetAccordian";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
@@ -16,9 +17,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
+
 const DashboardTabs = ({ goalData, handleAddGoal }) => {
   const [open, setOpen] = React.useState(false);
   const [openCreateModal, setOpenCreateModel] = React.useState(false);
+
   const [selectedCategories, setSelectedCategories] = useState([]); // Default to displaying bills table
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,12 +34,12 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
     }
   };
   const handleOpenCreateGoalModal = () => {
-    setOpen(true);
+    setOpenCreateModel(true);
   };
 
   const handleCloseCreateGoalModal = (event, reason) => {
     if (reason !== "backdropClick") {
-      setOpen(false);
+      setOpenCreateModel(false);
     }
   };
   const handleCategoryChange = (event) => {
@@ -89,9 +93,9 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                 <Button
                   variant="outlined"
                   sx={{ borderRadius: "2em" }}
-                  onClick={handleCloseCreateGoalModal}
+                  onClick={handleOpenCreateGoalModal}
                 >
-                  Add Category
+                  Create Goal
                 </Button>
               </div>
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
@@ -124,21 +128,16 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                 <DialogTitle>Create Goal</DialogTitle>
                 <DialogContent>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
-                      multiple
-                      value={selectedCategories}
-                      onChange={handleCategoryChange}
-                      renderValue={(selected) => selected.join(", ")}
-                      sx={{ minWidth: 120, m: 1 }}
-                    >
-                      <MenuItem value="bills">Bills</MenuItem>
-                      <MenuItem value="needs">Needs</MenuItem>
-                      <MenuItem value="wants">Wants</MenuItem>
-                    </Select>
+                    <TextField
+                      id="gaol-name"
+                      label="Goal name"
+                      variant="standard"
+                    />
+                    <DatePicker />
                   </FormControl>
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={handleClose}>Cancel</Button>
+                  <Button onClick={handleCloseCreateGoalModal}>Cancel</Button>
                   <Button onClick={handleClose}>Ok</Button>
                 </DialogActions>
               </Dialog>
