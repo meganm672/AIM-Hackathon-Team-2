@@ -37,8 +37,9 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
       amountPaid: 0,
       badges: "new account badge",
     };
-    handleAddGoal(data);
-    handleCloseCreateGoalModal();
+    // handleAddGoal(data);
+    // handleCloseCreateGoalModal();
+    console.log(data);
   };
   //
 
@@ -65,9 +66,9 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
     const { value } = event.target;
     setSelectedCategories(Array.isArray(value) ? value : [value]);
   };
-  const handleProrityChange = (event) => {
+  const handlePriorityChange = (event) => {
     const { value } = event.target;
-    setSelectedCategories(Array.isArray(value) ? value : [value]);
+    setPriority(Array.isArray(value) ? value : [value]);
   };
 
   const calculateTotalSaved = (category) => {
@@ -153,7 +154,7 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <Select
                       value={priority}
-                      onChange={handleProrityChange}
+                      onChange={handlePriorityChange}
                       renderValue={(selected) => selected.join(", ")}
                       sx={{ minWidth: 120, m: 1 }}
                     >
@@ -165,8 +166,27 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                       id="gaol-name"
                       label="Goal name"
                       variant="standard"
+                      value={goalName}
+                      onChange={(e) => setGoalName(e.target.value)}
                     />
-                    <DatePicker />
+                    <DatePicker
+                      value={deadline}
+                      onChange={(e) => setDeadline(e.target.value)}
+                    />
+                    <TextField
+                      id="filled-basic"
+                      placeholder="$0.00"
+                      variant="outlined"
+                      value={totalAmount}
+                      onChange={(e) => {
+                        let num = Number(e.target.value);
+
+                        if (isNaN(num)) {
+                          return setTotalAmount(0);
+                        }
+                        return setTotalAmount(num);
+                      }}
+                    />
                   </FormControl>
                 </DialogContent>
                 <DialogActions>
