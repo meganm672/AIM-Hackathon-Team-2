@@ -103,26 +103,26 @@ Whichever provider you use, you will need to set the following settings:
 ```
 
 # For running backend API
-Prerequities: Have Python installed: [Download link]('https://www.python.org/downloads/')
+**Prerequities**: Have Python installed: [Download link]('https://www.python.org/downloads/')
 <br>
 The backend is implemented using Django Rest Framework. 
 <br>
-Step 1: Install the the necessary libraries
+**Step 1**: Install the the necessary libraries
 ```
 cd backend
 pip install -r requirements.txt
 ```
 
-Step 2: Run the server
+**Step 2**: Run the server
 ```
 python manage.py runserver
 ```
 
-Step 3: Access the CRUD urls
+**Step 3**: Access the CRUD urls
 ```http://127.0.0.1:8000/api/goals/```
 ```http://127.0.0.1:8000/api/goals/1/```
 
-Step 4: Similarly access other urls
+**Step 4**: Similarly access other urls
 ```
 urlpatterns = [
     path("users/", UserView.as_view()),
