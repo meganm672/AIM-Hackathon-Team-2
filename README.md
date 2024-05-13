@@ -103,7 +103,7 @@ Whichever provider you use, you will need to set the following settings:
 ```
 
 # For running backend API
-<br>
+
 **Prerequities**: Have Python installed: [Download link](https://www.python.org/downloads/)
 <br>
 The backend is implemented using [Django Rest Framework](https://medium.com/@bhatnagar.aman1998/creating-restful-apis-in-django-rest-framework-using-class-based-views-78202e129773) 
