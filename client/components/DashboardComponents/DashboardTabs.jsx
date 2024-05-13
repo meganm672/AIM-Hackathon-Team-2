@@ -20,8 +20,14 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 
 const DashboardTabs = ({ goalData, handleAddGoal }) => {
-  const [open, setOpen] = React.useState(false);
-  const [openCreateModal, setOpenCreateModel] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [openCreateModal, setOpenCreateModel] = useState(false);
+  // Create Gaol states
+  const [gaolName, setGoalName] = useState("");
+  const [deadline, setDeadline] = useState(null);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [priority, setPriority] = useState(null);
+  //
 
   const [selectedCategories, setSelectedCategories] = useState([]); // Default to displaying bills table
   const handleClickOpen = () => {
