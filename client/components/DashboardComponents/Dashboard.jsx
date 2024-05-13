@@ -159,6 +159,14 @@ export default function Dashboard() {
     ),
   ];
 
+  const handleAddGoal = (data) => {
+    let { bills, totalAmount, deadline, priority, badges, id, amountPaid } =
+      data;
+    mockData.push(
+      createData(bills, totalAmount, deadline, priority, badges, id, amountPaid)
+    );
+  };
+
   return (
     // <ThemeProvider theme={defaultTheme}>
     <Router>
@@ -215,7 +223,10 @@ export default function Dashboard() {
           <List component="nav">{mainListItems}</List>
         </Drawer>
         <Routes>
-          <Route path="/" element={<Home goalData={mockData} />} />
+          <Route
+            path="/"
+            element={<Home goalData={mockData} handleAddGoal={handleAddGoal} />}
+          />
 
           {/* <Route path="/goal/:goalID" element={<Goal goalData={mockData} />} /> */}
           <Route path="/goal/:goalID" element={<Goal goalData={mockData} />} />
