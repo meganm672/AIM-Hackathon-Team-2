@@ -119,12 +119,12 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 
-**Step 3**: Access the CRUD urls
+**Step 3**: Access the CRUD urls (GET, POST, PUT, DELETE)
 </br>
-For listing all goals: </br>
++ For listing all goals: 
 ```http://127.0.0.1:8000/api/goals/```
 </br> </br>
-For listing goal with ID=1: </br>
++ For listing goal with ID=1: 
 ```http://127.0.0.1:8000/api/goals/1/```
 
 **Step 4**: Similarly access other urls
