@@ -82,8 +82,11 @@ const DashboardTabs = ({ goalData }) => {
                       sx={{ minWidth: 120, m: 1 }}
                     >
                       <MenuItem value="bills">Bills</MenuItem>
+                      <MenuItem value="debt">Debt</MenuItem>
                       <MenuItem value="needs">Needs</MenuItem>
+                      <MenuItem value="Subscriptions">Subscriptions</MenuItem>
                       <MenuItem value="wants">Wants</MenuItem>
+                      <MenuItem value="vacation">Vacations</MenuItem>
                     </Select>
                   </FormControl>
                 </DialogContent>
@@ -93,7 +96,7 @@ const DashboardTabs = ({ goalData }) => {
                 </DialogActions>
               </Dialog>
               <Divider />
-              <Typography>Total Amount Saved: ${calculateTotalBalance()}</Typography>
+              {/* <Typography>Total Amount Saved: ${calculateTotalBalance()}</Typography> */}
               <BudgetAccordian goalData={goalData} selectedCategories={selectedCategories} />
             </Paper>
           </Box>

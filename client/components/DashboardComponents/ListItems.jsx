@@ -1,35 +1,33 @@
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import SettingsIcon from '@mui/icons-material/Settings';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import { IoChatbubbles } from "react-icons/io5";
-
+import { RxDashboard } from "react-icons/rx";
+import { PiChartBar, PiBank } from "react-icons/pi";
+import { IoSettingsOutline } from "react-icons/io5";
 
 export const mainListItems = (
   <>
     <ListItemButton>
       <ListItemIcon>
-        <BarChartIcon />
+        <RxDashboard />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <AccountBalanceIcon />
+        <PiChartBar />
       </ListItemIcon>
-      <ListItemText primary="Bank" />
+      <ListItemText primary="Statistics" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <IoChatbubbles />
+        <PiBank />
       </ListItemIcon>
-      <ListItemText primary="Messaging" />
+      <ListItemText primary="Account" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <SettingsIcon/>
+        <IoSettingsOutline/>
       </ListItemIcon>
       <ListItemText primary="Settings" />
     </ListItemButton>

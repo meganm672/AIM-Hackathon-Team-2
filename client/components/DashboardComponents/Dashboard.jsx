@@ -28,6 +28,7 @@ import DashboardTabs from "./DashboardTabs";
 import Home from "../Home";
 import Goal from "../Goal";
 
+
 function Copyright(props) {
   return (
     <Typography
@@ -92,7 +93,6 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-// const defaultTheme = createTheme();
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
@@ -160,7 +160,6 @@ export default function Dashboard() {
   ];
 
   return (
-    // <ThemeProvider theme={defaultTheme}>
     <Router>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -222,6 +221,5 @@ export default function Dashboard() {
         </Routes>
       </Box>
     </Router>
-    // </ThemeProvider>
   );
 }
