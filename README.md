@@ -102,7 +102,7 @@ Whichever provider you use, you will need to set the following settings:
 │   └── index.js (start the app)
 ```
 
-### For running backend API
+# For running backend API
 Prerequities: Have Python installed: link('https://www.python.org/downloads/')
 The backend is implemented using Django Rest Framework. 
 Step 1: Install the the necessary libraries
