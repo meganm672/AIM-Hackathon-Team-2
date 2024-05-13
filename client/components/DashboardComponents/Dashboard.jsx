@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -94,6 +100,65 @@ export default function Dashboard() {
     setOpen(!open);
   };
 
+  function createData(
+    bills,
+    totalAmount,
+    deadline,
+    priority,
+    badges,
+    id,
+    amountPaid
+  ) {
+    return {
+      bills,
+      totalAmount,
+      deadline,
+      priority,
+      badges,
+      id,
+      amountPaid,
+    };
+  }
+  //dummy data for now we will have to map the rows to the file once we have the forms created
+  const mockData = [
+    createData(
+      "Rent",
+      1250.0,
+      "November 03,2024",
+      "Critical",
+      "new account badge",
+      "1",
+      250.0
+    ),
+    createData(
+      "Utilites",
+      500.0,
+      "September 13,2024",
+      "High",
+      "new account badge",
+      "2",
+      100.0
+    ),
+    createData(
+      "Car Insurance",
+      300.0,
+      "December 03,2024",
+      "Low",
+      "new account badge",
+      "3",
+      75.0
+    ),
+    createData(
+      "Student Loans",
+      650.0,
+      "July 03,2024",
+      "Critical",
+      "new account badge",
+      "4",
+      460.0
+    ),
+  ];
+
   return (
     // <ThemeProvider theme={defaultTheme}>
     <Router>
@@ -150,12 +215,13 @@ export default function Dashboard() {
           <List component="nav">{mainListItems}</List>
         </Drawer>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/goal" element={<Goal />} />
+          <Route path="/" element={<Home goalData={mockData} />} />
+
+          {/* <Route path="/goal/:goalID" element={<Goal goalData={mockData} />} /> */}
+          <Route path="/goal/:goalID" element={<Goal goalData={mockData} />} />
         </Routes>
       </Box>
     </Router>
-
     // </ThemeProvider>
   );
 }

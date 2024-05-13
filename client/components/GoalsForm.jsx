@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const GoalsForm = () => {
-    return (
-        <div>
-            Goals <Form></Form>
-        </div>
-    );
+  return (
+    <div>
+      Goals <Form></Form>
+    </div>
+  );
 };
 
 export default GoalsForm;

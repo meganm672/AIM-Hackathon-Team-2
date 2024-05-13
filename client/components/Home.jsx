@@ -26,7 +26,7 @@ function Copyright(props) {
   );
 }
 
-export default function Home() {
+export default function Home({ goalData }) {
   return (
     <Box
       component="main"
@@ -55,7 +55,7 @@ export default function Home() {
                 width: "79vw",
               }}
             >
-              <DashboardTabs />
+              <DashboardTabs goalData={goalData} />
             </Paper>
           </Grid>
           {/* Tabs /> */}
