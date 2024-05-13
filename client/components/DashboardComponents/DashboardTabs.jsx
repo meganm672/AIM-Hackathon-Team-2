@@ -23,10 +23,23 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
   const [open, setOpen] = useState(false);
   const [openCreateModal, setOpenCreateModel] = useState(false);
   // Create Gaol states
-  const [gaolName, setGoalName] = useState("");
+  const [goalName, setGoalName] = useState("");
   const [deadline, setDeadline] = useState(null);
   const [totalAmount, setTotalAmount] = useState(0);
   const [priority, setPriority] = useState(null);
+  const submitGoal = () => {
+    const data = {
+      bills: goalName,
+      deadline,
+      totalAmount,
+      priority,
+      id: Math.floor(Math.random() * 1000),
+      amountPaid: 0,
+      badges: "new account badge",
+    };
+    handleAddGoal(data);
+    handleCloseCreateGoalModal();
+  };
   //
 
   const [selectedCategories, setSelectedCategories] = useState([]); // Default to displaying bills table
@@ -49,6 +62,10 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
     }
   };
   const handleCategoryChange = (event) => {
+    const { value } = event.target;
+    setSelectedCategories(Array.isArray(value) ? value : [value]);
+  };
+  const handleProrityChange = (event) => {
     const { value } = event.target;
     setSelectedCategories(Array.isArray(value) ? value : [value]);
   };
@@ -134,6 +151,16 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                 <DialogTitle>Create Goal</DialogTitle>
                 <DialogContent>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
+                    <Select
+                      value={priority}
+                      onChange={handleProrityChange}
+                      renderValue={(selected) => selected.join(", ")}
+                      sx={{ minWidth: 120, m: 1 }}
+                    >
+                      <MenuItem value="Critical">Critical</MenuItem>
+                      <MenuItem value="High">High</MenuItem>
+                      <MenuItem value="Low">Low</MenuItem>
+                    </Select>
                     <TextField
                       id="gaol-name"
                       label="Goal name"
@@ -144,7 +171,7 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleCloseCreateGoalModal}>Cancel</Button>
-                  <Button onClick={handleClose}>Ok</Button>
+                  <Button onClick={submitGoal}>Ok</Button>
                 </DialogActions>
               </Dialog>
               <Divider />
