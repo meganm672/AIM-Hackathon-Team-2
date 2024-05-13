@@ -106,7 +106,7 @@ Whichever provider you use, you will need to set the following settings:
 
 **Prerequities**: Have Python installed: [Download link](https://www.python.org/downloads/)
 </br> </br>
-The backend is implemented using [Django Rest Framework](https://medium.com/@bhatnagar.aman1998/creating-restful-apis-in-django-rest-framework-using-class-based-views-78202e129773) and database integration is done with [Djongo]('https://magbanum.com/blog/starting-django-project-with-mongodb-using-djongo')
+The backend is implemented using [Django Rest Framework](https://medium.com/@bhatnagar.aman1998/creating-restful-apis-in-django-rest-framework-using-class-based-views-78202e129773) and database integration is done with [Djongo](https://magbanum.com/blog/starting-django-project-with-mongodb-using-djongo)
 </br> </br>
 **Step 1**: Install the the necessary libraries
 ```
