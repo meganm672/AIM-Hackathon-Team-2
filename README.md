@@ -105,9 +105,9 @@ Whichever provider you use, you will need to set the following settings:
 # For running backend API
 
 **Prerequities**: Have Python installed: [Download link](https://www.python.org/downloads/)
-</br>
+</br> </br>
 The backend is implemented using [Django Rest Framework](https://medium.com/@bhatnagar.aman1998/creating-restful-apis-in-django-rest-framework-using-class-based-views-78202e129773) 
-</br>
+</br> </br>
 **Step 1**: Install the the necessary libraries
 ```
 cd backend
@@ -120,10 +120,11 @@ python manage.py runserver
 ```
 
 **Step 3**: Access the CRUD urls
-For listing all goals:
-```http://127.0.0.1:8000/api/goals/```
 </br>
-For listing goal with ID=1
+For listing all goals: </br>
+```http://127.0.0.1:8000/api/goals/```
+</br> </br>
+For listing goal with ID=1: </br>
 ```http://127.0.0.1:8000/api/goals/1/```
 
 **Step 4**: Similarly access other urls
