@@ -11,7 +11,14 @@ import { FaCirclePlus } from "react-icons/fa6";
 
 
 const BudgetAccordian = ({ goalData, selectedCategories }) => {
-  const [accordionOpen, setAccordionOpen] = useState({});
+  // Initialize accordionOpen state with all categories closed
+  const initialAccordionState = selectedCategories.reduce((acc, category) => {
+    acc[category] = false;
+    return acc;
+  }, {});
+
+  const [accordionOpen, setAccordionOpen] = useState(initialAccordionState);
+
 
   const calculateTotalSaved = (category) => {
     return goalData.reduce((total, goal) => {
@@ -36,19 +43,23 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
           onChange={() => handleAccordionChange(category)}
         >
           <AccordionSummary
-            sx={{ flexDirection: "row-reverse"}}
+            sx={{
+              flexDirection: "row-reverse",
+              justifyContent: "space-between",
+              alignItems: "center"
+            }}
             expandIcon={<ArrowDropDownIcon />}
             aria-controls="panel1-content"
             id="panel1-header"
           >
-              <Typography align="left">{category.charAt(0).toUpperCase() + category.slice(1)}</Typography>
+              <Typography align="left" sx={{width:"50%"}} >{category.charAt(0).toUpperCase() + category.slice(1)}</Typography>
               {accordionOpen[category] && 
-              <Button sx={{ color: "#1F648E" }}>
+              <Button sx={{ color: "#1F648E"}}>
                 <FaCirclePlus />
                 Add Goals
               </Button>
               }
-              <Typography align="right">${calculateTotalSaved(category)}</Typography>
+              <Typography align="right" sx={{width:"50%"}}>${calculateTotalSaved(category)}</Typography>
               <BsThreeDotsVertical />
           </AccordionSummary>
           <AccordionDetails>

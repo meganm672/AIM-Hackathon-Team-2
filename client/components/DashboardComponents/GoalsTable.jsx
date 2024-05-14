@@ -14,6 +14,42 @@ import { BiTransfer } from "react-icons/bi";
 import Checkbox from '@mui/material/Checkbox';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import Chip from "@mui/material/Chip"
+import { createTheme,ThemeProvider } from '@mui/material/styles';
+
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       light: '#757ce8',
+//       main: '#3f50b5',
+//       dark: '#002884',
+//       contrastText: '#fff',
+//     },
+//     secondary: {
+//       light: '#ff7961',
+//       main: '#f44336',
+//       dark: '#ba000d',
+//       contrastText: '#000',
+//     },
+//     success:{ //low
+//       light: "#E4FDEB",
+//       main: "#48C76A"
+//     },
+//     info:{ //medium
+//       main: "#FFF3B4",
+//       dark: "#E7B147",
+
+//     },
+//     warning:{ //high
+//       main:"#F9E7D9",
+//       dark:"#E78A47"
+//     },
+//     error:{//critical
+//       main:"#FFEBEB",
+//       dark: "#EB5757"
+//     }
+//   },
+// });
 
 const GoalsTable = ({ goalData, category }) => {
   const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
@@ -70,11 +106,17 @@ const GoalsTable = ({ goalData, category }) => {
                     onChange={(event) => handlePriorityChange(event, row.id)} // Handle priority change
                   >
                     <MenuItem value="low">
-                      Low
+                      <Chip  color="success" label="Low"/>
                       </MenuItem>
-                    <MenuItem value="medium">Medium</MenuItem>
-                    <MenuItem value="high">High</MenuItem>
-                    <MenuItem value="critical">Critical</MenuItem>
+                    <MenuItem value="medium">
+                    <Chip color="info" label="Medium"/>
+                    </MenuItem>
+                    <MenuItem value="high">
+                    <Chip color="warning" label="High"/>
+                    </MenuItem>
+                    <MenuItem value="critical">
+                    <Chip color="error" label="Critical"/>
+                    </MenuItem>
                   </Select>
                 </TableCell>
                 <TableCell align="right">${row.totalAmount}</TableCell>

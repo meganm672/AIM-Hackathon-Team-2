@@ -17,7 +17,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import { IoIosSearch } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
 
@@ -56,6 +55,7 @@ const DashboardTabs = ({ goalData }) => {
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
               }}>
+                <div>
 
                 <TextField
                   label={
@@ -69,6 +69,7 @@ const DashboardTabs = ({ goalData }) => {
                 <Button>
                     <IoFilterOutline />
                 </Button>
+                </div>
                 <Button variant="contained" sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }} onClick={handleClickOpen}>
                  + Add New Category
                 </Button>

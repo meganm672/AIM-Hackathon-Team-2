@@ -21,7 +21,7 @@ export default function Home({ goalData }) {
             ? theme.palette.grey[100]
             : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
+        height: "100%",
         overflow: "auto",
       }}
     >
@@ -40,8 +40,9 @@ export default function Home({ goalData }) {
                 p: 2,
                 display: "flex",
                 flexDirection: "column",
-                height: "80vh",
+                height: "100vh",
                 width: "79vw",
+                // marginBottom:4
               }}
             >
               <DashboardTabs goalData={goalData} />
