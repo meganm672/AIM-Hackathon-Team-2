@@ -21,9 +21,10 @@ import TextField from "@mui/material/TextField";
 import dayjs from "dayjs";
 import { IoIosSearch } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
-const DashboardTabs = ({ goalData, handleAddGoal }) => {
+const DashboardTabs = ({ goalData, handleAddGoal, handleCreateCategory }) => {
   const [open, setOpen] = useState(false);
   const [openCreateModal, setOpenCreateModel] = useState(false);
+  const [categoryName, setCategoryName] = useState("");
   // Create Gaol states
   const [goalName, setGoalName] = useState("");
   const [deadline, setDeadline] = useState(dayjs("2022-04-17"));
@@ -64,23 +65,25 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
       setOpenCreateModel(false);
     }
   };
-  const handleCategoryChange = (event) => {
-    const { value } = event.target;
-    setSelectedCategories(Array.isArray(value) ? value : [value]);
+  // const handleCategoryChange = (event) => {
+  //   const { value } = event.target;
+  //   setSelectedCategories(Array.isArray(value) ? value : [value]);
+  // };
+  const submitNewCategory = (e) => {
+    e.preventDefault();
+    handleCreateCategory(categoryName);
+    handleClose();
   };
+
   const handlePriorityChange = (event) => {
     const { value } = event.target;
     setPriority(Array.isArray(value) ? value : [value]);
   };
 
   const calculateTotalSaved = (category) => {
-    console.log(category, goalData[category]);
-    if (!goalData.category) return 0;
+    if (!goalData[category]) return 0;
     return goalData[category].reduce((total, goal) => {
-      if (selectedCategories.includes(category)) {
-        return total + goal.amountPaid;
-      }
-      return total;
+      return total + goal.amountPaid;
     }, 0);
   };
 
@@ -152,7 +155,7 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                 <DialogTitle>Select A Category</DialogTitle>
                 <DialogContent>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <Select
+                    {/* <Select
                       multiple
                       value={selectedCategories}
                       onChange={handleCategoryChange}
@@ -165,12 +168,19 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                       <MenuItem value="Subscriptions">Subscriptions</MenuItem>
                       <MenuItem value="Wants">Wants</MenuItem>
                       <MenuItem value="Vacation">Vacations</MenuItem>
-                    </Select>
+                    </Select> */}
+                    <TextField
+                      id="gaol-name"
+                      variant="outlined"
+                      value={categoryName}
+                      placeholder="Goal name"
+                      onChange={(e) => setCategoryName(e.target.value)}
+                    />
                   </FormControl>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose}>Cancel</Button>
-                  <Button onClick={handleClose}>Ok</Button>
+                  <Button onClick={submitNewCategory}>Ok</Button>
                 </DialogActions>
               </Dialog>
               <Dialog

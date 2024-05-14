@@ -122,7 +122,10 @@ export default function Dashboard() {
     );
   };
   const handleCreateCategory = (category) => {
-    return (mockData[category] = []);
+    console.log(category);
+    mockData[category] = [];
+    console.log(mockData);
+    return;
   };
 
   return (
@@ -162,7 +165,13 @@ export default function Dashboard() {
         <Routes>
           <Route
             path="/"
-            element={<Home goalData={mockData} handleAddGoal={handleAddGoal} />}
+            element={
+              <Home
+                goalData={mockData}
+                handleAddGoal={handleAddGoal}
+                handleCreateCategory={handleCreateCategory}
+              />
+            }
           />
 
           {/* <Route path="/goal/:goalID" element={<Goal goalData={mockData} />} /> */}

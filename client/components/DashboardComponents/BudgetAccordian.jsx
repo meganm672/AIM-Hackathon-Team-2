@@ -27,17 +27,20 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
       {Object.keys(goalData).map((category) => (
         <div key={category}>
           <Accordion
-            expanded={accordionOpen}
-            onChange={() => setAccordionOpen(!accordionOpen)}
+            key={category}
+            expanded={accordionOpen[category]}
+            onChange={() => handleAccordionChange(category)}
           >
             <AccordionSummary
-              sx={{ flexDirection: "row-reverse", justifyContent: "flex-end" }}
+              sx={{ flexDirection: "row-reverse" }}
               expandIcon={<ArrowDropDownIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
             >
-              <Typography align="left">{category}</Typography>
-              {accordionOpen && (
+              <Typography align="left">
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </Typography>
+              {accordionOpen[category] && (
                 <Button sx={{ color: "#1F648E" }}>
                   <FaCirclePlus />
                   Add Goals
