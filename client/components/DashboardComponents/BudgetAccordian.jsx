@@ -5,7 +5,7 @@ import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { Typography, Button } from "@mui/material";
-import BillsTable from "./BillsTable";
+import CategoryTable from "./CategoryView";
 import NeedsTable from "./NeedsTable";
 import WantsTable from "./WantsTable";
 import DebtTable from "./DebtTable";
@@ -50,7 +50,7 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
               <BsThreeDotsVertical />
             </AccordionSummary>
             <AccordionDetails>
-              <BillsTable goalData={goalData[category]} />
+              <CategoryTable goalData={goalData[category]} />
             </AccordionDetails>
           </Accordion>
         </div>
