@@ -18,7 +18,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import FormControl from '@mui/material/FormControl';
 const DashboardTabs = ({ goalData }) => {
   const [open, setOpen] = React.useState(false);
-  const [selectedCategories, setSelectedCategories] = useState([]); // Default to displaying bills table
+  const [selectedCategories, setSelectedCategories] = useState(["bills"]); // Default to displaying bills table
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -71,7 +71,7 @@ const DashboardTabs = ({ goalData }) => {
                 <Button variant="outlined" sx={{ borderRadius: "2em", }} onClick={handleClickOpen}>Add Category</Button>
               </div>
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
-                <DialogTitle>Select A Category or All Categoires</DialogTitle>
+                <DialogTitle>Select A Category</DialogTitle>
                 <DialogContent>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <Select

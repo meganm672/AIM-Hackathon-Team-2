@@ -10,10 +10,16 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import LinearProgressWithLabel from "./Utils";
+import { PiPencilSimpleThin } from "react-icons/pi";
+import { BiTransfer } from "react-icons/bi";
 
 const BillsTable = ({ goalData }) => {
   return (
     <div>
+      <Button>
+        <AddBoxOutlinedIcon />
+        Add New Goal
+      </Button>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -23,6 +29,7 @@ const BillsTable = ({ goalData }) => {
               <TableCell align="right">Priority</TableCell>
               <TableCell align="right">Total Amount</TableCell>
               <TableCell align="right">Badges</TableCell>
+              <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -39,18 +46,24 @@ const BillsTable = ({ goalData }) => {
                   />
                 </TableCell>
                 <TableCell align="right">{row.deadline}</TableCell>
-                <TableCell align="right">{row.priority}</TableCell>
+                <TableCell align="right">
+                  {row.priority}
+                </TableCell>
                 <TableCell align="right">${row.totalAmount}</TableCell>
                 <TableCell align="right">{row.badges}</TableCell>
+                <TableCell align="right">
+                  <Button>
+                    <PiPencilSimpleThin />
+                  </Button>
+                  <Button>
+                    <BiTransfer />
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <Button>
-        <AddBoxOutlinedIcon />
-        Add New Goal
-      </Button>
     </div>
   );
 };
