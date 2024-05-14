@@ -12,6 +12,7 @@ import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import LinearProgressWithLabel from "./Utils";
 import { PiPencilSimpleThin } from "react-icons/pi";
 import { BiTransfer } from "react-icons/bi";
+import PrioritySelect from "./PrioritySelect";
 
 const BillsTable = ({ goalData }) => {
   return (
