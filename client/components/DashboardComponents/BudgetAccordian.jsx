@@ -48,7 +48,7 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
                 Add Goals
               </Button>
               }
-              <Typography align="right" sx={{ width: "80%" }}>${calculateTotalSaved('bills')}</Typography>
+              <Typography align="right">${calculateTotalSaved('bills')}</Typography>
               <BsThreeDotsVertical />
 
             </AccordionSummary>
@@ -77,7 +77,7 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
                 Add Goals
               </Button>
               }
-              <Typography align="right" sx={{ width: "80%" }}>${calculateTotalSaved('debt')}</Typography>
+              <Typography align="right" >${calculateTotalSaved('debt')}</Typography>
               <BsThreeDotsVertical />
             </AccordionSummary>
             <AccordionDetails>
@@ -105,7 +105,7 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
                 Add Goals
               </Button>
               }
-              <Typography align="right" sx={{ width: "77%" }}>${calculateTotalSaved('needs')}</Typography>
+              <Typography align="right">${calculateTotalSaved('needs')}</Typography>
               <BsThreeDotsVertical />
             </AccordionSummary>
             <AccordionDetails>
@@ -132,7 +132,7 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
                 Add Goals
               </Button>
               }
-              <Typography align="right" sx={{ width: "80%" }}>${calculateTotalSaved('subscriptions')}</Typography>
+              <Typography align="right" >${calculateTotalSaved('subscriptions')}</Typography>
               <BsThreeDotsVertical />
             </AccordionSummary>
             <AccordionDetails>
@@ -160,7 +160,7 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
                 Add Goals
               </Button>
               }
-              <Typography align="right" sx={{ width: "80%" }}>${calculateTotalSaved('wants')}</Typography>
+              <Typography align="right" >${calculateTotalSaved('wants')}</Typography>
               <BsThreeDotsVertical />
             </AccordionSummary>
             <AccordionDetails>
@@ -188,7 +188,7 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
                 Add Goals
               </Button>
               }
-              <Typography align="right" sx={{ width: "80%" }} >${calculateTotalSaved('vacation')}</Typography>
+              <Typography align="right" >${calculateTotalSaved('vacation')}</Typography>
               <BsThreeDotsVertical />
             </AccordionSummary>
             <AccordionDetails>

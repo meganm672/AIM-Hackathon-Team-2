@@ -26,7 +26,7 @@ export default function Home({ goalData }) {
       }}
     >
       <Toolbar />
-      <Container maxWidth="lg" sx={{ }}>
+      <Container maxWidth="lg" >
         <Typography variant="h4">Welcome Jane</Typography>
         <Button sx={{color: "#1c7488" }}>
           Take a tour 

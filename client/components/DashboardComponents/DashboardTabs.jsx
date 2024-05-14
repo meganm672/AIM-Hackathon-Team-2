@@ -48,7 +48,7 @@ const DashboardTabs = ({ goalData }) => {
           <Tab>Challenges</Tab>
         </TabList>
         <TabPanel value={0}>
-          <Box sx={{ height: "65vh" }}>
+          <Box sx={{ height: "100vh" }}>
             <Paper elevation={2}>
               <div style={{
                 display: 'flex',
@@ -87,7 +87,7 @@ const DashboardTabs = ({ goalData }) => {
                       <MenuItem value="bills">Bills</MenuItem>
                       <MenuItem value="debt">Debt</MenuItem>
                       <MenuItem value="needs">Needs</MenuItem>
-                      <MenuItem value="Subscriptions">Subscriptions</MenuItem>
+                      <MenuItem value="subscriptions">Subscriptions</MenuItem>
                       <MenuItem value="wants">Wants</MenuItem>
                       <MenuItem value="vacation">Vacations</MenuItem>
                     </Select>
