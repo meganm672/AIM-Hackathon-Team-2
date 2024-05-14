@@ -19,6 +19,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import dayjs from "dayjs";
+import { IoIosSearch } from "react-icons/io";
+import { IoFilterOutline } from "react-icons/io5";
 const DashboardTabs = ({ goalData, handleAddGoal }) => {
   const [open, setOpen] = useState(false);
   const [openCreateModal, setOpenCreateModel] = useState(false);
@@ -27,6 +29,7 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
   const [deadline, setDeadline] = useState(dayjs("2022-04-17"));
   const [totalAmount, setTotalAmount] = useState(0);
   const [priority, setPriority] = useState("");
+
   const submitGoal = () => {
     const data = {
       bills: goalName,
@@ -71,7 +74,9 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
   };
 
   const calculateTotalSaved = (category) => {
-    return goalData.reduce((total, goal) => {
+    console.log(category, goalData[category]);
+    if (!goalData.category) return 0;
+    return goalData[category].reduce((total, goal) => {
       if (selectedCategories.includes(category)) {
         return total + goal.amountPaid;
       }
@@ -112,13 +117,6 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                   onClick={handleClickOpen}
                 >
                   Add Category
-                </Button>
-                <Button
-                  variant="outlined"
-                  sx={{ borderRadius: "2em" }}
-                  onClick={handleOpenCreateGoalModal}
-                >
-                  Create Goal
                 </Button>
               </div>
               <div
@@ -161,12 +159,12 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                       renderValue={(selected) => selected.join(", ")}
                       sx={{ minWidth: 120, m: 1 }}
                     >
-                      <MenuItem value="bills">Bills</MenuItem>
-                      <MenuItem value="debt">Debt</MenuItem>
-                      <MenuItem value="needs">Needs</MenuItem>
-                      <MenuItem value="subscriptions">Subscriptions</MenuItem>
-                      <MenuItem value="wants">Wants</MenuItem>
-                      <MenuItem value="vacation">Vacations</MenuItem>
+                      <MenuItem value="Bills">Bills</MenuItem>
+                      <MenuItem value="Debt">Debt</MenuItem>
+                      <MenuItem value="Needs">Needs</MenuItem>
+                      <MenuItem value="Subscriptions">Subscriptions</MenuItem>
+                      <MenuItem value="Wants">Wants</MenuItem>
+                      <MenuItem value="Vacation">Vacations</MenuItem>
                     </Select>
                   </FormControl>
                 </DialogContent>
@@ -236,11 +234,6 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
               <Typography>
                 Total Amount Saved: ${calculateTotalBalance()}
               </Typography>
-              <BudgetAccordian
-                goalData={goalData}
-                selectedCategories={selectedCategories}
-              />
-              {/* <Typography>Total Amount Saved: ${calculateTotalBalance()}</Typography> */}
               <BudgetAccordian
                 goalData={goalData}
                 selectedCategories={selectedCategories}
