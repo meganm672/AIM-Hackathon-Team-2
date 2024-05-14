@@ -10,8 +10,11 @@ import DashboardTabs from "./DashboardComponents/DashboardTabs";
 import { Button } from "@mui/material";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 
-
-export default function Home({ goalData }) {
+export default function Home({
+  goalData,
+  handleAddGoal,
+  handleCreateCategory,
+}) {
   return (
     <Box
       component="main"
@@ -26,11 +29,11 @@ export default function Home({ goalData }) {
       }}
     >
       <Toolbar />
-      <Container maxWidth="lg" >
+      <Container maxWidth="lg">
         <Typography variant="h4">Welcome Jane</Typography>
-        <Button sx={{color: "#1c7488" }}>
-          Take a tour 
-        <IoIosInformationCircleOutline />
+        <Button sx={{ color: "#1c7488" }}>
+          Take a tour
+          <IoIosInformationCircleOutline />
         </Button>
         <Grid container spacing={1}>
           {/* Tabs */}
@@ -45,7 +48,11 @@ export default function Home({ goalData }) {
                 // marginBottom:4
               }}
             >
-              <DashboardTabs goalData={goalData} />
+              <DashboardTabs
+                goalData={goalData}
+                handleAddGoal={handleAddGoal}
+                handleCreateCategory={handleCreateCategory}
+              />
             </Paper>
           </Grid>
           {/* Tabs /> */}
