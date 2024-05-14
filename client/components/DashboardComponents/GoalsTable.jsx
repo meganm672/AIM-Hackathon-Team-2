@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,12 +11,13 @@ import Button from "@mui/material/Button";
 import LinearProgressWithLabel from "./Utils";
 import { PiPencilSimpleThin } from "react-icons/pi";
 import { BiTransfer } from "react-icons/bi";
-import Checkbox from '@mui/material/Checkbox';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import Checkbox from "@mui/material/Checkbox";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 const GoalsTable = ({ goalData, category }) => {
-  const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
+  const capitalizedCategory =
+    category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
 
   // State to store the selected priority for each goal
   const [selectedPriorities, setSelectedPriorities] = useState({});
@@ -69,9 +70,7 @@ const GoalsTable = ({ goalData, category }) => {
                     label="Priority"
                     onChange={(event) => handlePriorityChange(event, row.id)} // Handle priority change
                   >
-                    <MenuItem value="low">
-                      Low
-                      </MenuItem>
+                    <MenuItem value="low">Low</MenuItem>
                     <MenuItem value="medium">Medium</MenuItem>
                     <MenuItem value="high">High</MenuItem>
                     <MenuItem value="critical">Critical</MenuItem>
