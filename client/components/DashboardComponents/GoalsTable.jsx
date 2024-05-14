@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:client/components/DashboardComponents/CategoryView.jsx
-import React from "react";
-========
-import React, {useState} from "react";
->>>>>>>> origin/main:client/components/DashboardComponents/GoalsTable.jsx
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -15,18 +11,13 @@ import Button from "@mui/material/Button";
 import LinearProgressWithLabel from "./Utils";
 import { PiPencilSimpleThin } from "react-icons/pi";
 import { BiTransfer } from "react-icons/bi";
-<<<<<<<< HEAD:client/components/DashboardComponents/CategoryView.jsx
 import Checkbox from "@mui/material/Checkbox";
-import { FaCirclePlus } from "react-icons/fa6";
-
-const CategoryTable = ({ goalData }) => {
-========
-import Checkbox from '@mui/material/Checkbox';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 const GoalsTable = ({ goalData, category }) => {
-  const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
+  const capitalizedCategory =
+    category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
 
   // State to store the selected priority for each goal
   const [selectedPriorities, setSelectedPriorities] = useState({});
@@ -39,7 +30,6 @@ const GoalsTable = ({ goalData, category }) => {
     });
   };
 
->>>>>>>> origin/main:client/components/DashboardComponents/GoalsTable.jsx
   return (
     <div>
       <TableContainer component={Paper}>
@@ -49,11 +39,7 @@ const GoalsTable = ({ goalData, category }) => {
               <TableCell>
                 <Checkbox defaultChecked />
               </TableCell>
-<<<<<<<< HEAD:client/components/DashboardComponents/CategoryView.jsx
-              <TableCell>Bills</TableCell>
-========
               <TableCell>{capitalizedCategory}</TableCell>
->>>>>>>> origin/main:client/components/DashboardComponents/GoalsTable.jsx
               <TableCell align="right">Due Date</TableCell>
               <TableCell align="right">Priority</TableCell>
               <TableCell align="right">Total Amount</TableCell>
@@ -84,9 +70,7 @@ const GoalsTable = ({ goalData, category }) => {
                     label="Priority"
                     onChange={(event) => handlePriorityChange(event, row.id)} // Handle priority change
                   >
-                    <MenuItem value="low">
-                      Low
-                      </MenuItem>
+                    <MenuItem value="low">Low</MenuItem>
                     <MenuItem value="medium">Medium</MenuItem>
                     <MenuItem value="high">High</MenuItem>
                     <MenuItem value="critical">Critical</MenuItem>
@@ -111,8 +95,4 @@ const GoalsTable = ({ goalData, category }) => {
   );
 };
 
-<<<<<<<< HEAD:client/components/DashboardComponents/CategoryView.jsx
-export default CategoryTable;
-========
 export default GoalsTable;
->>>>>>>> origin/main:client/components/DashboardComponents/GoalsTable.jsx
