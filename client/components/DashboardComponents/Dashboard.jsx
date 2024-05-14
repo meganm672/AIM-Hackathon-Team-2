@@ -114,12 +114,15 @@ export default function Dashboard() {
     ],
   };
 
-  const handleAddGoal = (data) => {
+  const handleAddGoal = (category, data) => {
     let { bills, totalAmount, deadline, priority, badges, id, amountPaid } =
       data;
-    mockData.push(
+    return mockData[category].push(
       createData(bills, totalAmount, deadline, priority, badges, id, amountPaid)
     );
+  };
+  const handleCreateCategory = (category) => {
+    return (mockData[category] = []);
   };
 
   return (
