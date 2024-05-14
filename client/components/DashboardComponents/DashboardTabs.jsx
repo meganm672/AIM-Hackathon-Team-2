@@ -18,15 +18,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
-
+import dayjs from "dayjs";
 const DashboardTabs = ({ goalData, handleAddGoal }) => {
   const [open, setOpen] = useState(false);
   const [openCreateModal, setOpenCreateModel] = useState(false);
   // Create Gaol states
   const [goalName, setGoalName] = useState("");
-  const [deadline, setDeadline] = useState(null);
+  const [deadline, setDeadline] = useState(dayjs("2022-04-17"));
   const [totalAmount, setTotalAmount] = useState(0);
-  const [priority, setPriority] = useState(null);
+  const [priority, setPriority] = useState("");
   const submitGoal = () => {
     const data = {
       bills: goalName,
@@ -37,9 +37,8 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
       amountPaid: 0,
       badges: "new account badge",
     };
-    // handleAddGoal(data);
-    // handleCloseCreateGoalModal();
-    console.log(data);
+    handleAddGoal(data);
+    handleCloseCreateGoalModal();
   };
   //
 
@@ -154,6 +153,7 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <Select
                       value={priority}
+                      placeholder="Status"
                       onChange={handlePriorityChange}
                       renderValue={(selected) => selected.join(", ")}
                       sx={{ minWidth: 120, m: 1 }}
@@ -164,18 +164,24 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                     </Select>
                     <TextField
                       id="gaol-name"
-                      label="Goal name"
-                      variant="standard"
+                      variant="outlined"
                       value={goalName}
+                      placeholder="Goal name"
                       onChange={(e) => setGoalName(e.target.value)}
                     />
                     <DatePicker
                       value={deadline}
-                      onChange={(e) => setDeadline(e.target.value)}
+                      onChange={(newValue) => {
+                        let newDate = dayjs(newValue.toDate()).format(
+                          "YYYY-MM-DD"
+                        );
+
+                        setDeadline(newDate);
+                      }}
                     />
                     <TextField
                       id="filled-basic"
-                      placeholder="$0.00"
+                      placeholder="Amount"
                       variant="outlined"
                       value={totalAmount}
                       onChange={(e) => {
