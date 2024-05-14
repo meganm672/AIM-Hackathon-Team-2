@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:client/components/DashboardComponents/CategoryView.jsx
 import React from "react";
+========
+import React, {useState} from "react";
+>>>>>>>> origin/main:client/components/DashboardComponents/GoalsTable.jsx
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,10 +15,31 @@ import Button from "@mui/material/Button";
 import LinearProgressWithLabel from "./Utils";
 import { PiPencilSimpleThin } from "react-icons/pi";
 import { BiTransfer } from "react-icons/bi";
+<<<<<<<< HEAD:client/components/DashboardComponents/CategoryView.jsx
 import Checkbox from "@mui/material/Checkbox";
 import { FaCirclePlus } from "react-icons/fa6";
 
 const CategoryTable = ({ goalData }) => {
+========
+import Checkbox from '@mui/material/Checkbox';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+
+const GoalsTable = ({ goalData, category }) => {
+  const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
+
+  // State to store the selected priority for each goal
+  const [selectedPriorities, setSelectedPriorities] = useState({});
+
+  // Function to handle priority change
+  const handlePriorityChange = (event, goalId) => {
+    setSelectedPriorities({
+      ...selectedPriorities,
+      [goalId]: event.target.value, // Update the priority for the goal
+    });
+  };
+
+>>>>>>>> origin/main:client/components/DashboardComponents/GoalsTable.jsx
   return (
     <div>
       <TableContainer component={Paper}>
@@ -24,7 +49,11 @@ const CategoryTable = ({ goalData }) => {
               <TableCell>
                 <Checkbox defaultChecked />
               </TableCell>
+<<<<<<<< HEAD:client/components/DashboardComponents/CategoryView.jsx
               <TableCell>Bills</TableCell>
+========
+              <TableCell>{capitalizedCategory}</TableCell>
+>>>>>>>> origin/main:client/components/DashboardComponents/GoalsTable.jsx
               <TableCell align="right">Due Date</TableCell>
               <TableCell align="right">Priority</TableCell>
               <TableCell align="right">Total Amount</TableCell>
@@ -35,7 +64,7 @@ const CategoryTable = ({ goalData }) => {
           <TableBody>
             {goalData.map((row) => (
               <TableRow
-                key={row.bills}
+                key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell>
@@ -49,7 +78,20 @@ const CategoryTable = ({ goalData }) => {
                   />
                 </TableCell>
                 <TableCell align="right">{row.deadline}</TableCell>
-                <TableCell align="right">{row.priority}</TableCell>
+                <TableCell align="right">
+                  <Select
+                    value={selectedPriorities[row.id] || row.priority} // Set the value to the priority of the current goal
+                    label="Priority"
+                    onChange={(event) => handlePriorityChange(event, row.id)} // Handle priority change
+                  >
+                    <MenuItem value="low">
+                      Low
+                      </MenuItem>
+                    <MenuItem value="medium">Medium</MenuItem>
+                    <MenuItem value="high">High</MenuItem>
+                    <MenuItem value="critical">Critical</MenuItem>
+                  </Select>
+                </TableCell>
                 <TableCell align="right">${row.totalAmount}</TableCell>
                 <TableCell align="right">{row.badges}</TableCell>
                 <TableCell align="right">
@@ -69,4 +111,8 @@ const CategoryTable = ({ goalData }) => {
   );
 };
 
+<<<<<<<< HEAD:client/components/DashboardComponents/CategoryView.jsx
 export default CategoryTable;
+========
+export default GoalsTable;
+>>>>>>>> origin/main:client/components/DashboardComponents/GoalsTable.jsx

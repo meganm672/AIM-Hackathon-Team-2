@@ -11,18 +11,25 @@ import WantsTable from "./WantsTable";
 import DebtTable from "./DebtTable";
 import VacationTable from "./VacationTable";
 import SubscriptionsTable from "./SubscriptionsTable";
+import GoalsTable from "./GoalsTable";
+import { Typography, Button, Box } from "@mui/material";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaCirclePlus } from "react-icons/fa6";
 
 const BudgetAccordian = ({ goalData, selectedCategories }) => {
-  const [accordionOpen, setAccordionOpen] = useState(false);
+  const [accordionOpen, setAccordionOpen] = useState({});
 
   const calculateTotalSaved = (category) => {
     return goalData[category].reduce((total, goal) => {
       return total + goal.amountPaid;
     }, 0);
   };
-
+  const handleAccordionChange = (category) => {
+    setAccordionOpen((prevState) => ({
+      ...prevState,
+      [category]: !prevState[category],
+    }));
+  };
   return (
     <div>
       {Object.keys(goalData).map((category) => (
@@ -45,168 +52,17 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
                 </Button>
               )}
               <Typography align="right">
-                ${calculateTotalSaved("Needs")}
+                ${calculateTotalSaved(category)}
               </Typography>
               <BsThreeDotsVertical />
             </AccordionSummary>
             <AccordionDetails>
               <CategoryTable goalData={goalData[category]} />
+              <GoalsTable goalData={goalData[category]} category={category} />
             </AccordionDetails>
           </Accordion>
         </div>
       ))}
-      {selectedCategories.includes("bills") && <></>}
-      {selectedCategories.includes("debt") && (
-        <>
-          <Accordion
-            expanded={accordionOpen}
-            onChange={() => setAccordionOpen(!accordionOpen)}
-          >
-            <AccordionSummary
-              sx={{ flexDirection: "row-reverse" }}
-              expandIcon={<ArrowDropDownIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              <Typography align="left">Debt</Typography>
-              {accordionOpen && (
-                <Button sx={{ color: "#1F648E" }}>
-                  <FaCirclePlus />
-                  Add Goals
-                </Button>
-              )}
-              <Typography align="right">
-                ${calculateTotalSaved("debt")}
-              </Typography>
-              <BsThreeDotsVertical />
-            </AccordionSummary>
-            <AccordionDetails>
-              <DebtTable goalData={goalData} />
-            </AccordionDetails>
-          </Accordion>
-        </>
-      )}
-      {selectedCategories.includes("needs") && (
-        <>
-          <Accordion
-            expanded={accordionOpen}
-            onChange={() => setAccordionOpen(!accordionOpen)}
-          >
-            <AccordionSummary
-              sx={{ flexDirection: "row-reverse" }}
-              expandIcon={<ArrowDropDownIcon />}
-              aria-controls="panel2-content"
-              id="panel2-header"
-            >
-              <Typography align="left"> Needs</Typography>
-              {accordionOpen && (
-                <Button sx={{ color: "#1F648E" }}>
-                  <FaCirclePlus />
-                  Add Goals
-                </Button>
-              )}
-              <Typography align="right">
-                ${calculateTotalSaved("needs")}
-              </Typography>
-              <BsThreeDotsVertical />
-            </AccordionSummary>
-            <AccordionDetails>
-              <NeedsTable goalData={goalData} />
-            </AccordionDetails>
-          </Accordion>
-        </>
-      )}
-      {selectedCategories.includes("subscriptions") && (
-        <>
-          <Accordion
-            expanded={accordionOpen}
-            onChange={() => setAccordionOpen(!accordionOpen)}
-          >
-            <AccordionSummary
-              sx={{ flexDirection: "row-reverse" }}
-              expandIcon={<ArrowDropDownIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              <Typography align="left">Subscriptions</Typography>
-              {accordionOpen && (
-                <Button sx={{ color: "#1F648E" }}>
-                  <FaCirclePlus />
-                  Add Goals
-                </Button>
-              )}
-              <Typography align="right">
-                ${calculateTotalSaved("subscriptions")}
-              </Typography>
-              <BsThreeDotsVertical />
-            </AccordionSummary>
-            <AccordionDetails>
-              <SubscriptionsTable goalData={goalData} />
-            </AccordionDetails>
-          </Accordion>
-        </>
-      )}
-      {selectedCategories.includes("wants") && (
-        <>
-          <Accordion
-            expanded={accordionOpen}
-            onChange={() => setAccordionOpen(!accordionOpen)}
-          >
-            <AccordionSummary
-              sx={{ flexDirection: "row-reverse" }}
-              expandIcon={<ArrowDropDownIcon />}
-              aria-controls="panel3-content"
-              id="panel3-header"
-            >
-              <Typography align="left">Wants</Typography>
-              {accordionOpen && (
-                <Button sx={{ color: "#1F648E" }}>
-                  <FaCirclePlus />
-                  Add Goals
-                </Button>
-              )}
-              <Typography align="right">
-                ${calculateTotalSaved("wants")}
-              </Typography>
-              <BsThreeDotsVertical />
-            </AccordionSummary>
-            <AccordionDetails>
-              <WantsTable goalData={goalData} />
-            </AccordionDetails>
-            <AccordionActions></AccordionActions>
-          </Accordion>
-        </>
-      )}
-      {selectedCategories.includes("vacation") && (
-        <>
-          <Accordion
-            expanded={accordionOpen}
-            onChange={() => setAccordionOpen(!accordionOpen)}
-          >
-            <AccordionSummary
-              sx={{ flexDirection: "row-reverse" }}
-              expandIcon={<ArrowDropDownIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              <Typography align="left">Vacation</Typography>
-              {accordionOpen && (
-                <Button sx={{ color: "#1F648E" }}>
-                  <FaCirclePlus />
-                  Add Goals
-                </Button>
-              )}
-              <Typography align="right">
-                ${calculateTotalSaved("vacation")}
-              </Typography>
-              <BsThreeDotsVertical />
-            </AccordionSummary>
-            <AccordionDetails>
-              <VacationTable goalData={goalData} />
-            </AccordionDetails>
-          </Accordion>
-        </>
-      )}
     </div>
   );
 };
