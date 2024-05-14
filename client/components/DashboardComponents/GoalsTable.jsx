@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,9 +12,23 @@ import LinearProgressWithLabel from "./Utils";
 import { PiPencilSimpleThin } from "react-icons/pi";
 import { BiTransfer } from "react-icons/bi";
 import Checkbox from '@mui/material/Checkbox';
-import { FaCirclePlus } from "react-icons/fa6";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
-const BillsTable = ({ goalData }) => {
+const GoalsTable = ({ goalData, category }) => {
+  const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
+
+  // State to store the selected priority for each goal
+  const [selectedPriorities, setSelectedPriorities] = useState({});
+
+  // Function to handle priority change
+  const handlePriorityChange = (event, goalId) => {
+    setSelectedPriorities({
+      ...selectedPriorities,
+      [goalId]: event.target.value, // Update the priority for the goal
+    });
+  };
+
   return (
     <div>
       <TableContainer component={Paper}>
@@ -24,7 +38,7 @@ const BillsTable = ({ goalData }) => {
               <TableCell>
                 <Checkbox defaultChecked />
               </TableCell>
-              <TableCell>Bills</TableCell>
+              <TableCell>{capitalizedCategory}</TableCell>
               <TableCell align="right">Due Date</TableCell>
               <TableCell align="right">Priority</TableCell>
               <TableCell align="right">Total Amount</TableCell>
@@ -35,12 +49,12 @@ const BillsTable = ({ goalData }) => {
           <TableBody>
             {goalData.map((row) => (
               <TableRow
-                key={row.bills}
+                key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell>
-                <Checkbox />
-              </TableCell>
+                  <Checkbox />
+                </TableCell>
                 <TableCell component="th" scope="row">
                   <Link to={`/goal/${row.id}`}>{row.bills}</Link>
                   <LinearProgressWithLabel
@@ -50,7 +64,18 @@ const BillsTable = ({ goalData }) => {
                 </TableCell>
                 <TableCell align="right">{row.deadline}</TableCell>
                 <TableCell align="right">
-                  {row.priority}
+                  <Select
+                    value={selectedPriorities[row.id] || row.priority} // Set the value to the priority of the current goal
+                    label="Priority"
+                    onChange={(event) => handlePriorityChange(event, row.id)} // Handle priority change
+                  >
+                    <MenuItem value="low">
+                      Low
+                      </MenuItem>
+                    <MenuItem value="medium">Medium</MenuItem>
+                    <MenuItem value="high">High</MenuItem>
+                    <MenuItem value="critical">Critical</MenuItem>
+                  </Select>
                 </TableCell>
                 <TableCell align="right">${row.totalAmount}</TableCell>
                 <TableCell align="right">{row.badges}</TableCell>
@@ -71,4 +96,4 @@ const BillsTable = ({ goalData }) => {
   );
 };
 
-export default BillsTable;
+export default GoalsTable;
