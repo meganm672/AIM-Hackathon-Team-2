@@ -16,6 +16,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import { IoIosSearch } from "react-icons/io";
+import { IoFilterOutline } from "react-icons/io5";
+
 const DashboardTabs = ({ goalData }) => {
   const [open, setOpen] = React.useState(false);
   const [selectedCategories, setSelectedCategories] = useState(["bills"]); // Default to displaying bills table
@@ -32,23 +37,8 @@ const DashboardTabs = ({ goalData }) => {
     const { value } = event.target;
     setSelectedCategories(Array.isArray(value) ? value : [value]);
   };
-  
-  const calculateTotalSaved = (category) => {
-    return goalData.reduce((total, goal) => {
-      if (selectedCategories.includes(category)) {
-        return total + goal.amountPaid;
-      }
-      return total;
-    }, 0);
-  };
 
-  const calculateTotalBalance = () => {
-    let totalBalance = 0;
-    selectedCategories.forEach(category => {
-      totalBalance += calculateTotalSaved(category);
-    });
-    return totalBalance;
-  };
+
 
   return (
     <>
@@ -67,8 +57,21 @@ const DashboardTabs = ({ goalData }) => {
                 flexWrap: 'wrap',
               }}>
 
-                <Typography>Catagories</Typography>
-                <Button variant="outlined" sx={{ borderRadius: "2em", }} onClick={handleClickOpen}>Add Category</Button>
+                <TextField
+                  label={
+                  <>
+                  <IoIosSearch />
+                  Search goal
+                  </>}
+                  type="search"
+                  variant="filled"
+                />
+                <Button>
+                    <IoFilterOutline />
+                </Button>
+                <Button variant="contained" sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }} onClick={handleClickOpen}>
+                 + Add New Category
+                </Button>
               </div>
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
                 <DialogTitle>Select A Category</DialogTitle>

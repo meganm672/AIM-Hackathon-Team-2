@@ -16,10 +16,6 @@ import { BiTransfer } from "react-icons/bi";
 const VacationTable = ({ goalData }) => {
     return (
         <div>
-            <Button>
-                <AddBoxOutlinedIcon />
-                Add New Goal
-            </Button>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>

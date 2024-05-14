@@ -12,6 +12,8 @@ const PrioritySelect = ({goalData}) => {
         setPriority(event.target.value);
     };
 
+
+
     return (
         <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
