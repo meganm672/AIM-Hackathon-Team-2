@@ -14,7 +14,7 @@ import { useParams } from "react-router";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import LinearProgress from "@mui/material/LinearProgress";
+import LinearProgressWithLabel from "./DashboardComponents/Utils";
 
 export default function Goal({ goalData }) {
   let [open, setOpen] = useState(false);
@@ -82,7 +82,7 @@ export default function Goal({ goalData }) {
                 <Typography variant="h4">{currentGoal[0].bills}</Typography>
                 <Typography>{currentGoal[0].priority}</Typography>
               </div>
-              <LinearProgress
+              <LinearProgressWithLabel
                 variant="determinate"
                 value={(currentGoal[0].amountPaid / currentGoal[0].totalAmount) * 100}
               />

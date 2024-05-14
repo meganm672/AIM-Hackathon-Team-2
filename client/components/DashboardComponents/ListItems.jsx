@@ -1,35 +1,52 @@
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import SettingsIcon from '@mui/icons-material/Settings';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import { IoChatbubbles } from "react-icons/io5";
-
+import { RxDashboard } from "react-icons/rx";
+import { PiChartBar, PiBank, PiThumbsUpLight } from "react-icons/pi";
+import { IoSettingsOutline, IoMapOutline } from "react-icons/io5";
+import { GoPeople } from "react-icons/go";
 
 export const mainListItems = (
   <>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
+    <ListItemButton sx={{color: "#1F648E"}}>
+      <ListItemIcon sx={{fontSize: "1.5em",color: "#1F648E"}}>
+        <RxDashboard />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="Dashboard"  />
     </ListItemButton>
     <ListItemButton>
-      <ListItemIcon>
-        <AccountBalanceIcon />
+      <ListItemIcon sx={{fontSize: "1.5em"}}>
+        <PiBank />
       </ListItemIcon>
-      <ListItemText primary="Bank" />
+      <ListItemText primary="Account" />
     </ListItemButton>
     <ListItemButton>
-      <ListItemIcon>
-        <IoChatbubbles />
+      <ListItemIcon sx={{fontSize: "1.5em"}}>
+        <PiChartBar />
       </ListItemIcon>
-      <ListItemText primary="Messaging" />
+      <ListItemText primary="Statistics" />
     </ListItemButton>
     <ListItemButton>
-      <ListItemIcon>
-        <SettingsIcon/>
+      <ListItemIcon sx={{fontSize: "1.5em"}}>
+        <IoMapOutline />
+      </ListItemIcon>
+      <ListItemText primary="Budget" />
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon sx={{fontSize: "1.5em"}}>
+        <GoPeople />
+      </ListItemIcon>
+      <ListItemText primary="Community" />
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon sx={{fontSize: "1.5em"}}>
+        <PiThumbsUpLight />
+      </ListItemIcon>
+      <ListItemText primary="Advice" />
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon sx={{fontSize: "1.5em"}}>
+        <IoSettingsOutline/>
       </ListItemIcon>
       <ListItemText primary="Settings" />
     </ListItemButton>

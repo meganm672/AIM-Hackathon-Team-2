@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,23 +7,19 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
-import LinearProgressWithLabel from "./Utils";
+import { Button } from "@mui/material";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import LinearProgressWithLabel from './Utils';
 import { PiPencilSimpleThin } from "react-icons/pi";
 import { BiTransfer } from "react-icons/bi";
-import Checkbox from '@mui/material/Checkbox';
-import { FaCirclePlus } from "react-icons/fa6";
 
-const BillsTable = ({ goalData }) => {
+const DebtTable = ({ goalData }) => {
   return (
     <div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>
-                <Checkbox defaultChecked />
-              </TableCell>
               <TableCell>Bills</TableCell>
               <TableCell align="right">Due Date</TableCell>
               <TableCell align="right">Priority</TableCell>
@@ -38,9 +34,6 @@ const BillsTable = ({ goalData }) => {
                 key={row.bills}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell>
-                <Checkbox />
-              </TableCell>
                 <TableCell component="th" scope="row">
                   <Link to={`/goal/${row.id}`}>{row.bills}</Link>
                   <LinearProgressWithLabel
@@ -49,9 +42,7 @@ const BillsTable = ({ goalData }) => {
                   />
                 </TableCell>
                 <TableCell align="right">{row.deadline}</TableCell>
-                <TableCell align="right">
-                  {row.priority}
-                </TableCell>
+                <TableCell align="right">{row.priority}</TableCell>
                 <TableCell align="right">${row.totalAmount}</TableCell>
                 <TableCell align="right">{row.badges}</TableCell>
                 <TableCell align="right">
@@ -71,4 +62,4 @@ const BillsTable = ({ goalData }) => {
   );
 };
 
-export default BillsTable;
+export default DebtTable;

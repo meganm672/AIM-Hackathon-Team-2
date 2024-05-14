@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React from 'react';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,11 +9,11 @@ import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
-import LinearProgressWithLabel from "./Utils";
+import LinearProgressWithLabel from './Utils';
 import { PiPencilSimpleThin } from "react-icons/pi";
 import { BiTransfer } from "react-icons/bi";
 
-const NeedsTable = ({ goalData }) => {
+const VacationTable = ({ goalData }) => {
     return (
         <div>
             <TableContainer component={Paper}>
@@ -36,8 +35,11 @@ const NeedsTable = ({ goalData }) => {
                                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    <Link to={`/goal/${row.bills}`}>{row.bills}</Link>
-                                    <LinearProgressWithLabel variant="determinate" value={(row.amountPaid / row.totalAmount) * 100} />
+                                    <Link to={`/goal/${row.id}`}>{row.bills}</Link>
+                                    <LinearProgressWithLabel
+                                        variant="determinate"
+                                        value={(row.amountPaid / row.totalAmount) * 100}
+                                    />
                                 </TableCell>
                                 <TableCell align="right">{row.deadline}</TableCell>
                                 <TableCell align="right">{row.priority}</TableCell>
@@ -60,4 +62,4 @@ const NeedsTable = ({ goalData }) => {
     );
 };
 
-export default NeedsTable;
+export default VacationTable;

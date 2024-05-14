@@ -95,7 +95,7 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
           <Tab>Challenges</Tab>
         </TabList>
         <TabPanel value={0}>
-          <Box sx={{ height: "65vh" }}>
+          <Box sx={{ height: "100vh" }}>
             <Paper elevation={2}>
               <div
                 style={{
@@ -121,8 +121,37 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                   Create Goal
                 </Button>
               </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                }}
+              >
+                <TextField
+                  label={
+                    <>
+                      <IoIosSearch />
+                      Search goal
+                    </>
+                  }
+                  type="search"
+                  variant="filled"
+                />
+                <Button>
+                  <IoFilterOutline />
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}
+                  onClick={handleClickOpen}
+                >
+                  + Add New Category
+                </Button>
+              </div>
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
-                <DialogTitle>Select A Category or All Categoires</DialogTitle>
+                <DialogTitle>Select A Category</DialogTitle>
                 <DialogContent>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <Select
@@ -133,8 +162,11 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
                       sx={{ minWidth: 120, m: 1 }}
                     >
                       <MenuItem value="bills">Bills</MenuItem>
+                      <MenuItem value="debt">Debt</MenuItem>
                       <MenuItem value="needs">Needs</MenuItem>
+                      <MenuItem value="subscriptions">Subscriptions</MenuItem>
                       <MenuItem value="wants">Wants</MenuItem>
+                      <MenuItem value="vacation">Vacations</MenuItem>
                     </Select>
                   </FormControl>
                 </DialogContent>
@@ -204,6 +236,11 @@ const DashboardTabs = ({ goalData, handleAddGoal }) => {
               <Typography>
                 Total Amount Saved: ${calculateTotalBalance()}
               </Typography>
+              <BudgetAccordian
+                goalData={goalData}
+                selectedCategories={selectedCategories}
+              />
+              {/* <Typography>Total Amount Saved: ${calculateTotalBalance()}</Typography> */}
               <BudgetAccordian
                 goalData={goalData}
                 selectedCategories={selectedCategories}
