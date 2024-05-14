@@ -1,16 +1,8 @@
 import React, { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import { Typography, Button } from "@mui/material";
-import CategoryTable from "./CategoryView";
-import NeedsTable from "./NeedsTable";
-import WantsTable from "./WantsTable";
-import DebtTable from "./DebtTable";
-import VacationTable from "./VacationTable";
-import SubscriptionsTable from "./SubscriptionsTable";
 import GoalsTable from "./GoalsTable";
 import { Typography, Button, Box } from "@mui/material";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -57,7 +49,7 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
               <BsThreeDotsVertical />
             </AccordionSummary>
             <AccordionDetails>
-              <CategoryTable goalData={goalData[category]} />
+              {/* <CategoryTable goalData={goalData[category]} /> */}
               <GoalsTable goalData={goalData[category]} category={category} />
             </AccordionDetails>
           </Accordion>
