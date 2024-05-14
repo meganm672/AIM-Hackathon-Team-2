@@ -19,6 +19,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import dayjs from "dayjs";
+
 import { IoIosSearch } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
 const DashboardTabs = ({ goalData, handleAddGoal, handleCreateCategory }) => {
@@ -105,6 +106,7 @@ const DashboardTabs = ({ goalData, handleAddGoal, handleCreateCategory }) => {
         <TabPanel value={0}>
           <Box sx={{ height: "100vh" }}>
             <Paper elevation={2}>
+
               <div
                 style={{
                   display: "flex",
@@ -143,6 +145,7 @@ const DashboardTabs = ({ goalData, handleAddGoal, handleCreateCategory }) => {
                 <Button>
                   <IoFilterOutline />
                 </Button>
+
                 <Button
                   variant="contained"
                   sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}

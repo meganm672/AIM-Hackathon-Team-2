@@ -9,7 +9,14 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaCirclePlus } from "react-icons/fa6";
 
 const BudgetAccordian = ({ goalData, selectedCategories }) => {
-  const [accordionOpen, setAccordionOpen] = useState({});
+  // Initialize accordionOpen state with all categories closed
+  const initialAccordionState = selectedCategories.reduce((acc, category) => {
+    acc[category] = false;
+    return acc;
+  }, {});
+
+  const [accordionOpen, setAccordionOpen] = useState(initialAccordionState);
+
 
   const calculateTotalSaved = (category) => {
     return goalData[category].reduce((total, goal) => {
