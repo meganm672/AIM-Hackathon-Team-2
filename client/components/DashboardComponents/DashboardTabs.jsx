@@ -16,9 +16,14 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import { IoIosSearch } from "react-icons/io";
+import { IoFilterOutline } from "react-icons/io5";
+
 const DashboardTabs = ({ goalData }) => {
   const [open, setOpen] = React.useState(false);
-  const [selectedCategories, setSelectedCategories] = useState([]); // Default to displaying bills table
+  const [selectedCategories, setSelectedCategories] = useState(["bills"]); // Default to displaying bills table
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -32,23 +37,8 @@ const DashboardTabs = ({ goalData }) => {
     const { value } = event.target;
     setSelectedCategories(Array.isArray(value) ? value : [value]);
   };
-  
-  const calculateTotalSaved = (category) => {
-    return goalData.reduce((total, goal) => {
-      if (selectedCategories.includes(category)) {
-        return total + goal.amountPaid;
-      }
-      return total;
-    }, 0);
-  };
 
-  const calculateTotalBalance = () => {
-    let totalBalance = 0;
-    selectedCategories.forEach(category => {
-      totalBalance += calculateTotalSaved(category);
-    });
-    return totalBalance;
-  };
+
 
   return (
     <>
@@ -58,7 +48,7 @@ const DashboardTabs = ({ goalData }) => {
           <Tab>Challenges</Tab>
         </TabList>
         <TabPanel value={0}>
-          <Box sx={{ height: "65vh" }}>
+          <Box sx={{ height: "100vh" }}>
             <Paper elevation={2}>
               <div style={{
                 display: 'flex',
@@ -67,11 +57,24 @@ const DashboardTabs = ({ goalData }) => {
                 flexWrap: 'wrap',
               }}>
 
-                <Typography>Catagories</Typography>
-                <Button variant="outlined" sx={{ borderRadius: "2em", }} onClick={handleClickOpen}>Add Category</Button>
+                <TextField
+                  label={
+                  <>
+                  <IoIosSearch />
+                  Search goal
+                  </>}
+                  type="search"
+                  variant="filled"
+                />
+                <Button>
+                    <IoFilterOutline />
+                </Button>
+                <Button variant="contained" sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }} onClick={handleClickOpen}>
+                 + Add New Category
+                </Button>
               </div>
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
-                <DialogTitle>Select A Category or All Categoires</DialogTitle>
+                <DialogTitle>Select A Category</DialogTitle>
                 <DialogContent>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <Select
@@ -82,8 +85,11 @@ const DashboardTabs = ({ goalData }) => {
                       sx={{ minWidth: 120, m: 1 }}
                     >
                       <MenuItem value="bills">Bills</MenuItem>
+                      <MenuItem value="debt">Debt</MenuItem>
                       <MenuItem value="needs">Needs</MenuItem>
+                      <MenuItem value="subscriptions">Subscriptions</MenuItem>
                       <MenuItem value="wants">Wants</MenuItem>
+                      <MenuItem value="vacation">Vacations</MenuItem>
                     </Select>
                   </FormControl>
                 </DialogContent>
@@ -93,7 +99,7 @@ const DashboardTabs = ({ goalData }) => {
                 </DialogActions>
               </Dialog>
               <Divider />
-              <Typography>Total Amount Saved: ${calculateTotalBalance()}</Typography>
+              {/* <Typography>Total Amount Saved: ${calculateTotalBalance()}</Typography> */}
               <BudgetAccordian goalData={goalData} selectedCategories={selectedCategories} />
             </Paper>
           </Box>
