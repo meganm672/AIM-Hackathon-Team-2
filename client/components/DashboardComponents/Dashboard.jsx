@@ -61,12 +61,11 @@ export default function Dashboard() {
     id,
     amountPaid
   ) {
-    const lowercasePriority = priority.toLowerCase();
     return {
       bills,
       totalAmount,
       deadline,
-      priority: lowercasePriority,
+      priority: priority.toLowerCase(),
       badges,
       id,
       amountPaid,

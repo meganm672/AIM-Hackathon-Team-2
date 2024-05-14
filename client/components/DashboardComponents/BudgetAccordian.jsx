@@ -7,16 +7,65 @@ import GoalsTable from "./GoalsTable";
 import { Typography, Button, Box } from "@mui/material";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaCirclePlus } from "react-icons/fa6";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
-const BudgetAccordian = ({ goalData, selectedCategories }) => {
+const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
+  const [openCreateModal, setOpenCreateModel] = useState(false);
+  // Create Gaol states
+  const [goalName, setGoalName] = useState("");
+  const [deadline, setDeadline] = useState(dayjs());
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [priority, setPriority] = useState("");
+
+  const submitGoal = (category) => {
+    const data = {
+      bills: goalName,
+      deadline: deadline.format("MMMM DD, YYYY"),
+      totalAmount,
+      priority: priority[0],
+      id: Math.floor(Math.random() * 1000),
+      amountPaid: 0,
+      badges: "new account badge",
+    };
+
+    handleAddGoal(category, data);
+    handleCloseCreateGoalModal();
+  };
+  //
+  const handleOpenCreateGoalModal = () => {
+    setOpenCreateModel(true);
+  };
+
+  const handleCloseCreateGoalModal = (event, reason) => {
+    if (reason !== "backdropClick") {
+      setOpenCreateModel(false);
+    }
+  };
+  const handlePriorityChange = (event) => {
+    const { value } = event.target;
+    setPriority(Array.isArray(value) ? value : [value]);
+  };
+
   // Initialize accordionOpen state with all categories closed
   const initialAccordionState = selectedCategories.reduce((acc, category) => {
     acc[category] = false;
     return acc;
   }, {});
+  // Determine if the accordion should be controlled or uncontrolled based on initial state
+  const isControlledAccordion = Object.values(initialAccordionState).some(
+    (value) => value !== undefined
+  );
 
   const [accordionOpen, setAccordionOpen] = useState(initialAccordionState);
-
 
   const calculateTotalSaved = (category) => {
     return goalData[category].reduce((total, goal) => {
@@ -35,7 +84,9 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
         <div key={category}>
           <Accordion
             key={category}
-            expanded={accordionOpen[category]}
+            expanded={
+              isControlledAccordion ? accordionOpen[category] : undefined
+            }
             onChange={() => handleAccordionChange(category)}
           >
             <AccordionSummary
@@ -48,7 +99,10 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </Typography>
               {accordionOpen[category] && (
-                <Button sx={{ color: "#1F648E" }}>
+                <Button
+                  sx={{ color: "#1F648E" }}
+                  onClick={handleOpenCreateGoalModal}
+                >
                   <FaCirclePlus />
                   Add Goals
                 </Button>
@@ -63,6 +117,61 @@ const BudgetAccordian = ({ goalData, selectedCategories }) => {
               <GoalsTable goalData={goalData[category]} category={category} />
             </AccordionDetails>
           </Accordion>
+          <Dialog
+            disableEscapeKeyDown
+            open={openCreateModal}
+            onClose={handleCloseCreateGoalModal}
+          >
+            <DialogTitle>Create Goal</DialogTitle>
+            <DialogContent>
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <Select
+                  value={priority}
+                  placeholder="Status"
+                  onChange={handlePriorityChange}
+                  renderValue={(selected) => selected.join(", ")}
+                  sx={{ minWidth: 120, m: 1 }}
+                >
+                  <MenuItem value="Critical">Critical</MenuItem>
+                  <MenuItem value="High">High</MenuItem>
+                  <MenuItem value="Medium">Medium</MenuItem>
+                  <MenuItem value="Low">Low</MenuItem>
+                </Select>
+                <TextField
+                  id="gaol-name"
+                  variant="outlined"
+                  value={goalName}
+                  placeholder="Goal name"
+                  onChange={(e) => setGoalName(e.target.value)}
+                  required
+                />
+                <DatePicker
+                  value={deadline}
+                  onChange={(newValue) => {
+                    setDeadline(newValue);
+                  }}
+                />
+                <TextField
+                  id="filled-basic"
+                  placeholder="Amount"
+                  variant="outlined"
+                  value={totalAmount}
+                  onChange={(e) => {
+                    let num = Number(e.target.value);
+
+                    if (isNaN(num)) {
+                      return setTotalAmount(0);
+                    }
+                    return setTotalAmount(num);
+                  }}
+                />
+              </FormControl>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseCreateGoalModal}>Cancel</Button>
+              <Button onClick={() => submitGoal(category)}>Ok</Button>
+            </DialogActions>
+          </Dialog>
         </div>
       ))}
     </div>
