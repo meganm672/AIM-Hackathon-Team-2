@@ -54,19 +54,30 @@ const DashboardTabs = ({
       setOpenAddMoney(false);
     }
   };
-  const handleAddMoneyPush = (value) => setAddMoney(value);
+  const handleAddMoneyPush = (value) => setAmountAdd(value);
 
   const handleSubmitAddMoney = (e) => {
     e.preventDefault();
-    if (typeof addMoney !== "number") {
+
+    if (typeof amountAdd !== "number") {
       return;
     }
-    // let currentGoal = goalData.filter((data) => {
-    //   return data.id === ;
-    // });
-    Object.entries((category) => {});
+
+    console.log("Click");
+    let currentGoalIndex;
+    let foundCategory;
+    for (const [key, value] of Object.entries(goalData)) {
+      value.filter((goal, i) => {
+        if (goal.id === selectedGoalPrimary) {
+          foundCategory = key;
+          currentGoalIndex = i;
+          return goal;
+        }
+      });
+    }
     handleCloseAddMoney();
-    // currentGoal[0].amountPaid += amountAdd;
+    goalData[foundCategory][currentGoalIndex].amountPaid += amountAdd;
+
     setAmountAdd(0);
   };
 
@@ -172,7 +183,7 @@ const DashboardTabs = ({
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-                <form>
+                <form onSubmit={handleSubmitAddMoney}>
                   <Box sx={style}>
                     <InputLabel id="demo-simple-select-label">Goal:</InputLabel>
                     <Select
