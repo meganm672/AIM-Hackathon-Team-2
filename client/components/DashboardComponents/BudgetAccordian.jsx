@@ -20,7 +20,7 @@ import dayjs from "dayjs";
 
 const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
   const [openCreateModal, setOpenCreateModel] = useState(false);
-  // Create Gaol states
+  // Create Goal states
   const [goalName, setGoalName] = useState("");
   const [deadline, setDeadline] = useState(dayjs());
   const [totalAmount, setTotalAmount] = useState(0);
