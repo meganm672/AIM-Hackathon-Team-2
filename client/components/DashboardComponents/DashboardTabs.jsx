@@ -62,8 +62,6 @@ const DashboardTabs = ({
     if (typeof amountAdd !== "number") {
       return;
     }
-
-    console.log("Click");
     let currentGoalIndex;
     let foundCategory;
     for (const [key, value] of Object.entries(goalData)) {
