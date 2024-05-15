@@ -121,9 +121,7 @@ const DashboardTabs = ({
                   justifyContent: "space-between",
                   flexWrap: "wrap",
                 }}
-              >
-                <Typography>Catagories</Typography>
-              </div>
+              ></div>
               <div
                 style={{
                   display: "flex",
@@ -145,10 +143,12 @@ const DashboardTabs = ({
                 <Button>
                   <IoFilterOutline />
                 </Button>
+
+                <Button onClick={handleClickOpenAddMoney}>
+                  <PaidRoundedIcon />
+                </Button>
               </div>
-              <Button onClick={handleClickOpenAddMoney}>
-                <PaidRoundedIcon />
-              </Button>
+
               <Button
                 variant="contained"
                 sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}

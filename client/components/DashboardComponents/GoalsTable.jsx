@@ -97,6 +97,10 @@ const GoalsTable = ({ goalData, category }) => {
                       {badge.icon}
                     </IconButton>
                   ))}
+                  <Stack direction={"row"} spacing={1}>
+                    <span>{row.badges[0].icon}</span>
+                    <span>{row.badges[1].icon}</span>
+                  </Stack>
                 </TableCell>
                 <TableCell align="right">
                   <Stack direction={"row"}>

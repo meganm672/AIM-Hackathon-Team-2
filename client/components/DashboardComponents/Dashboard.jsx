@@ -118,7 +118,7 @@ export default function Dashboard() {
           { label: "Goal Grubber", icon:<GoalGrubberBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
           { label: "Overachiever", icon: <OverachieverBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
         ],
-        "2",
+        "3",
         100.0
       ),
       createData(
@@ -142,7 +142,7 @@ export default function Dashboard() {
             { label: "Budget Boss", icon:<BudgetBossBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
             { label: "Challenge Champion", icon: <ChallengeChampionBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
           ],
-          "3",
+          "5",
           75.0
         ),
     ],
@@ -150,37 +150,51 @@ export default function Dashboard() {
       createData(
         "Rent",
         1250.0,
-        "November 03,2024",
+        "03 Nov 2024",
         "Critical",
-        "new account badge",
-        "5",
+
+        [
+          { label: "Budget Boss", icon:<BudgetBossBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
+          { label: "Challenge Champion", icon: <ChallengeChampionBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+        ],
+        "1",
         250.0
       ),
       createData(
         "Utilites",
         500.0,
-        "September 13,2024",
+        "13 Sept 2024",
         "High",
-        "new account badge",
-        "6",
+        [
+          { label: "Steady Saver", icon:<SteadySaverBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
+          { label: "Streak Starter", icon: <StreakStarterBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+        ],
+        "2",
         100.0
       ),
       createData(
         "Car Insurance",
         300.0,
-        "December 03,2024",
+        "10 Dec 2025",
         "Low",
-        "new account badge",
-        "7",
+        [
+          { label: "Goal Grubber", icon:<GoalGrubberBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
+          { label: "Overachiever", icon: <OverachieverBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+        ],
+        "3",
+
         75.0
       ),
       createData(
         "Student Loans",
         650.0,
-        "July 03,2024",
+        "03 July 2024",
         "Critical",
-        "new account badge",
-        "8",
+        [
+          { label: "Debt Slayer", icon:<ScroogeMcSavingsBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
+          { label: "Challenge Accepted", icon: <LongGamePlayerBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+        ],
+        "4",
         460.0
       ),
     ],
