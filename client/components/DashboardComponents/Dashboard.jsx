@@ -111,19 +111,64 @@ export default function Dashboard() {
         460.0
       ),
     ],
+    Bills: [
+      createData(
+        "Rent",
+        1250.0,
+        "November 03,2024",
+        "Critical",
+        "new account badge",
+        "1",
+        250.0
+      ),
+      createData(
+        "Utilites",
+        500.0,
+        "September 13,2024",
+        "High",
+        "new account badge",
+        "2",
+        100.0
+      ),
+      createData(
+        "Car Insurance",
+        300.0,
+        "December 03,2024",
+        "Low",
+        "new account badge",
+        "3",
+        75.0
+      ),
+      createData(
+        "Student Loans",
+        650.0,
+        "July 03,2024",
+        "Critical",
+        "new account badge",
+        "4",
+        460.0
+      ),
+    ],
+  };
+
+  const listGoals = () => {
+    let allGoals = [];
+    for (const [key, value] of Object.entries(mockData)) {
+      allGoals.push(value);
+    }
+    return allGoals.flat(1);
   };
 
   const handleAddGoal = (category, data) => {
     let { bills, totalAmount, deadline, priority, badges, id, amountPaid } =
       data;
-    return mockData[category].push(
+    mockData[category].push(
       createData(bills, totalAmount, deadline, priority, badges, id, amountPaid)
     );
   };
   const handleCreateCategory = (category) => {
-    console.log(category);
     mockData[category] = [];
-    console.log(mockData);
+
     return;
   };
 
