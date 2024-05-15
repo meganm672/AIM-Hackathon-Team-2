@@ -11,61 +11,41 @@ import Button from "@mui/material/Button";
 import LinearProgressWithLabel from "./Utils";
 import { PiPencilSimpleThin } from "react-icons/pi";
 import { BiTransfer } from "react-icons/bi";
-
 import Checkbox from '@mui/material/Checkbox';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import Chip from "@mui/material/Chip"
-import { createTheme,ThemeProvider } from '@mui/material/styles';
+import Chip from '@mui/material/Chip'
+import Stack from '@mui/material/Stack'
+import IconButton from '@mui/material/IconButton';
+const priorityColorMap = {
+  low: { backgroundColor: "#E4FDEB", color: "#48C76A" }, // Green
+  medium: { backgroundColor: "#FFF3B4", color: "#E7B147" }, // Yellow
+  high: { backgroundColor: "#F9E7D9", color: "#E78A47" }, // Orange
+  critical: { backgroundColor: "#FFEBEB", color: "#EB5757" } // Red
+};
 
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       light: '#757ce8',
-//       main: '#3f50b5',
-//       dark: '#002884',
-//       contrastText: '#fff',
-//     },
-//     secondary: {
-//       light: '#ff7961',
-//       main: '#f44336',
-//       dark: '#ba000d',
-//       contrastText: '#000',
-//     },
-//     success:{ //low
-//       light: "#E4FDEB",
-//       main: "#48C76A"
-//     },
-//     info:{ //medium
-//       main: "#FFF3B4",
-//       dark: "#E7B147",
+const chipStyle = {
+  borderRadius: "4px", // Adjust the border radius as needed
+};
 
-//     },
-//     warning:{ //high
-//       main:"#F9E7D9",
-//       dark:"#E78A47"
-//     },
-//     error:{//critical
-//       main:"#FFEBEB",
-//       dark: "#EB5757"
-//     }
-//   },
-// });
-
+const buttonStyle = {
+  borderRadius: "50%", // Make the button circular
+  width: "40px", // Set the width and height to create a circle
+  height: "40px",
+  backgroundColor: "#F1F3F4", // Gray color
+  color: "#706F6F",
+  fontSize: 15
+};
 
 const GoalsTable = ({ goalData, category }) => {
   const capitalizedCategory =
     category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
 
-  // State to store the selected priority for each goal
-  const [selectedPriorities, setSelectedPriorities] = useState({});
-
-  // Function to handle priority change
-  const handlePriorityChange = (event, goalId) => {
-    setSelectedPriorities({
-      ...selectedPriorities,
-      [goalId]: event.target.value, // Update the priority for the goal
-    });
+  const getPriorityCellStyle = (priority) => {
+    const { backgroundColor, color } = priorityColorMap[priority] || {};
+    return {
+      backgroundColor: backgroundColor || "inherit",
+      color: color || "inherit",
+      textTransform: "capitalize",
+    };
   };
 
   return (
@@ -102,36 +82,35 @@ const GoalsTable = ({ goalData, category }) => {
                   />
                 </TableCell>
                 <TableCell align="right">{row.deadline}</TableCell>
-                <TableCell align="right">
-                  <Select
-                    value={selectedPriorities[row.id] || row.priority} // Set the value to the priority of the current goal
-                    label="Priority"
-                    onChange={(event) => handlePriorityChange(event, row.id)} // Handle priority change
-                  >
-
-                    <MenuItem value="low">
-                      <Chip  color="success" label="Low"/>
-                      </MenuItem>
-                    <MenuItem value="medium">
-                    <Chip color="info" label="Medium"/>
-                    </MenuItem>
-                    <MenuItem value="high">
-                    <Chip color="warning" label="High"/>
-                    </MenuItem>
-                    <MenuItem value="critical">
-                    <Chip color="error" label="Critical"/>
-                    </MenuItem>
-                  </Select>
+                <TableCell align="right" >
+                  <Chip
+                    label={row.priority}
+                    style={{
+                      ...getPriorityCellStyle(row.priority),
+                      ...chipStyle,
+                    }}
+                  />
                 </TableCell>
                 <TableCell align="right">${row.totalAmount}</TableCell>
-                <TableCell align="right">{row.badges}</TableCell>
                 <TableCell align="right">
-                  <Button>
-                    <PiPencilSimpleThin />
-                  </Button>
-                  <Button>
-                    <BiTransfer />
-                  </Button>
+                  {row.badges.map((badge, index) => (
+                    <IconButton key={index} style={{ padding: 0 }}>
+                      {badge.icon}
+                    </IconButton>
+                    
+                  ))}
+
+                </TableCell>
+                <TableCell align="right">
+                  <Stack direction={"row"}>
+
+                    <IconButton style={buttonStyle}>
+                      <PiPencilSimpleThin />
+                    </IconButton>
+                    <IconButton style={buttonStyle}>
+                      <BiTransfer />
+                    </IconButton>
+                  </Stack>
                 </TableCell>
               </TableRow>
             ))}

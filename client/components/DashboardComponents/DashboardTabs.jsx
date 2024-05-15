@@ -122,7 +122,6 @@ const DashboardTabs = ({
                   flexWrap: "wrap",
                 }}
               >
-                <Typography>Catagories</Typography>
               </div>
               <div
                 style={{
@@ -131,7 +130,8 @@ const DashboardTabs = ({
                   justifyContent: "space-between",
                   flexWrap: "wrap",
                 }}
-              >
+                >
+
                 <TextField
                   label={
                     <>
@@ -145,9 +145,13 @@ const DashboardTabs = ({
                 <Button>
                   <IoFilterOutline />
                 </Button>
+
                 <Button onClick={handleClickOpenAddMoney}>
                   <PaidRoundedIcon />
                 </Button>
+
+                </div>
+
                 <Button
                   variant="contained"
                   sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}
@@ -155,7 +159,8 @@ const DashboardTabs = ({
                 >
                   + Add New Category
                 </Button>
-              </div>
+
+                </div>
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
                 <DialogTitle>Category Name</DialogTitle>
                 <DialogContent>
@@ -280,9 +285,6 @@ const DashboardTabs = ({
               </Modal>
 
               <Divider />
-              <Typography>
-                Total Amount Saved: ${calculateTotalBalance()}
-              </Typography>
               <BudgetAccordian
                 goalData={goalData}
                 selectedCategories={selectedCategories}
