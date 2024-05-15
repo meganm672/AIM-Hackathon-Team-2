@@ -14,7 +14,6 @@ export default function Home({
   goalData,
   handleAddGoal,
   handleCreateCategory,
-  listGoals,
 }) {
   return (
     <Box
@@ -53,7 +52,6 @@ export default function Home({
                 goalData={goalData}
                 handleAddGoal={handleAddGoal}
                 handleCreateCategory={handleCreateCategory}
-                listGoals={listGoals}
               />
             </Paper>
           </Grid>

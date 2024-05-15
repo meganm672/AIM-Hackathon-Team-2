@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Tabs from "@mui/joy/Tabs";
-import TabList from "@mui/joy/TabList";
-import Tab from "@mui/joy/Tab";
-import TabPanel from "@mui/joy/TabPanel";
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { Modal, Typography } from "@mui/material";
@@ -10,7 +8,7 @@ import Divider from "@mui/material/Divider";
 import BudgetAccordian from "./BudgetAccordian";
 import Button from "@mui/material/Button";
 import PaidRoundedIcon from "@mui/icons-material/PaidRounded";
-
+import IconButton from "@mui/material/IconButton";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -20,9 +18,30 @@ import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-
+import Stack from '@mui/material/Stack'
 import { IoIosSearch } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
+import { PiCurrencyCircleDollar } from "react-icons/pi";
+
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 const DashboardTabs = ({
   goalData,
   handleAddGoal,
@@ -86,81 +105,73 @@ const DashboardTabs = ({
     handleClose();
   };
 
-  const calculateTotalSaved = (category) => {
-    if (!goalData[category]) return 0;
-    return goalData[category].reduce((total, goal) => {
-      return total + goal.amountPaid;
-    }, 0);
-  };
 
-  const calculateTotalBalance = () => {
-    let totalBalance = 0;
-    selectedCategories.forEach((category) => {
-      totalBalance += calculateTotalSaved(category);
-    });
-    return totalBalance;
-  };
   const handleChange = (event) => {
     setSelectedGoalPrimary(event.target.value);
+  };
+  const [value, setValue] = React.useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
     <>
-      <Tabs defaultValue={0}>
-        <TabList underlinePlacement={"left"}>
-          <Tab>Goals</Tab>
-          <Tab>Challenges</Tab>
-        </TabList>
-        <TabPanel value={0}>
+      <Box>
+
+
+        <Box>
+          <Tabs value={value} onChange={handleTabChange}>
+
+            <Tab label="Goal" />
+            <Tab label="Transactions" disabled/>
+            <Tab label="Challenges" />
+          </Tabs>
+        </Box>
+        <CustomTabPanel value={value} index={0}>
           <Box sx={{ height: "100vh" }}>
             <Paper elevation={2}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  flexWrap: "wrap",
-                }}
-              >
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  flexWrap: "wrap",
-                }}
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", p: 2 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
                 >
-
-                <TextField
-                  label={
-                    <>
-                      <IoIosSearch />
-                      Search goal
-                    </>
-                  }
-                  type="search"
-                  variant="filled"
-                />
-                <Button>
-                  <IoFilterOutline />
-                </Button>
-
-                <Button onClick={handleClickOpenAddMoney}>
-                  <PaidRoundedIcon />
-                </Button>
-
+                  <TextField
+                    label={
+                      <>
+                        <IoIosSearch />
+                        Search goal
+                      </>
+                    }
+                    type="search"
+                    variant="filled"
+                    size="small"
+                  />
+                  <IconButton>
+                    <IoFilterOutline />
+                  </IconButton>
                 </div>
+                <Stack direction={"row"}>
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}>
+                    <IconButton onClick={handleClickOpenAddMoney}>
+                      <PiCurrencyCircleDollar />
+                    </IconButton>
+                    <Button
+                      variant="contained"
+                      sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}
+                      onClick={handleClickOpen}
+                    >
+                      + Add New Category
+                    </Button>
 
-                <Button
-                  variant="contained"
-                  sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}
-                  onClick={handleClickOpen}
-                >
-                  + Add New Category
-                </Button>
-
-                </div>
+                  </div>
+                </Stack>
+              </Box>
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
                 <DialogTitle>Category Name</DialogTitle>
                 <DialogContent>
@@ -196,7 +207,7 @@ const DashboardTabs = ({
                       label="Add money"
                       onChange={handleChange}
                     >
-                      {listGoals().map((goal) => {
+                      {listGoals && typeof listGoals === 'function' && listGoals().map((goal) => {
                         return (
                           <MenuItem key={goal.id} value={goal.id}>
                             {goal.bills}
@@ -283,7 +294,6 @@ const DashboardTabs = ({
                   </Box>
                 </form>
               </Modal>
-
               <Divider />
               <BudgetAccordian
                 goalData={goalData}
@@ -292,11 +302,14 @@ const DashboardTabs = ({
               />
             </Paper>
           </Box>
-        </TabPanel>
-        <TabPanel value={1}>
-          <b>Second</b> tab panel
-        </TabPanel>
-      </Tabs>
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+          transactions
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={2}>
+          Challenge
+        </CustomTabPanel>
+      </Box>
     </>
   );
 };
@@ -310,6 +323,5 @@ const style = {
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  Typography: 4,
 };
 export default DashboardTabs;
