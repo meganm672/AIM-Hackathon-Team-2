@@ -153,7 +153,7 @@ export default function Dashboard() {
         "November 03,2024",
         "Critical",
         "new account badge",
-        "1",
+        "5",
         250.0
       ),
       createData(
@@ -162,7 +162,7 @@ export default function Dashboard() {
         "September 13,2024",
         "High",
         "new account badge",
-        "2",
+        "6",
         100.0
       ),
       createData(
@@ -171,7 +171,7 @@ export default function Dashboard() {
         "December 03,2024",
         "Low",
         "new account badge",
-        "3",
+        "7",
         75.0
       ),
       createData(
@@ -180,7 +180,7 @@ export default function Dashboard() {
         "July 03,2024",
         "Critical",
         "new account badge",
-        "4",
+        "8",
         460.0
       ),
     ],
@@ -203,7 +203,6 @@ export default function Dashboard() {
   };
   const handleCreateCategory = (category) => {
     mockData[category] = [];
-
     return;
   };
 
@@ -249,6 +248,7 @@ export default function Dashboard() {
                 goalData={mockData}
                 handleAddGoal={handleAddGoal}
                 handleCreateCategory={handleCreateCategory}
+                listGoals={listGoals}
               />
             }
           />
