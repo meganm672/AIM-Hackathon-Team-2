@@ -145,17 +145,18 @@ const DashboardTabs = ({
                 <Button>
                   <IoFilterOutline />
                 </Button>
-                <Button onClick={handleClickOpenAddMoney}>
-                  <PaidRoundedIcon />
-                </Button>
-                <Button
-                  variant="contained"
-                  sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}
-                  onClick={handleClickOpen}
-                >
-                  + Add New Category
-                </Button>
               </div>
+              <Button onClick={handleClickOpenAddMoney}>
+                <PaidRoundedIcon />
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}
+                onClick={handleClickOpen}
+              >
+                + Add New Category
+              </Button>
+
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
                 <DialogTitle>Category Name</DialogTitle>
                 <DialogContent>
@@ -280,9 +281,6 @@ const DashboardTabs = ({
               </Modal>
 
               <Divider />
-              <Typography>
-                Total Amount Saved: ${calculateTotalBalance()}
-              </Typography>
               <BudgetAccordian
                 goalData={goalData}
                 selectedCategories={selectedCategories}
