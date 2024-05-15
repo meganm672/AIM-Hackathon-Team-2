@@ -93,13 +93,10 @@ const GoalsTable = ({ goalData, category }) => {
                 </TableCell>
                 <TableCell align="right">${row.totalAmount}</TableCell>
                 <TableCell align="right">
-                  {row.badges.map((badge, index) => (
-                    <IconButton key={index} style={{ padding: 0 }}>
-                      {badge.icon}
-                    </IconButton>
-                    
-                  ))}
-
+                  <Stack direction={"row"} >
+                    <span>{row.badges[0].icon}</span>
+                    <span>{row.badges[1].icon}</span>
+                  </Stack>
                 </TableCell>
                 <TableCell align="right">
                   <Stack direction={"row"}>
