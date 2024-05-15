@@ -88,14 +88,16 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
               isControlledAccordion ? accordionOpen[category] : undefined
             }
             onChange={() => handleAccordionChange(category)}
+            sx={{margin:2}}
           >
             <AccordionSummary
-              sx={{ flexDirection: "row-reverse" }}
+              sx={{ flexDirection: "row-reverse", backgroundColor: "#F2F8FD" }}
               expandIcon={<ArrowDropDownIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
+              
             >
-              <Typography align="left">
+              <Typography align="left" sx={{width:"50%"}} >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </Typography>
               {accordionOpen[category] && (
@@ -107,12 +109,12 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                   Add Goals
                 </Button>
               )}
-              <Typography align="right">
+              <Typography align="right" sx={{width:"70%"}}>
                 ${calculateTotalSaved(category)}
               </Typography>
               <BsThreeDotsVertical />
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails sx={{backgroundColor: "#F2F8FD"}}>
               {/* <CategoryTable goalData={goalData[category]} /> */}
               <GoalsTable goalData={goalData[category]} category={category} />
             </AccordionDetails>
