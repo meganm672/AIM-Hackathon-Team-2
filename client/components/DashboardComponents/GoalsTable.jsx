@@ -11,15 +11,15 @@ import Button from "@mui/material/Button";
 import LinearProgressWithLabel from "./Utils";
 import { PiPencilSimpleThin } from "react-icons/pi";
 import { BiTransfer } from "react-icons/bi";
-import Checkbox from '@mui/material/Checkbox';
-import Chip from '@mui/material/Chip'
-import Stack from '@mui/material/Stack'
-import IconButton from '@mui/material/IconButton';
+import Checkbox from "@mui/material/Checkbox";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import IconButton from "@mui/material/IconButton";
 const priorityColorMap = {
   low: { backgroundColor: "#E4FDEB", color: "#48C76A" }, // Green
   medium: { backgroundColor: "#FFF3B4", color: "#E7B147" }, // Yellow
   high: { backgroundColor: "#F9E7D9", color: "#E78A47" }, // Orange
-  critical: { backgroundColor: "#FFEBEB", color: "#EB5757" } // Red
+  critical: { backgroundColor: "#FFEBEB", color: "#EB5757" }, // Red
 };
 
 const chipStyle = {
@@ -32,7 +32,7 @@ const buttonStyle = {
   height: "40px",
   backgroundColor: "#F1F3F4", // Gray color
   color: "#706F6F",
-  fontSize: 15
+  fontSize: 15,
 };
 
 const GoalsTable = ({ goalData, category }) => {
@@ -47,7 +47,6 @@ const GoalsTable = ({ goalData, category }) => {
       textTransform: "capitalize",
     };
   };
-
   return (
     <div>
       <TableContainer component={Paper}>
@@ -82,7 +81,7 @@ const GoalsTable = ({ goalData, category }) => {
                   />
                 </TableCell>
                 <TableCell align="right">{row.deadline}</TableCell>
-                <TableCell align="right" >
+                <TableCell align="right">
                   <Chip
                     label={row.priority}
                     style={{
@@ -93,14 +92,18 @@ const GoalsTable = ({ goalData, category }) => {
                 </TableCell>
                 <TableCell align="right">${row.totalAmount}</TableCell>
                 <TableCell align="right">
-                  <Stack direction={"row"} spacing={1}>
+                  {row.badges.map((badge, index) => (
+                    <IconButton key={index} style={{ padding: 0 }}>
+                      {badge.icon}
+                    </IconButton>
+                  ))}
+                  {/* <Stack direction={"row"} spacing={1}>
                     <span>{row.badges[0].icon}</span>
                     <span>{row.badges[1].icon}</span>
-                  </Stack>
+                  </Stack> */}
                 </TableCell>
                 <TableCell align="right">
                   <Stack direction={"row"}>
-
                     <IconButton style={buttonStyle}>
                       <PiPencilSimpleThin />
                     </IconButton>

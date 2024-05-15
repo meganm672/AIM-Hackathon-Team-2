@@ -121,8 +121,7 @@ const DashboardTabs = ({
                   justifyContent: "space-between",
                   flexWrap: "wrap",
                 }}
-              >
-              </div>
+              ></div>
               <div
                 style={{
                   display: "flex",
@@ -130,8 +129,7 @@ const DashboardTabs = ({
                   justifyContent: "space-between",
                   flexWrap: "wrap",
                 }}
-                >
-
+              >
                 <TextField
                   label={
                     <>
@@ -149,18 +147,16 @@ const DashboardTabs = ({
                 <Button onClick={handleClickOpenAddMoney}>
                   <PaidRoundedIcon />
                 </Button>
+              </div>
 
-                </div>
+              <Button
+                variant="contained"
+                sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}
+                onClick={handleClickOpen}
+              >
+                + Add New Category
+              </Button>
 
-                <Button
-                  variant="contained"
-                  sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}
-                  onClick={handleClickOpen}
-                >
-                  + Add New Category
-                </Button>
-
-                </div>
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
                 <DialogTitle>Category Name</DialogTitle>
                 <DialogContent>
