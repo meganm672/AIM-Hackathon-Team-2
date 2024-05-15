@@ -37,6 +37,7 @@ const DashboardTabs = ({ goalData, handleAddGoal, handleCreateCategory }) => {
 
   const submitNewCategory = (e) => {
     e.preventDefault();
+    if (!categoryName) return;
     handleCreateCategory(categoryName);
     handleClose();
   };
@@ -104,21 +105,21 @@ const DashboardTabs = ({ goalData, handleAddGoal, handleCreateCategory }) => {
 
                 </div>
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
-                <DialogTitle>Select A Category</DialogTitle>
+                <DialogTitle>Category Name</DialogTitle>
                 <DialogContent>
                   <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <TextField
                       id="gaol-name"
                       variant="outlined"
                       value={categoryName}
-                      placeholder="Goal name"
+                      placeholder="Enter category name..."
                       onChange={(e) => setCategoryName(e.target.value)}
                     />
                   </FormControl>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose}>Cancel</Button>
-                  <Button onClick={submitNewCategory}>Ok</Button>
+                  <Button onClick={submitNewCategory}>Create Category</Button>
                 </DialogActions>
               </Dialog>
 
