@@ -17,6 +17,9 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 import { IoIosSearch } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
@@ -30,6 +33,7 @@ const DashboardTabs = ({
   const [openAddMoney, setOpenAddMoney] = useState(false);
   const [amountAdd, setAmountAdd] = useState(0);
   const [categoryName, setCategoryName] = useState("");
+  const [selectedGoalPrimary, setSelectedGoalPrimary] = useState("");
 
   const [selectedCategories, setSelectedCategories] = useState([]); // Default to displaying bills table
   const handleClickOpen = () => {
@@ -57,9 +61,13 @@ const DashboardTabs = ({
     if (typeof addMoney !== "number") {
       return;
     }
-    handleCloseModal();
-    currentGoal[0].amountPaid += addMoney;
-    setAddMoney(0);
+    // let currentGoal = goalData.filter((data) => {
+    //   return data.id === ;
+    // });
+    Object.entries((category) => {});
+    handleCloseAddMoney();
+    // currentGoal[0].amountPaid += amountAdd;
+    setAmountAdd(0);
   };
 
   const submitNewCategory = (e) => {
@@ -82,6 +90,9 @@ const DashboardTabs = ({
       totalBalance += calculateTotalSaved(category);
     });
     return totalBalance;
+  };
+  const handleChange = (event) => {
+    setSelectedGoalPrimary(event.target.value);
   };
 
   return (
@@ -163,6 +174,22 @@ const DashboardTabs = ({
               >
                 <form>
                   <Box sx={style}>
+                    <InputLabel id="demo-simple-select-label">Goal:</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={selectedGoalPrimary}
+                      label="Add money"
+                      onChange={handleChange}
+                    >
+                      {listGoals().map((goal) => {
+                        return (
+                          <MenuItem key={goal.id} value={goal.id}>
+                            {goal.bills}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
                     <Typography
                       id="modal-modal-title"
                       variant="h6"
@@ -233,6 +260,9 @@ const DashboardTabs = ({
                         $10000
                       </Button>
                     </Box>
+                    <Button variant="outlined" onClick={handleCloseAddMoney}>
+                      Cancel
+                    </Button>
                     <Button variant="outlined" type="submit">
                       Add Money
                     </Button>
