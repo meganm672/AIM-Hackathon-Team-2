@@ -118,7 +118,7 @@ export default function Dashboard() {
           { label: "Goal Grubber", icon:<GoalGrubberBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
           { label: "Overachiever", icon: <OverachieverBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
         ],
-        "2",
+        "3",
         100.0
       ),
       createData(
@@ -142,7 +142,7 @@ export default function Dashboard() {
             { label: "Budget Boss", icon:<BudgetBossBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
             { label: "Challenge Champion", icon: <ChallengeChampionBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
           ],
-          "3",
+          "5",
           75.0
         ),
     ],
