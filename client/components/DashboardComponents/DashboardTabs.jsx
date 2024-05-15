@@ -75,23 +75,12 @@ const DashboardTabs = ({ goalData, handleAddGoal, handleCreateCategory }) => {
                   flexWrap: "wrap",
                 }}
               >
-                <Typography>Catagories</Typography>
-                <Button
-                  variant="outlined"
-                  sx={{ borderRadius: "2em" }}
-                  onClick={handleClickOpen}
-                >
-                  Add Category
-                </Button>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  flexWrap: "wrap",
+                <div style={{
+                   display: "flex",
+                  alignItems:"center"
                 }}
-              >
+                >
+
                 <TextField
                   label={
                     <>
@@ -105,7 +94,7 @@ const DashboardTabs = ({ goalData, handleAddGoal, handleCreateCategory }) => {
                 <Button>
                   <IoFilterOutline />
                 </Button>
-
+                </div>
                 <Button
                   variant="contained"
                   sx={{ color: "#FFFFFF", backgroundColor: "#1F648E" }}
@@ -113,7 +102,8 @@ const DashboardTabs = ({ goalData, handleAddGoal, handleCreateCategory }) => {
                 >
                   + Add New Category
                 </Button>
-              </div>
+
+                </div>
               <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
                 <DialogTitle>Category Name</DialogTitle>
                 <DialogContent>
@@ -134,9 +124,6 @@ const DashboardTabs = ({ goalData, handleAddGoal, handleCreateCategory }) => {
               </Dialog>
 
               <Divider />
-              <Typography>
-                Total Amount Saved: ${calculateTotalBalance()}
-              </Typography>
               <BudgetAccordian
                 goalData={goalData}
                 selectedCategories={selectedCategories}
