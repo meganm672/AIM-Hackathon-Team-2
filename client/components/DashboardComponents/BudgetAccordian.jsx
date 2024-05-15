@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Accordion from "@mui/material/Accordion";
+import InputLabel from "@mui/material/InputLabel";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import GoalsTable from "./GoalsTable";
@@ -17,16 +18,19 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import GoalView from "../GoalView";
 
 const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
   const [openCreateModal, setOpenCreateModel] = useState(false);
+  const [addGoalToCategory, setAddGoalToCategory] = useState("");
   // Create Gaol states
   const [goalName, setGoalName] = useState("");
   const [deadline, setDeadline] = useState(dayjs());
-  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState();
   const [priority, setPriority] = useState("");
 
   const submitGoal = (category) => {
+    console.log(category);
     const data = {
       bills: goalName,
       deadline: deadline.format("MMMM DD, YYYY"),
@@ -48,6 +52,10 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
   const handleCloseCreateGoalModal = (event, reason) => {
     if (reason !== "backdropClick") {
       setOpenCreateModel(false);
+      setDeadline(dayjs());
+      setGoalName("");
+      setTotalAmount();
+      setPriority("");
     }
   };
   const handlePriorityChange = (event) => {
@@ -101,7 +109,10 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
               {accordionOpen[category] && (
                 <Button
                   sx={{ color: "#1F648E" }}
-                  onClick={handleOpenCreateGoalModal}
+                  onClick={() => {
+                    setAddGoalToCategory(category);
+                    handleOpenCreateGoalModal();
+                  }}
                 >
                   <FaCirclePlus />
                   Add Goals
@@ -125,9 +136,10 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
             <DialogTitle>Create Goal</DialogTitle>
             <DialogContent>
               <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="set-goal-priority">Set Priority</InputLabel>
                 <Select
                   value={priority}
-                  placeholder="Status"
+                  labelId="set-goal-priority"
                   onChange={handlePriorityChange}
                   renderValue={(selected) => selected.join(", ")}
                   sx={{ minWidth: 120, m: 1 }}
@@ -141,7 +153,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                   id="gaol-name"
                   variant="outlined"
                   value={goalName}
-                  placeholder="Goal name"
+                  placeholder="Enter goal name..."
                   onChange={(e) => setGoalName(e.target.value)}
                   required
                 />
@@ -153,12 +165,11 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                 />
                 <TextField
                   id="filled-basic"
-                  placeholder="Amount"
+                  placeholder="$0.00"
                   variant="outlined"
                   value={totalAmount}
                   onChange={(e) => {
                     let num = Number(e.target.value);
-
                     if (isNaN(num)) {
                       return setTotalAmount(0);
                     }
@@ -169,7 +180,13 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCloseCreateGoalModal}>Cancel</Button>
-              <Button onClick={() => submitGoal(category)}>Ok</Button>
+              <Button
+                onClick={() => {
+                  submitGoal(addGoalToCategory);
+                }}
+              >
+                Ok
+              </Button>
             </DialogActions>
           </Dialog>
         </div>
