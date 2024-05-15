@@ -152,6 +152,7 @@ export default function Dashboard() {
         1250.0,
         "03 Nov 2024",
         "Critical",
+
         [
           { label: "Budget Boss", icon:<BudgetBossBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
           { label: "Challenge Champion", icon: <ChallengeChampionBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
@@ -181,6 +182,7 @@ export default function Dashboard() {
           { label: "Overachiever", icon: <OverachieverBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
         ],
         "3",
+
         75.0
       ),
       createData(
@@ -215,7 +217,6 @@ export default function Dashboard() {
   };
   const handleCreateCategory = (category) => {
     mockData[category] = [];
-
     return;
   };
 
@@ -261,6 +262,7 @@ export default function Dashboard() {
                 goalData={mockData}
                 handleAddGoal={handleAddGoal}
                 handleCreateCategory={handleCreateCategory}
+                listGoals={listGoals}
               />
             }
           />
