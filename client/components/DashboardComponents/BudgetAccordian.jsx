@@ -18,7 +18,6 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-import GoalView from "../GoalView";
 
 const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
   const [openCreateModal, setOpenCreateModel] = useState(false);

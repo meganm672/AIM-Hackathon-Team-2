@@ -168,7 +168,6 @@ export default function Dashboard() {
   };
   const handleCreateCategory = (category) => {
     mockData[category] = [];
-
     return;
   };
 
@@ -214,6 +213,7 @@ export default function Dashboard() {
                 goalData={mockData}
                 handleAddGoal={handleAddGoal}
                 handleCreateCategory={handleCreateCategory}
+                listGoals={listGoals}
               />
             }
           />
