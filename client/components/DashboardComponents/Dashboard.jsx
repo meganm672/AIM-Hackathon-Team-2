@@ -33,8 +33,7 @@ import OverachieverBadge from "../Badges/OverachieverBadge";
 import ScroogeMcSavingsBadge from "../Badges/ScroogeMcSavingsBadge";
 import SteadySaverBadge from "../Badges/SteadySaverBadge";
 import StreakStarterBadge from "../Badges/StreakStarterBadge";
-import axios from 'axios';
-
+import axios from "axios";
 
 const drawerWidth = 240;
 
@@ -64,9 +63,7 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-
 export default function Dashboard() {
-
   function createData(
     bills,
     totalAmount,
@@ -89,20 +86,36 @@ export default function Dashboard() {
 
   async function fetchGoals() {
     try {
-      const response = await axios.get('https://aim-hackathon-team-2.onrender.com/api/goals/'); // Replace with your actual endpoint URL
+      const response = await axios.get(
+        "https://aim-hackathon-team-2.onrender.com/api/goals/"
+      ); // Replace with your actual endpoint URL
       const goalsData = response.data;
       // Filter goals with category "needs"
-      const needsGoals = goalsData.filter(goal => goal.category === 'needs');
+      const needsGoals = goalsData.filter((goal) => goal.category === "needs");
       // Now you have the filtered needsGoals data, ready for mapping
-      const mappedNeedsGoals = needsGoals.map(need => {
-        const { goal_name, total_amount, completed_amount, deadline, priority } = need;
+      const mappedNeedsGoals = needsGoals.map((need) => {
+        const {
+          goal_name,
+          total_amount,
+          completed_amount,
+          deadline,
+          priority,
+        } = need;
         const bills = goal_name; // Replace with the appropriate field from your API response
-        return createData(bills, total_amount, deadline, priority.toLowerCase(), [], need.id, completed_amount); // Assuming badges is empty for now
+        return createData(
+          bills,
+          total_amount,
+          deadline,
+          priority.toLowerCase(),
+          [],
+          need.id,
+          completed_amount
+        ); // Assuming badges is empty for now
       });
-      console.log(mappedNeedsGoals)
+      console.log(mappedNeedsGoals);
       // Use mappedNeedsGoals in your component
     } catch (error) {
-      console.error('Error fetching goals:', error);
+      console.error("Error fetching goals:", error);
     }
   }
 
@@ -383,7 +396,7 @@ export default function Dashboard() {
           />
 
           {/* <Route path="/goal/:goalID" element={<Goal goalData={mockData} />} /> */}
-          <Route path="/goal/:goalID" element={<Goal goalData={mockData} />} />
+          <Route path="/goal/:goalID" element={<Goal goalData={listGoals} />} />
         </Routes>
       </Box>
     </Router>
