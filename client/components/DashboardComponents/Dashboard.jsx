@@ -91,6 +91,61 @@ export default function Dashboard() {
   const [categories, setCategories] = useState([]);
   const [mockData, setMockData] = useState({});
 
+  // Badge options (replace with your actual badge objects)
+  const badgeOptions = [
+    { label: "Debt Slayer", icon: <DebtSlayerBadge />, backgroundColor: "#2196F3", color: "#FFFFFF" },
+    { label: "Challenge Accepted", icon: <ChallengeAcceptedBadge />, backgroundColor: "#4CAF50", color: "#FFFFFF" },
+    {
+      label: "Steady Saver",
+      icon: <SteadySaverBadge />,
+      backgroundColor: "#2196F3",
+      color: "#FFFFFF",
+    },
+    {
+      label: "Streak Starter",
+      icon: <StreakStarterBadge />,
+      backgroundColor: "#4CAF50",
+      color: "#FFFFFF",
+    },
+    {
+      label: "Goal Grubber",
+      icon: <GoalGrubberBadge />,
+      backgroundColor: "#2196F3",
+      color: "#FFFFFF",
+    },
+    {
+      label: "Overachiever",
+      icon: <OverachieverBadge />,
+      backgroundColor: "#4CAF50",
+      color: "#FFFFFF",
+    },
+    {
+      label: "Budget Boss",
+      icon: <BudgetBossBadge />,
+      backgroundColor: "#2196F3",
+      color: "#FFFFFF",
+    },
+    {
+      label: "Challenge Champion",
+      icon: <ChallengeChampionBadge />,
+      backgroundColor: "#4CAF50",
+      color: "#FFFFFF",
+    },
+    {
+      label: "Debt Slayer",
+      icon: <ScroogeMcSavingsBadge />,
+      backgroundColor: "#2196F3",
+      color: "#FFFFFF",
+    },
+    {
+      label: "Challenge Accepted",
+      icon: <LongGamePlayerBadge />,
+      backgroundColor: "#4CAF50",
+      color: "#FFFFFF",
+    },
+  ];
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -100,6 +155,7 @@ export default function Dashboard() {
         const goalsData = await axios.get('https://aim-hackathon-team-2.onrender.com/api/goals/');  // Replace with your actual endpoint URL
         const goals = goalsData.data;
 
+
         const updatedMockData = {};
         fetchedCategories.forEach(category => {
           updatedMockData[category.category_name] = [];
@@ -108,9 +164,12 @@ export default function Dashboard() {
         goals.forEach(goal => {
           const categoryName = fetchedCategories.find(cat => cat.id === goal.category)?.category_name;
           const { goal_name, total_amount, completed_amount, deadline, priority } = goal; // Destructuring for cleaner code
+          const selectedBadges = [badgeOptions[0], badgeOptions[1]];
+
+
           // Assuming "bills" is the field you want to represent in createData (adapt based on your needs)
           const bills = goal_name; // Replace with the appropriate field from your API response
-          const goal_data = createData(bills, total_amount, deadline, priority.toLowerCase(), [], goal.id, completed_amount);
+          const goal_data = createData(bills, total_amount, deadline, priority.toLowerCase(), selectedBadges, goal.id, completed_amount);
           if (categoryName) {
             updatedMockData[categoryName].push(goal_data);
           } else {
@@ -149,13 +208,67 @@ export default function Dashboard() {
     return allGoals.flat(1);
   };
 
-  const handleAddGoal = (category, data) => {
+
+  function convertDateToYYYYMMDD(dateString) {
+    try {
+      // Create a Date object using a flexible format specifier
+      const dateObj = new Date(dateString);
+
+      // Ensure the date is valid (avoids errors with invalid input)
+      if (isNaN(dateObj.getTime())) {
+        throw new Error('Invalid date format. Please use "Month Day, Year" (e.g., "May 16, 2024").');
+      }
+
+      // Format the date object in YYYY-MM-DD format
+      const formattedDate = dateObj.toISOString().slice(0, 10);
+      return formattedDate;
+      //return dateObj;
+    } catch (error) {
+      console.error('Error converting date:', error.message);
+      // Handle errors gracefully (e.g., display error message to the user)
+      return null; // Or return an alternative value (e.g., empty string)
+    }
+  }
+
+  const handleAddGoal = async (category, data) => {
     let { bills, totalAmount, deadline, priority, badges, id, amountPaid } =
       data;
-    mockData[category].push(
-      createData(bills, totalAmount, deadline, priority, badges, id, amountPaid)
-    );
+    console.log(convertDateToYYYYMMDD(deadline));
+    const goalData = {
+      goal_name: bills, // Assuming 'bills' field maps to 'goal_name' in your API
+      total_amount: totalAmount,
+      completed_amount: "0.00", // Assuming completed amount starts at 0
+      deadline: convertDateToYYYYMMDD(deadline),
+      priority: priority.toLowerCase(), // Ensure consistent priority case
+      saving_frequency: "bi-weekly", // Assuming not provided by the user
+      reminder_interval: null, // Assuming not provided by the user
+      category: categories.find(c => c.category_name === category)["id"],
+      user: 1// Assuming category ID is used
+    };
+
+    // Add badges data if provided (assuming badges is an array of objects)
+    if (badges && badges.length) {
+      goalData.badges = badges;
+    }
+
+    try {
+      const response = await axios.post('https://aim-hackathon-team-2.onrender.com/api/goals/', goalData); // POST request with goal data
+
+      // Handle successful response (e.g., clear form, update UI)
+      console.log('Goal added successfully:', response.data);
+
+    // Update mockData locally (optional)
+    // Assuming 'id' and 'completed_amount' are set after creation on the backend
+      mockData[category].push(
+        createData(bills, totalAmount, deadline, priority, [badgeOptions[2], badgeOptions[3]], response.data.id, amountPaid)
+      );
+    } catch (error) {
+      console.error('Error adding goal:', error);
+      // Handle errors (e.g., display error message to the user)
+    }
   };
+
+
   const handleCreateCategory = (category) => {
     mockData[category] = [];
     return;
