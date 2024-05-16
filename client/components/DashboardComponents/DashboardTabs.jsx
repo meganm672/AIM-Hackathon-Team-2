@@ -6,6 +6,7 @@ import Paper from "@mui/material/Paper";
 import { Modal, StepConnector, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import BudgetAccordian from "./BudgetAccordian";
+import ChallengesPage from "../ChallengesComponents/ChallengesPage"
 import Button from "@mui/material/Button";
 import PaidRoundedIcon from "@mui/icons-material/PaidRounded";
 import IconButton from "@mui/material/IconButton";
@@ -23,6 +24,7 @@ import { IoIosSearch } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
 import { PiCurrencyCircleDollar } from "react-icons/pi";
 import CloseIcon from '@mui/icons-material/Close';
+
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -330,7 +332,7 @@ const DashboardTabs = ({
           transactions
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          Challenge
+         <ChallengesPage />
         </CustomTabPanel>
       </Box>
     </>
