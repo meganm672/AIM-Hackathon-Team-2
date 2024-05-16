@@ -19,8 +19,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import Divider from "@mui/material/Divider";
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
   const [openCreateModal, setOpenCreateModel] = useState(false);
@@ -32,13 +32,12 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
   const [totalAmount, setTotalAmount] = useState();
   const [priority, setPriority] = useState("");
   //reminder buttons
-  const [alignment, setAlignment] = React.useState('left');
+  const [alignment, setAlignment] = React.useState("left");
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
   const submitGoal = (category) => {
-    console.log(category);
     const data = {
       bills: goalName,
       deadline: deadline.format("MMMM DD, YYYY"),
@@ -107,18 +106,22 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
             sx={{ margin: 2 }}
           >
             <AccordionSummary
-              sx={{ flexDirection: "row-reverse", backgroundColor: "#F2F8FD", alignItems: "center"}}
+              sx={{
+                flexDirection: "row-reverse",
+                backgroundColor: "#F2F8FD",
+                alignItems: "center",
+              }}
               expandIcon={<ArrowDropDownIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
             >
-              <Typography align="left"  >
+              <Typography align="left">
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </Typography>
               {accordionOpen[category] ? (
                 <>
                   <Button
-                    sx={{ color: "#1F648E", marginRight: "auto"}}
+                    sx={{ color: "#1F648E", marginRight: "auto" }}
                     onClick={() => {
                       setAddGoalToCategory(category);
                       handleOpenCreateGoalModal();
@@ -127,12 +130,16 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                     <FaCirclePlus />
                     Add Goals
                   </Button>
-                  <Typography align="right">${calculateTotalSaved(category)}</Typography>
+                  <Typography align="right">
+                    ${calculateTotalSaved(category)}
+                  </Typography>
                   <BsThreeDotsVertical />
                 </>
               ) : (
                 <>
-                  <Typography sx={{ marginLeft: "auto" }}>${calculateTotalSaved(category)}</Typography>
+                  <Typography sx={{ marginLeft: "auto" }}>
+                    ${calculateTotalSaved(category)}
+                  </Typography>
                   <BsThreeDotsVertical />
                 </>
               )}
@@ -144,7 +151,6 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
           </Accordion>
           {/* add goal form */}
           <Box sx={{ width: "60%" }}>
-
             <Dialog
               disableEscapeKeyDown
               open={openCreateModal}
@@ -181,7 +187,6 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
 
                   <Stack direction="row">
                     <Stack>
-
                       <FormLabel>Due date</FormLabel>
                       <DatePicker
                         value={deadline}
@@ -210,7 +215,6 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                   </Stack>
                   <Box>
                     <Stack>
-
                       <FormLabel>Set a reminder</FormLabel>
                       <ToggleButtonGroup
                         value={alignment}
@@ -218,32 +222,20 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                         onChange={handleAlignment}
                         aria-label="text alignment"
                         sx={{
-                          '& .Mui-selected': {
-                            backgroundColor: '#1C7488',
-                            color: '#FFFFFF',
+                          "& .Mui-selected": {
+                            backgroundColor: "#1C7488",
+                            color: "#FFFFFF",
                           },
-                          '& .MuiButton-label': {
-                            textTransform: 'capitalize',
-                            fontSize: '14px',
-                          }
+                          "& .MuiButton-label": {
+                            textTransform: "capitalize",
+                            fontSize: "14px",
+                          },
                         }}
                       >
-                        <ToggleButton value="weekly"
-                        >
-                          Weekly
-                        </ToggleButton>
-                        <ToggleButton value="monthly"
-                        >
-                          Monthly
-                        </ToggleButton>
-                        <ToggleButton value="yearly"
-                        >
-                          Yearly
-                        </ToggleButton>
-                        <ToggleButton value="custom"
-                        >
-                          Custom
-                        </ToggleButton>
+                        <ToggleButton value="weekly">Weekly</ToggleButton>
+                        <ToggleButton value="monthly">Monthly</ToggleButton>
+                        <ToggleButton value="yearly">Yearly</ToggleButton>
+                        <ToggleButton value="custom">Custom</ToggleButton>
                       </ToggleButtonGroup>
                       <FormLabel>Every</FormLabel>
                       <Select>
@@ -256,19 +248,22 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                 </FormControl>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleCloseCreateGoalModal}
+                <Button
+                  onClick={handleCloseCreateGoalModal}
                   sx={{
                     backgroundColor: "#F1F3F4", // Gray color
                     color: "#706F6F",
                   }}
-                >Cancel</Button>
+                >
+                  Cancel
+                </Button>
                 <Button
                   onClick={() => {
                     submitGoal(addGoalToCategory);
                   }}
                   sx={{
                     backgroundColor: "#1C7488",
-                    color: "#FFFFFF"
+                    color: "#FFFFFF",
                   }}
                 >
                   Create Task

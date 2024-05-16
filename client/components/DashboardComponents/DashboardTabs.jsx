@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { Modal, Typography } from "@mui/material";
@@ -18,7 +18,7 @@ import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import Stack from '@mui/material/Stack'
+import Stack from "@mui/material/Stack";
 import { IoIosSearch } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
 import { PiCurrencyCircleDollar } from "react-icons/pi";
@@ -105,7 +105,6 @@ const DashboardTabs = ({
     handleClose();
   };
 
-
   const handleChange = (event) => {
     setSelectedGoalPrimary(event.target.value);
   };
@@ -121,14 +120,21 @@ const DashboardTabs = ({
         <Box>
           <Tabs value={value} onChange={handleTabChange}>
             <Tab label="Goal" />
-            <Tab label="Transactions" disabled/>
+            <Tab label="Transactions" disabled />
             <Tab label="Challenges" />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
           <Box sx={{ height: "100vh" }}>
             <Paper elevation={2}>
-              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", p: 2 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  p: 2,
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -151,10 +157,12 @@ const DashboardTabs = ({
                   </IconButton>
                 </div>
                 <Stack direction={"row"}>
-                  <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
                     <IconButton onClick={handleClickOpenAddMoney}>
                       <PiCurrencyCircleDollar />
                     </IconButton>
@@ -165,7 +173,6 @@ const DashboardTabs = ({
                     >
                       + Add New Category
                     </Button>
-
                   </div>
                 </Stack>
               </Box>
@@ -204,13 +211,15 @@ const DashboardTabs = ({
                       label="Add money"
                       onChange={handleChange}
                     >
-                      {listGoals && typeof listGoals === 'function' && listGoals().map((goal) => {
-                        return (
-                          <MenuItem key={goal.id} value={goal.id}>
-                            {goal.bills}
-                          </MenuItem>
-                        );
-                      })}
+                      {listGoals &&
+                        typeof listGoals === "function" &&
+                        listGoals().map((goal) => {
+                          return (
+                            <MenuItem key={goal.id} value={goal.id}>
+                              {goal.bills}
+                            </MenuItem>
+                          );
+                        })}
                     </Select>
                     <Typography
                       id="modal-modal-title"
