@@ -36,7 +36,7 @@ function CustomTabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Box>{children}</Box>
         </Box>
       )}
     </div>
@@ -118,11 +118,8 @@ const DashboardTabs = ({
   return (
     <>
       <Box>
-
-
         <Box>
           <Tabs value={value} onChange={handleTabChange}>
-
             <Tab label="Goal" />
             <Tab label="Transactions" disabled/>
             <Tab label="Challenges" />
