@@ -145,6 +145,27 @@ export default function Dashboard() {
     },
   ];
 
+  function convertDateToUserFormat(dateString) {
+    try {
+      // Create a Date object from the YYYY-MM-DD string
+      const dateObj = new Date(dateString);
+
+      // Ensure the date is valid (avoids errors with invalid input)
+      if (isNaN(dateObj.getTime())) {
+        throw new Error('Invalid date format. Please use YYYY-MM-DD format (e.g., "2024-05-16").');
+      }
+
+      // Format the date object into month, day, year format
+      const options = { year: 'numeric', month: 'long', day: 'numeric' }; // Customizable format options
+      const formattedDate = dateObj.toLocaleDateString('en-US', options); // Adjust locale based on your needs
+      return formattedDate;
+    } catch (error) {
+      console.error('Error converting date:', error.message);
+      // Handle errors gracefully (e.g., display error message to the user)
+      return null; // Or return an alternative value (e.g., empty string)
+    }
+  }
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -163,6 +184,7 @@ export default function Dashboard() {
 
         goals.forEach(goal => {
           const categoryName = fetchedCategories.find(cat => cat.id === goal.category)?.category_name;
+          deadline = convertDateToUserFormat(deadline);
           const { goal_name, total_amount, completed_amount, deadline, priority } = goal; // Destructuring for cleaner code
           const selectedBadges = [badgeOptions[0], badgeOptions[1]];
 
