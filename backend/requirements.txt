@@ -4,3 +4,4 @@ django
 djangorestframework
 gunicorn
 pytz
+django-cors-headers
