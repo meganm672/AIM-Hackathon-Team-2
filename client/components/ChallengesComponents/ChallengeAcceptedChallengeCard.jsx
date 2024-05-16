@@ -29,7 +29,7 @@ const ChallengeAcceptedChallengeCard = () => {
          Challenge Accepted
         </Typography>
         <Typography variant="caption" sx={{marginLeft: 1}} >
-          Awarded starting a challenge
+          Awarded for signing up for an optional budgeting challenge
         </Typography>
         </Stack>
         </Stack>

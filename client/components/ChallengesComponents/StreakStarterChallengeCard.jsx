@@ -26,7 +26,7 @@ const StreakStarterChallengeCard = () => {
          Streak Starter
         </Typography>
         <Typography variant="caption" sx={{marginLeft: 1}} >
-          Awarded for starting a streak
+          Awarded for completing a set number of challenges
         </Typography>
         </Stack>
         </Stack>

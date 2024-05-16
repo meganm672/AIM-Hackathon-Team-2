@@ -27,7 +27,7 @@ const ChallengeChampionChallengeCard = () => {
          Challenge Champion
         </Typography>
         <Typography variant="caption" sx={{marginLeft: 1}} >
-          Awarded for slaying challenges
+       Awarded consistently participating in and conquering budgeting challenges
         </Typography>
         </Stack>
         </Stack>

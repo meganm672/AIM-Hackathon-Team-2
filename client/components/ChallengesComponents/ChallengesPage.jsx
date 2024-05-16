@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { BsFillFilterSquareFill } from "react-icons/bs";
 import { Typography, Button, IconButton, Box, Paper, Stack, Grid } from "@mui/material"
 import ChallengeCongurereChallengeCard from "./ChallengeConqurereChallengeCard"
-import BudgetBossChallengeCard from './BudgetBossChallengeCard';
+import BudgetBossChallengeCard from './DebtSlayerChallengeCard';
 import ChallengeAcceptedChallengeCard from './ChallengeAcceptedChallengeCard';
 import StreakStarterChallengeCard from './StreakStarterChallengeCard';
 import ChallengeChampionChallengeCard from "./ChallengeChampionChallengeCard"
-import OverachieverChallengeCard from "./OverachieverChallengeCard"
+import GoalGrubberChallengeCard from "./GoalGrubberChallengeCard"
+import DebtSlayerChallengeCard from './DebtSlayerChallengeCard';
 const ChallengesPage = () => {
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -40,7 +41,7 @@ const ChallengesPage = () => {
         <Grid container spacing={2}>
         <Grid item >
 
-        <BudgetBossChallengeCard />
+        <DebtSlayerChallengeCard />
         </Grid>
         <Grid item>
 
@@ -56,7 +57,7 @@ const ChallengesPage = () => {
         </Grid>
         <Grid item>
 
-        <OverachieverChallengeCard />
+        <GoalGrubberChallengeCard />
         </Grid>
         <Grid item>
 

@@ -3,11 +3,12 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import OverachieverBadge from "../Badges/OverachieverBadge";
+import DebtSlayerBadge from "../Badges/DebtSlayerBadge";
 import LinearProgressWithLabel from '../DashboardComponents/Utils';
 import { Stack,Box, IconButton, Chip } from '@mui/material';
 import { GoTrash } from "react-icons/go";
-const OverachieverChallengeCard = () => {
+
+const DebtSlayerChallengeCard = () => {
     const chipStyle = {
         borderRadius: "4px", 
         backgroundColor: "#D3D3FF",
@@ -19,14 +20,14 @@ const OverachieverChallengeCard = () => {
       <CardContent>
         <Stack direction="row">
 
-        <OverachieverBadge />
+        <DebtSlayerBadge />
         <Stack direction="column">
 
         <Typography sx={{ fontSize: 14, paddingLeft:1, fontWeight:"bold" }} >
-         Budget Boss
+         Debt Slayer
         </Typography>
         <Typography variant="caption" sx={{marginLeft: 1}} >
-          Awarded for budgeting 
+        Awarded for making consistent payments towards debt repayment
         </Typography>
         </Stack>
         </Stack>
@@ -56,4 +57,4 @@ const OverachieverChallengeCard = () => {
     );
 };
 
-export default OverachieverChallengeCard;
+export default DebtSlayerChallengeCard;

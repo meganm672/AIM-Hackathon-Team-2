@@ -24,10 +24,10 @@ const ChallengeConqurereChallengeCard = () => {
         <Stack direction="column">
 
         <Typography sx={{ fontSize: 14, paddingLeft:1, fontWeight:"bold" }} >
-         Budget Boss
+         Challenge Conqurere
         </Typography>
         <Typography variant="caption" sx={{marginLeft: 1}} >
-          Awarded for budgeting 
+          Awarded for successfully completing a budgeting challenge
         </Typography>
         </Stack>
         </Stack>

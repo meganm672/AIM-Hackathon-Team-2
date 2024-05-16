@@ -3,12 +3,11 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import BudgetBossBadge from "../Badges/BudgetBossBadge";
+import GoalGrubberBadge from "../Badges/GoalGrubberBadge"
 import LinearProgressWithLabel from '../DashboardComponents/Utils';
 import { Stack,Box, IconButton, Chip } from '@mui/material';
 import { GoTrash } from "react-icons/go";
-
-const BudgetBossChallengeCard = () => {
+const GoalGrubberChallengeCard = () => {
     const chipStyle = {
         borderRadius: "4px", 
         backgroundColor: "#D3D3FF",
@@ -20,21 +19,21 @@ const BudgetBossChallengeCard = () => {
       <CardContent>
         <Stack direction="row">
 
-        <BudgetBossBadge />
+        <GoalGrubberBadge />
         <Stack direction="column">
 
         <Typography sx={{ fontSize: 14, paddingLeft:1, fontWeight:"bold" }} >
-         Budget Boss
+        Goal Grubber
         </Typography>
         <Typography variant="caption" sx={{marginLeft: 1}} >
-          Awarded for budgeting 
+          Awarded for creating a first savings goal
         </Typography>
         </Stack>
         </Stack>
         <Box>
 
         <Typography variant='caption'>
-            Goal: <b>Rent</b>
+            Goal: <b>Car Payment</b>
         </Typography>
         </Box>
        <Box sx={{marginTop: 4}}>
@@ -57,4 +56,4 @@ const BudgetBossChallengeCard = () => {
     );
 };
 
-export default BudgetBossChallengeCard;
+export default GoalGrubberChallengeCard;
