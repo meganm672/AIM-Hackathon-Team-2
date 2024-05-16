@@ -19,8 +19,11 @@ import MenuItem from "@mui/material/MenuItem";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import Divider from "@mui/material/Divider";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from "@mui/material/IconButton";
 
 const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
   const [openCreateModal, setOpenCreateModel] = useState(false);
@@ -82,6 +85,13 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
 
   const [accordionOpen, setAccordionOpen] = useState(initialAccordionState);
 
+  const [reminderInterval, setReminderInterval] = useState("Week");
+
+  const handleReminderIntervalChange = (event) => {
+    setReminderInterval(event.target.value);
+  };
+
+
   const calculateTotalSaved = (category) => {
     return goalData[category].reduce((total, goal) => {
       return total + goal.amountPaid;
@@ -106,11 +116,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
             sx={{ margin: 2 }}
           >
             <AccordionSummary
-              sx={{
-                flexDirection: "row-reverse",
-                backgroundColor: "#F2F8FD",
-                alignItems: "center",
-              }}
+              sx={{ flexDirection: "row-reverse", backgroundColor: "#F2F8FD", alignItems: "center" }}
               expandIcon={<ArrowDropDownIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
@@ -156,55 +162,63 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
               open={openCreateModal}
               onClose={handleCloseCreateGoalModal}
             >
-              <DialogTitle>Create Goal</DialogTitle>
+              <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+
+                <DialogTitle>Create Goal</DialogTitle>
+                <IconButton onClick={handleCloseCreateGoalModal}>
+                  <CloseIcon />
+                </IconButton>
+              </Stack>
               <Divider />
               <DialogContent>
-                <FormControl sx={{ m: 1, minWidth: 100 }}>
-                  <FormLabel>Goal Name</FormLabel>
-                  <TextField
-                    id="gaol-name"
-                    variant="outlined"
-                    value={goalName}
-                    placeholder="Enter goal name..."
-                    onChange={(e) => setGoalName(e.target.value)}
-                    required
-                  />
-                  <FormLabel>Amount</FormLabel>
-                  <TextField
-                    id="filled-basic"
-                    placeholder="$0.00"
-                    variant="outlined"
-                    value={totalAmount}
-                    onChange={(e) => {
-                      let num = Number(e.target.value);
-                      if (isNaN(num)) {
-                        return setTotalAmount(0);
-                      }
-                      return setTotalAmount(num);
-                    }}
-                  />
-                  {/* <InputLabe÷l id="set-goal-priority">Set Priority</InputLabe÷l> */}
+                <Box sx={{ m: 1, minWidth: 100 }}>
+                  <Stack direction="column">
 
+                    <FormLabel>Goal Name</FormLabel>
+                    <TextField
+                      id="goal-name"
+                      variant="outlined"
+                      value={goalName}
+                      placeholder="Enter goal name..."
+                      onChange={(e) => setGoalName(e.target.value)}
+                      required
+                    />
+                    <FormLabel>Amount</FormLabel>
+                    <TextField
+                      id="amount"
+                      placeholder="$0.00"
+                      variant="outlined"
+                      value={totalAmount}
+                      onChange={(e) => {
+                        let num = Number(e.target.value);
+                        if (isNaN(num)) {
+                          return setTotalAmount(0);
+                        }
+                        return setTotalAmount(num);
+                      }}
+                    />
+                  </Stack>
                   <Stack direction="row">
-                    <Stack>
+
+                    <Stack sx={{ width: "50%", m: 1 }}>
+
                       <FormLabel>Due date</FormLabel>
                       <DatePicker
                         value={deadline}
                         onChange={(newValue) => {
                           setDeadline(newValue);
                         }}
-                        sx={{ width: "70%" }}
                       />
                     </Stack>
-                    <Stack>
+                    <Stack sx={{ width: "50%", m: 1 }}>
                       <FormLabel>Priority</FormLabel>
                       <Select
                         value={priority}
+                        id="Set-priority"
                         label="Set Priority"
                         labelId="set-goal-priority"
                         onChange={handlePriorityChange}
                         renderValue={(selected) => selected.join(", ")}
-                        sx={{ minWidth: 120, m: 1, width: "70%" }}
                       >
                         <MenuItem value="Critical">Critical</MenuItem>
                         <MenuItem value="High">High</MenuItem>
@@ -222,30 +236,46 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                         onChange={handleAlignment}
                         aria-label="text alignment"
                         sx={{
-                          "& .Mui-selected": {
-                            backgroundColor: "#1C7488",
-                            color: "#FFFFFF",
-                          },
-                          "& .MuiButton-label": {
-                            textTransform: "capitalize",
-                            fontSize: "14px",
-                          },
+                          '& .Mui-selected': {
+                            backgroundColor: '#1C7488',
+                            color: '#FFFFFF',
+                          }
                         }}
                       >
-                        <ToggleButton value="weekly">Weekly</ToggleButton>
-                        <ToggleButton value="monthly">Monthly</ToggleButton>
-                        <ToggleButton value="yearly">Yearly</ToggleButton>
-                        <ToggleButton value="custom">Custom</ToggleButton>
+                        <ToggleButton value="weekly"
+                        sx={{textTransform: "capitalize"}}
+                        >
+                          Weekly
+                        </ToggleButton>
+                        <ToggleButton value="monthly"
+                         sx={{textTransform: "capitalize"}}
+                        >
+                          Monthly
+                        </ToggleButton>
+                        <ToggleButton value="yearly"
+                         sx={{textTransform: "capitalize"}}
+                        >
+                          Yearly
+                        </ToggleButton>
+                        <ToggleButton value="custom"
+                         sx={{textTransform: "capitalize"}}
+                        >
+                          Custom
+                        </ToggleButton>
                       </ToggleButtonGroup>
                       <FormLabel>Every</FormLabel>
-                      <Select>
+                      <Select
+                        value={reminderInterval}
+                        onChange={handleReminderIntervalChange}
+                      >
                         <MenuItem value="Week">Week</MenuItem>
                         <MenuItem value="Month">Month</MenuItem>
                         <MenuItem value="Year">Year</MenuItem>
+                        <MenuItem value="Custom">Custom</MenuItem>
                       </Select>
                     </Stack>
                   </Box>
-                </FormControl>
+                </Box>
               </DialogContent>
               <DialogActions>
                 <Button
@@ -253,6 +283,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                   sx={{
                     backgroundColor: "#F1F3F4", // Gray color
                     color: "#706F6F",
+                    textTransform: "capitalize"
                   }}
                 >
                   Cancel
@@ -264,6 +295,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                   sx={{
                     backgroundColor: "#1C7488",
                     color: "#FFFFFF",
+                    textTransform: "capitalize"
                   }}
                 >
                   Create Task

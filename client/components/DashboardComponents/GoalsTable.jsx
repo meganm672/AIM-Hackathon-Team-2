@@ -23,21 +23,21 @@ const priorityColorMap = {
 };
 
 const chipStyle = {
-  borderRadius: "4px", // Adjust the border radius as needed
+  borderRadius: "4px", 
 };
 
 const buttonStyle = {
-  borderRadius: "50%", // Make the button circular
-  width: "40px", // Set the width and height to create a circle
+  borderRadius: "50%", 
+  width: "40px", 
   height: "40px",
-  backgroundColor: "#F1F3F4", // Gray color
+  backgroundColor: "#F1F3F4", 
   color: "#706F6F",
   fontSize: 15,
 };
 
 const GoalsTable = ({ goalData, category }) => {
   const capitalizedCategory =
-    category.charAt(0).toUpperCase() + category.slice(1); // Capitalize the first letter
+    category.charAt(0).toUpperCase() + category.slice(1); 
 
   const getPriorityCellStyle = (priority) => {
     const { backgroundColor, color } = priorityColorMap[priority] || {};
@@ -92,16 +92,10 @@ const GoalsTable = ({ goalData, category }) => {
                 </TableCell>
                 <TableCell align="right">${row.totalAmount}</TableCell>
                 <TableCell align="right">
-                  {console.log(row.badges[0])}
-                  {row.badges.map((badge, index) => (
-                    <IconButton key={index} style={{ padding: 0 }}>
-                      {badge.icon}
-                    </IconButton>
-                  ))}
-                  {/* <Stack direction={"row"} spacing={1}>
+                  <Stack direction={"row"} spacing={1}>
                     <span>{row.badges[0].icon}</span>
                     <span>{row.badges[1].icon}</span>
-                  </Stack> */}
+                  </Stack>
                 </TableCell>
                 <TableCell align="right">
                   <Stack direction={"row"}>
