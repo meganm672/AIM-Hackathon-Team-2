@@ -175,6 +175,7 @@ export default function Dashboard() {
 
         const goalsData = await axios.get('https://aim-hackathon-team-2.onrender.com/api/goals/');  // Replace with your actual endpoint URL
         const goals = goalsData.data;
+        console.log(goals);
 
 
         const updatedMockData = {};
@@ -184,14 +185,17 @@ export default function Dashboard() {
 
         goals.forEach(goal => {
           const categoryName = fetchedCategories.find(cat => cat.id === goal.category)?.category_name;
-          deadline = convertDateToUserFormat(deadline);
+          console.log(goal);
           const { goal_name, total_amount, completed_amount, deadline, priority } = goal; // Destructuring for cleaner code
           const selectedBadges = [badgeOptions[0], badgeOptions[1]];
+          console.log(deadline);
+          const deadline1 = convertDateToUserFormat(deadline);
+          console.log(deadline1);
 
 
           // Assuming "bills" is the field you want to represent in createData (adapt based on your needs)
           const bills = goal_name; // Replace with the appropriate field from your API response
-          const goal_data = createData(bills, total_amount, deadline, priority.toLowerCase(), selectedBadges, goal.id, completed_amount);
+          const goal_data = createData(bills, total_amount, deadline1, priority.toLowerCase(), selectedBadges, goal.id, completed_amount);
           if (categoryName) {
             updatedMockData[categoryName].push(goal_data);
           } else {
@@ -207,8 +211,6 @@ export default function Dashboard() {
 
     fetchData();
   }, []);
-
-
 
 
   async function fetchCategories() {
