@@ -65,9 +65,7 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-
 export default function Dashboard() {
-
   function createData(
     bills,
     totalAmount,
@@ -281,8 +279,8 @@ export default function Dashboard() {
       // Handle successful response (e.g., clear form, update UI)
       console.log('Goal added successfully:', response.data);
 
-    // Update mockData locally (optional)
-    // Assuming 'id' and 'completed_amount' are set after creation on the backend
+      // Update mockData locally (optional)
+      // Assuming 'id' and 'completed_amount' are set after creation on the backend
       mockData[category].push(
         createData(bills, totalAmount, deadline, priority, [badgeOptions[2], badgeOptions[3]], response.data.id, amountPaid)
       );
@@ -354,7 +352,7 @@ export default function Dashboard() {
           />
 
           {/* <Route path="/goal/:goalID" element={<Goal goalData={mockData} />} /> */}
-          <Route path="/goal/:goalID" element={<Goal goalData={mockData} />} />
+          <Route path="/goal/:goalID" element={<Goal goalData={listGoals} />} />
         </Routes>
       </Box>
     </Router>

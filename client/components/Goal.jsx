@@ -20,7 +20,7 @@ export default function Goal({ goalData }) {
   let [open, setOpen] = useState(false);
   let [addMoney, setAddMoney] = useState(0);
   let { goalID } = useParams();
-  let currentGoal = goalData.filter((data) => {
+  let currentGoal = goalData().filter((data) => {
     return data.id === goalID;
   });
   const handleOpenModal = () => setOpen(true);
@@ -73,18 +73,22 @@ export default function Goal({ goalData }) {
                 width: "79vw",
               }}
             >
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-              }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                }}
+              >
                 <Typography variant="h4">{currentGoal[0].bills}</Typography>
                 <Typography>{currentGoal[0].priority}</Typography>
               </div>
               <LinearProgressWithLabel
                 variant="determinate"
-                value={(currentGoal[0].amountPaid / currentGoal[0].totalAmount) * 100}
+                value={
+                  (currentGoal[0].amountPaid / currentGoal[0].totalAmount) * 100
+                }
               />
               <br></br>
               <Paper
@@ -96,22 +100,29 @@ export default function Goal({ goalData }) {
                 }}
               >
                 <Typography>${currentGoal[0].amountPaid}</Typography>
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  flexWrap: 'wrap',
-                }}>
-                  <div >
-                    <Typography sx={{ margin: 1 }} variant="caption">${currentGoal[0].totalAmount}</Typography>
-                    <Typography variant="caption">{currentGoal[0].deadline}</Typography>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div>
+                    <Typography sx={{ margin: 1 }} variant="caption">
+                      ${currentGoal[0].totalAmount}
+                    </Typography>
+                    <Typography variant="caption">
+                      {currentGoal[0].deadline}
+                    </Typography>
                   </div>
-                  <div style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    textAlign: 'center'
-                  }}>
-
+                  <div
+                    style={{
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                  >
                     <Fab
                       size="small"
                       color="primary"
@@ -123,13 +134,17 @@ export default function Goal({ goalData }) {
                     <Typography>Add Money</Typography>
                   </div>
                 </div>
-                  <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  }}>
-                    <Typography variant="caption" sx={{margin: 1}}>Goal</Typography>
-                    <Typography variant="caption">Date</Typography>
-                  </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography variant="caption" sx={{ margin: 1 }}>
+                    Goal
+                  </Typography>
+                  <Typography variant="caption">Date</Typography>
+                </div>
                 <Modal
                   open={open}
                   onClose={handleCloseModal}

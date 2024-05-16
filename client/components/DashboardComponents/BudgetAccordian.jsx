@@ -19,10 +19,12 @@ import MenuItem from "@mui/material/MenuItem";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import Divider from "@mui/material/Divider";
+
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from "@mui/material/IconButton";
+
 const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
   const [openCreateModal, setOpenCreateModel] = useState(false);
 
@@ -33,13 +35,12 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
   const [totalAmount, setTotalAmount] = useState();
   const [priority, setPriority] = useState("");
   //reminder buttons
-  const [alignment, setAlignment] = React.useState('left');
+  const [alignment, setAlignment] = React.useState("left");
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
   const submitGoal = (category) => {
-    console.log(category);
     const data = {
       bills: goalName,
       deadline: deadline.format("MMMM DD, YYYY"),
@@ -47,7 +48,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
       priority: priority[0],
       id: Math.floor(Math.random() * 1000),
       amountPaid: 0,
-      badges: "new account badge",
+      badges: [],
     };
 
     handleAddGoal(category, data);
@@ -120,7 +121,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
               aria-controls="panel1-content"
               id="panel1-header"
             >
-              <Typography align="left"  >
+              <Typography align="left">
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </Typography>
               {accordionOpen[category] ? (
@@ -135,12 +136,16 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                     <FaCirclePlus />
                     Add Goals
                   </Button>
-                  <Typography align="right">${calculateTotalSaved(category)}</Typography>
+                  <Typography align="right">
+                    ${calculateTotalSaved(category)}
+                  </Typography>
                   <BsThreeDotsVertical />
                 </>
               ) : (
                 <>
-                  <Typography sx={{ marginLeft: "auto" }}>${calculateTotalSaved(category)}</Typography>
+                  <Typography sx={{ marginLeft: "auto" }}>
+                    ${calculateTotalSaved(category)}
+                  </Typography>
                   <BsThreeDotsVertical />
                 </>
               )}
@@ -152,7 +157,6 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
           </Accordion>
           {/* add goal form */}
           <Box sx={{ width: "60%" }}>
-
             <Dialog
               disableEscapeKeyDown
               open={openCreateModal}
@@ -195,7 +199,9 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                     />
                   </Stack>
                   <Stack direction="row">
+
                     <Stack sx={{ width: "50%", m: 1 }}>
+
                       <FormLabel>Due date</FormLabel>
                       <DatePicker
                         value={deadline}
@@ -272,13 +278,16 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                 </Box>
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleCloseCreateGoalModal}
+                <Button
+                  onClick={handleCloseCreateGoalModal}
                   sx={{
                     backgroundColor: "#F1F3F4", // Gray color
                     color: "#706F6F",
                     textTransform: "capitalize"
                   }}
-                >Cancel</Button>
+                >
+                  Cancel
+                </Button>
                 <Button
                   onClick={() => {
                     submitGoal(addGoalToCategory);
