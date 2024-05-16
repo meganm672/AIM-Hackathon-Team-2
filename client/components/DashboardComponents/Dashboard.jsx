@@ -34,6 +34,7 @@ import ScroogeMcSavingsBadge from "../Badges/ScroogeMcSavingsBadge";
 import SteadySaverBadge from "../Badges/SteadySaverBadge";
 import StreakStarterBadge from "../Badges/StreakStarterBadge";
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 
 const drawerWidth = 240;
@@ -87,233 +88,58 @@ export default function Dashboard() {
     };
   }
 
-  async function fetchGoals() {
+  const [categories, setCategories] = useState([]);
+  const [mockData, setMockData] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedCategories = await fetchCategories();
+        setCategories(fetchedCategories);
+
+        const goalsData = await axios.get('https://aim-hackathon-team-2.onrender.com/api/goals/');  // Replace with your actual endpoint URL
+        const goals = goalsData.data;
+
+        const updatedMockData = {};
+        fetchedCategories.forEach(category => {
+          updatedMockData[category.category_name] = [];
+        });
+
+        goals.forEach(goal => {
+          const categoryName = fetchedCategories.find(cat => cat.id === goal.category)?.category_name;
+          const { goal_name, total_amount, completed_amount, deadline, priority } = goal; // Destructuring for cleaner code
+          // Assuming "bills" is the field you want to represent in createData (adapt based on your needs)
+          const bills = goal_name; // Replace with the appropriate field from your API response
+          const goal_data = createData(bills, total_amount, deadline, priority.toLowerCase(), [], goal.id, completed_amount);
+          if (categoryName) {
+            updatedMockData[categoryName].push(goal_data);
+          } else {
+            console.warn(`Goal with ID ${goal.id} has an invalid category ID.`);
+          }
+        });
+
+        setMockData(updatedMockData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+
+  async function fetchCategories() {
     try {
-      const response = await axios.get('https://aim-hackathon-team-2.onrender.com/api/goals/'); // Replace with your actual endpoint URL
-      const goalsData = response.data;
-      // Filter goals with category "needs"
-      const needsGoals = goalsData.filter(goal => goal.category === 'needs');
-      // Now you have the filtered needsGoals data, ready for mapping
-      const mappedNeedsGoals = needsGoals.map(need => {
-        const { goal_name, total_amount, completed_amount, deadline, priority } = need;
-        const bills = goal_name; // Replace with the appropriate field from your API response
-        return createData(bills, total_amount, deadline, priority.toLowerCase(), [], need.id, completed_amount); // Assuming badges is empty for now
-      });
-      console.log(mappedNeedsGoals)
-      // Use mappedNeedsGoals in your component
+      const response = await axios.get('https://aim-hackathon-team-2.onrender.com/api/categories/');  // Replace with your actual endpoint URL
+      const categoriesData = response.data;
+      return categoriesData; // Assuming 'name' is the field for category name
     } catch (error) {
-      console.error('Error fetching goals:', error);
+      console.error('Error fetching categories:', error);
     }
   }
 
-  fetchGoals();
-  //dummy data for now we will have to map the rows to the file once we have the forms created
-  const mockData = {
-    Needs: [
-      createData(
-        "Rent",
-        1000.0,
-        "01 May 2025",
-        "Critical",
-        [
-          {
-            label: "Debt Slayer",
-            icon: <DebtSlayerBadge />,
-            backgroundColor: "#2196F3",
-            color: "#FFFFFF",
-          },
-          {
-            label: "Challenge Accepted",
-            icon: <ChallengeAcceptedBadge />,
-            backgroundColor: "#4CAF50",
-            color: "#FFFFFF",
-          },
-        ],
-        "1",
-        250.0
-      ),
-      createData(
-        "Utilites",
-        500.0,
-        "11 Nov 2025",
-        "High",
-        [
-          {
-            label: "Challenge Accepted",
-            icon: <ChallengeAcceptedBadge />,
-            backgroundColor: "#2196F3",
-            color: "#FFFFFF",
-          },
-          {
-            label: "Challenge Conqurere",
-            icon: <ChallengeConqurereBadge />,
-            backgroundColor: "#4CAF50",
-            color: "#FFFFFF",
-          },
-        ],
-        "2",
-        100.0
-      ),
-      createData(
-        "Childcare",
-        1700.0,
-        "20 Oct 2026",
-        "Medium",
-        [
-          {
-            label: "Goal Grubber",
-            icon: <GoalGrubberBadge />,
-            backgroundColor: "#2196F3",
-            color: "#FFFFFF",
-          },
-          {
-            label: "Overachiever",
-            icon: <OverachieverBadge />,
-            backgroundColor: "#4CAF50",
-            color: "#FFFFFF",
-          },
-        ],
-        "3",
-        100.0
-      ),
-      createData(
-        "Student Loans",
-        1000.0,
-        "13 Dec 2026",
-        "Low",
-        [
-          {
-            label: "Steady Saver",
-            icon: <SteadySaverBadge />,
-            backgroundColor: "#2196F3",
-            color: "#FFFFFF",
-          },
-          {
-            label: "Streak Starter",
-            icon: <StreakStarterBadge />,
-            backgroundColor: "#4CAF50",
-            color: "#FFFFFF",
-          },
-        ],
-        "4",
-        460.0
-      ),
-      createData(
-        "Car Payment",
-        300.0,
-        "20 Dec 2026",
-        "Low",
-        [
-          {
-            label: "Budget Boss",
-            icon: <BudgetBossBadge />,
-            backgroundColor: "#2196F3",
-            color: "#FFFFFF",
-          },
-          {
-            label: "Challenge Champion",
-            icon: <ChallengeChampionBadge />,
-            backgroundColor: "#4CAF50",
-            color: "#FFFFFF",
-          },
-        ],
-        "5",
-        75.0
-      ),
-    ],
-    Bills: [
-      createData(
-        "Rent",
-        1250.0,
-        "03 Nov 2024",
-        "Critical",
-
-        [
-          {
-            label: "Budget Boss",
-            icon: <BudgetBossBadge />,
-            backgroundColor: "#2196F3",
-            color: "#FFFFFF",
-          },
-          {
-            label: "Challenge Champion",
-            icon: <ChallengeChampionBadge />,
-            backgroundColor: "#4CAF50",
-            color: "#FFFFFF",
-          },
-        ],
-        "6",
-        250.0
-      ),
-      createData(
-        "Utilites",
-        500.0,
-        "13 Sept 2024",
-        "High",
-        [
-          {
-            label: "Steady Saver",
-            icon: <SteadySaverBadge />,
-            backgroundColor: "#2196F3",
-            color: "#FFFFFF",
-          },
-          {
-            label: "Streak Starter",
-            icon: <StreakStarterBadge />,
-            backgroundColor: "#4CAF50",
-            color: "#FFFFFF",
-          },
-        ],
-        "7",
-        100.0
-      ),
-      createData(
-        "Car Insurance",
-        300.0,
-        "10 Dec 2025",
-        "Low",
-        [
-          {
-            label: "Goal Grubber",
-            icon: <GoalGrubberBadge />,
-            backgroundColor: "#2196F3",
-            color: "#FFFFFF",
-          },
-          {
-            label: "Overachiever",
-            icon: <OverachieverBadge />,
-            backgroundColor: "#4CAF50",
-            color: "#FFFFFF",
-          },
-        ],
-        "8",
-
-        75.0
-      ),
-      createData(
-        "Student Loans",
-        650.0,
-        "03 July 2024",
-        "Critical",
-        [
-          {
-            label: "Debt Slayer",
-            icon: <ScroogeMcSavingsBadge />,
-            backgroundColor: "#2196F3",
-            color: "#FFFFFF",
-          },
-          {
-            label: "Challenge Accepted",
-            icon: <LongGamePlayerBadge />,
-            backgroundColor: "#4CAF50",
-            color: "#FFFFFF",
-          },
-        ],
-        "9",
-        460.0
-      ),
-    ],
-  };
 
   const listGoals = () => {
     let allGoals = [];
