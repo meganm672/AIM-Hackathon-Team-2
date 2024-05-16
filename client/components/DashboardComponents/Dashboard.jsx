@@ -22,17 +22,17 @@ import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import { VscBellDot } from "react-icons/vsc";
 import { IoIosArrowDown } from "react-icons/io";
-import BudgetBossBadge from '../Badges/BudgetBossBadge';
-import ChallengeAcceptedBadge from '../Badges/ChallengeAcceptedBadge';
-import ChallengeChampionBadge from '../Badges/ChallengeChampionBadge';
+import BudgetBossBadge from "../Badges/BudgetBossBadge";
+import ChallengeAcceptedBadge from "../Badges/ChallengeAcceptedBadge";
+import ChallengeChampionBadge from "../Badges/ChallengeChampionBadge";
 import ChallengeConqurereBadge from "../Badges/ChallengeConqurereBadge";
 import DebtSlayerBadge from "../Badges/DebtSlayerBadge";
-import GoalGrubberBadge from '../Badges/GoalGrubberBadge';
-import LongGamePlayerBadge from '../Badges/LongGamePlayerBadge';
-import OverachieverBadge from '../Badges/OverachieverBadge';
-import ScroogeMcSavingsBadge from '../Badges/ScroogeMcSavingsBadge';
-import SteadySaverBadge from '../Badges/SteadySaverBadge';
-import StreakStarterBadge from '../Badges/StreakStarterBadge';
+import GoalGrubberBadge from "../Badges/GoalGrubberBadge";
+import LongGamePlayerBadge from "../Badges/LongGamePlayerBadge";
+import OverachieverBadge from "../Badges/OverachieverBadge";
+import ScroogeMcSavingsBadge from "../Badges/ScroogeMcSavingsBadge";
+import SteadySaverBadge from "../Badges/SteadySaverBadge";
+import StreakStarterBadge from "../Badges/StreakStarterBadge";
 
 const drawerWidth = 240;
 
@@ -91,8 +91,18 @@ export default function Dashboard() {
         "01 May 2025",
         "Critical",
         [
-          { label: "Debt Slayer", icon:<DebtSlayerBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
-          { label: "Challenge Accepted", icon: <ChallengeAcceptedBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+          {
+            label: "Debt Slayer",
+            icon: <DebtSlayerBadge />,
+            backgroundColor: "#2196F3",
+            color: "#FFFFFF",
+          },
+          {
+            label: "Challenge Accepted",
+            icon: <ChallengeAcceptedBadge />,
+            backgroundColor: "#4CAF50",
+            color: "#FFFFFF",
+          },
         ],
         "1",
         250.0
@@ -103,8 +113,18 @@ export default function Dashboard() {
         "11 Nov 2025",
         "High",
         [
-          { label: "Challenge Accepted", icon:<ChallengeAcceptedBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
-          { label: "Challenge Conqurere", icon: <ChallengeConqurereBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+          {
+            label: "Challenge Accepted",
+            icon: <ChallengeAcceptedBadge />,
+            backgroundColor: "#2196F3",
+            color: "#FFFFFF",
+          },
+          {
+            label: "Challenge Conqurere",
+            icon: <ChallengeConqurereBadge />,
+            backgroundColor: "#4CAF50",
+            color: "#FFFFFF",
+          },
         ],
         "2",
         100.0
@@ -115,8 +135,18 @@ export default function Dashboard() {
         "20 Oct 2026",
         "Medium",
         [
-          { label: "Goal Grubber", icon:<GoalGrubberBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
-          { label: "Overachiever", icon: <OverachieverBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+          {
+            label: "Goal Grubber",
+            icon: <GoalGrubberBadge />,
+            backgroundColor: "#2196F3",
+            color: "#FFFFFF",
+          },
+          {
+            label: "Overachiever",
+            icon: <OverachieverBadge />,
+            backgroundColor: "#4CAF50",
+            color: "#FFFFFF",
+          },
         ],
         "3",
         100.0
@@ -127,24 +157,44 @@ export default function Dashboard() {
         "13 Dec 2026",
         "Low",
         [
-          { label: "Steady Saver", icon:<SteadySaverBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
-          { label: "Streak Starter", icon: <StreakStarterBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+          {
+            label: "Steady Saver",
+            icon: <SteadySaverBadge />,
+            backgroundColor: "#2196F3",
+            color: "#FFFFFF",
+          },
+          {
+            label: "Streak Starter",
+            icon: <StreakStarterBadge />,
+            backgroundColor: "#4CAF50",
+            color: "#FFFFFF",
+          },
         ],
         "4",
         460.0
-        ),
-        createData(
-          "Car Payment",
-          300.0,
-          "20 Dec 2026",
-          "Low",
-          [
-            { label: "Budget Boss", icon:<BudgetBossBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
-            { label: "Challenge Champion", icon: <ChallengeChampionBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
-          ],
-          "5",
-          75.0
-        ),
+      ),
+      createData(
+        "Car Payment",
+        300.0,
+        "20 Dec 2026",
+        "Low",
+        [
+          {
+            label: "Budget Boss",
+            icon: <BudgetBossBadge />,
+            backgroundColor: "#2196F3",
+            color: "#FFFFFF",
+          },
+          {
+            label: "Challenge Champion",
+            icon: <ChallengeChampionBadge />,
+            backgroundColor: "#4CAF50",
+            color: "#FFFFFF",
+          },
+        ],
+        "5",
+        75.0
+      ),
     ],
     Bills: [
       createData(
@@ -154,10 +204,20 @@ export default function Dashboard() {
         "Critical",
 
         [
-          { label: "Budget Boss", icon:<BudgetBossBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
-          { label: "Challenge Champion", icon: <ChallengeChampionBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+          {
+            label: "Budget Boss",
+            icon: <BudgetBossBadge />,
+            backgroundColor: "#2196F3",
+            color: "#FFFFFF",
+          },
+          {
+            label: "Challenge Champion",
+            icon: <ChallengeChampionBadge />,
+            backgroundColor: "#4CAF50",
+            color: "#FFFFFF",
+          },
         ],
-        "1",
+        "6",
         250.0
       ),
       createData(
@@ -166,10 +226,20 @@ export default function Dashboard() {
         "13 Sept 2024",
         "High",
         [
-          { label: "Steady Saver", icon:<SteadySaverBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
-          { label: "Streak Starter", icon: <StreakStarterBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+          {
+            label: "Steady Saver",
+            icon: <SteadySaverBadge />,
+            backgroundColor: "#2196F3",
+            color: "#FFFFFF",
+          },
+          {
+            label: "Streak Starter",
+            icon: <StreakStarterBadge />,
+            backgroundColor: "#4CAF50",
+            color: "#FFFFFF",
+          },
         ],
-        "2",
+        "7",
         100.0
       ),
       createData(
@@ -178,10 +248,20 @@ export default function Dashboard() {
         "10 Dec 2025",
         "Low",
         [
-          { label: "Goal Grubber", icon:<GoalGrubberBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
-          { label: "Overachiever", icon: <OverachieverBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+          {
+            label: "Goal Grubber",
+            icon: <GoalGrubberBadge />,
+            backgroundColor: "#2196F3",
+            color: "#FFFFFF",
+          },
+          {
+            label: "Overachiever",
+            icon: <OverachieverBadge />,
+            backgroundColor: "#4CAF50",
+            color: "#FFFFFF",
+          },
         ],
-        "3",
+        "8",
 
         75.0
       ),
@@ -191,10 +271,20 @@ export default function Dashboard() {
         "03 July 2024",
         "Critical",
         [
-          { label: "Debt Slayer", icon:<ScroogeMcSavingsBadge /> , backgroundColor: "#2196F3", color: "#FFFFFF" },
-          { label: "Challenge Accepted", icon: <LongGamePlayerBadge /> , backgroundColor: "#4CAF50", color: "#FFFFFF" },
+          {
+            label: "Debt Slayer",
+            icon: <ScroogeMcSavingsBadge />,
+            backgroundColor: "#2196F3",
+            color: "#FFFFFF",
+          },
+          {
+            label: "Challenge Accepted",
+            icon: <LongGamePlayerBadge />,
+            backgroundColor: "#4CAF50",
+            color: "#FFFFFF",
+          },
         ],
-        "4",
+        "9",
         460.0
       ),
     ],
