@@ -45,7 +45,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
       priority: priority[0],
       id: Math.floor(Math.random() * 1000),
       amountPaid: 0,
-      badges: "new account badge",
+      badges: [],
     };
 
     handleAddGoal(category, data);
