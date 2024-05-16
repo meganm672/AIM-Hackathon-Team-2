@@ -107,30 +107,35 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
             sx={{ margin: 2 }}
           >
             <AccordionSummary
-              sx={{ flexDirection: "row-reverse", backgroundColor: "#F2F8FD" }}
+              sx={{ flexDirection: "row-reverse", backgroundColor: "#F2F8FD", alignItems: "center"}}
               expandIcon={<ArrowDropDownIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
             >
-              <Typography align="left" sx={{ width: "50%" }} >
+              <Typography align="left"  >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </Typography>
-              {accordionOpen[category] && (
-                <Button
-                  sx={{ color: "#1F648E" }}
-                  onClick={() => {
-                    setAddGoalToCategory(category);
-                    handleOpenCreateGoalModal();
-                  }}
-                >
-                  <FaCirclePlus />
-                  Add Goals
-                </Button>
+              {accordionOpen[category] ? (
+                <>
+                  <Button
+                    sx={{ color: "#1F648E", marginRight: "auto"}}
+                    onClick={() => {
+                      setAddGoalToCategory(category);
+                      handleOpenCreateGoalModal();
+                    }}
+                  >
+                    <FaCirclePlus />
+                    Add Goals
+                  </Button>
+                  <Typography align="right">${calculateTotalSaved(category)}</Typography>
+                  <BsThreeDotsVertical />
+                </>
+              ) : (
+                <>
+                  <Typography sx={{ marginLeft: "auto" }}>${calculateTotalSaved(category)}</Typography>
+                  <BsThreeDotsVertical />
+                </>
               )}
-              <Typography align="right" sx={{ width: "70%" }}>
-                ${calculateTotalSaved(category)}
-              </Typography>
-              <BsThreeDotsVertical />
             </AccordionSummary>
             <AccordionDetails sx={{ backgroundColor: "#F2F8FD" }}>
               {/* <CategoryTable goalData={goalData[category]} /> */}
@@ -240,22 +245,22 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                           Custom
                         </ToggleButton>
                       </ToggleButtonGroup>
-                        <FormLabel>Every</FormLabel>
-                        <Select>
-                          <MenuItem value="Week">Week</MenuItem>
-                          <MenuItem value="Month">Month</MenuItem>
-                          <MenuItem value="Year">Year</MenuItem>
-                        </Select>
+                      <FormLabel>Every</FormLabel>
+                      <Select>
+                        <MenuItem value="Week">Week</MenuItem>
+                        <MenuItem value="Month">Month</MenuItem>
+                        <MenuItem value="Year">Year</MenuItem>
+                      </Select>
                     </Stack>
                   </Box>
                 </FormControl>
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleCloseCreateGoalModal}
-                sx={{
-                  backgroundColor: "#F1F3F4", // Gray color
-  color: "#706F6F",
-                }}
+                  sx={{
+                    backgroundColor: "#F1F3F4", // Gray color
+                    color: "#706F6F",
+                  }}
                 >Cancel</Button>
                 <Button
                   onClick={() => {
