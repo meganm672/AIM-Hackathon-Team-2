@@ -293,9 +293,17 @@ export default function Dashboard() {
   };
 
 
-  const handleCreateCategory = (category) => {
-    mockData[category] = [];
-    return;
+  const handleCreateCategory = async (category) => {
+    //mockData[category] = [];
+    try {
+      const response = await axios.post('https://aim-hackathon-team-2.onrender.com/api/categories/', { category_name: category, user: 1 }); // Send category name
+
+      // Handle successful response
+      console.log('Category created successfully:', response.data);
+
+    } catch (error) {
+      console.error('Error creating category:', error);
+    }
   };
 
   return (
