@@ -33,9 +33,8 @@ import OverachieverBadge from "../Badges/OverachieverBadge";
 import ScroogeMcSavingsBadge from "../Badges/ScroogeMcSavingsBadge";
 import SteadySaverBadge from "../Badges/SteadySaverBadge";
 import StreakStarterBadge from "../Badges/StreakStarterBadge";
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const drawerWidth = 240;
 
@@ -77,12 +76,12 @@ export default function Dashboard() {
   ) {
     return {
       bills,
-      totalAmount,
+      totalAmount: Number(totalAmount),
       deadline,
       priority: priority.toLowerCase(),
       badges,
       id,
-      amountPaid,
+      amountPaid: Number(amountPaid),
     };
   }
 
@@ -91,8 +90,18 @@ export default function Dashboard() {
 
   // Badge options (replace with your actual badge objects)
   const badgeOptions = [
-    { label: "Debt Slayer", icon: <DebtSlayerBadge />, backgroundColor: "#2196F3", color: "#FFFFFF" },
-    { label: "Challenge Accepted", icon: <ChallengeAcceptedBadge />, backgroundColor: "#4CAF50", color: "#FFFFFF" },
+    {
+      label: "Debt Slayer",
+      icon: <DebtSlayerBadge />,
+      backgroundColor: "#2196F3",
+      color: "#FFFFFF",
+    },
+    {
+      label: "Challenge Accepted",
+      icon: <ChallengeAcceptedBadge />,
+      backgroundColor: "#4CAF50",
+      color: "#FFFFFF",
+    },
     {
       label: "Steady Saver",
       icon: <SteadySaverBadge />,
@@ -150,20 +159,21 @@ export default function Dashboard() {
 
       // Ensure the date is valid (avoids errors with invalid input)
       if (isNaN(dateObj.getTime())) {
-        throw new Error('Invalid date format. Please use YYYY-MM-DD format (e.g., "2024-05-16").');
+        throw new Error(
+          'Invalid date format. Please use YYYY-MM-DD format (e.g., "2024-05-16").'
+        );
       }
 
       // Format the date object into month, day, year format
-      const options = { year: 'numeric', month: 'long', day: 'numeric' }; // Customizable format options
-      const formattedDate = dateObj.toLocaleDateString('en-US', options); // Adjust locale based on your needs
+      const options = { year: "numeric", month: "long", day: "numeric" }; // Customizable format options
+      const formattedDate = dateObj.toLocaleDateString("en-US", options); // Adjust locale based on your needs
       return formattedDate;
     } catch (error) {
-      console.error('Error converting date:', error.message);
+      console.error("Error converting date:", error.message);
       // Handle errors gracefully (e.g., display error message to the user)
       return null; // Or return an alternative value (e.g., empty string)
     }
   }
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -171,29 +181,45 @@ export default function Dashboard() {
         const fetchedCategories = await fetchCategories();
         setCategories(fetchedCategories);
 
-        const goalsData = await axios.get('https://aim-hackathon-team-2.onrender.com/api/goals/');  // Replace with your actual endpoint URL
+        const goalsData = await axios.get(
+          "https://aim-hackathon-team-2.onrender.com/api/goals/"
+        ); // Replace with your actual endpoint URL
         const goals = goalsData.data;
         console.log(goals);
 
-
         const updatedMockData = {};
-        fetchedCategories.forEach(category => {
+        fetchedCategories.forEach((category) => {
           updatedMockData[category.category_name] = [];
         });
 
-        goals.forEach(goal => {
-          const categoryName = fetchedCategories.find(cat => cat.id === goal.category)?.category_name;
+        goals.forEach((goal) => {
+          const categoryName = fetchedCategories.find(
+            (cat) => cat.id === goal.category
+          )?.category_name;
           console.log(goal);
-          const { goal_name, total_amount, completed_amount, deadline, priority } = goal; // Destructuring for cleaner code
+          const {
+            goal_name,
+            total_amount,
+            completed_amount,
+            deadline,
+            priority,
+          } = goal; // Destructuring for cleaner code
           const selectedBadges = [badgeOptions[0], badgeOptions[1]];
           console.log(deadline);
           const deadline1 = convertDateToUserFormat(deadline);
           console.log(deadline1);
 
-
           // Assuming "bills" is the field you want to represent in createData (adapt based on your needs)
           const bills = goal_name; // Replace with the appropriate field from your API response
-          const goal_data = createData(bills, total_amount, deadline1, priority.toLowerCase(), selectedBadges, goal.id, completed_amount);
+          const goal_data = createData(
+            bills,
+            total_amount,
+            deadline1,
+            priority.toLowerCase(),
+            selectedBadges,
+            goal.id,
+            completed_amount
+          );
           if (categoryName) {
             updatedMockData[categoryName].push(goal_data);
           } else {
@@ -203,24 +229,24 @@ export default function Dashboard() {
 
         setMockData(updatedMockData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
 
-
   async function fetchCategories() {
     try {
-      const response = await axios.get('https://aim-hackathon-team-2.onrender.com/api/categories/');  // Replace with your actual endpoint URL
+      const response = await axios.get(
+        "https://aim-hackathon-team-2.onrender.com/api/categories/"
+      ); // Replace with your actual endpoint URL
       const categoriesData = response.data;
       return categoriesData; // Assuming 'name' is the field for category name
     } catch (error) {
-      console.error('Error fetching categories:', error);
+      console.error("Error fetching categories:", error);
     }
   }
-
 
   const listGoals = () => {
     let allGoals = [];
@@ -230,7 +256,6 @@ export default function Dashboard() {
     return allGoals.flat(1);
   };
 
-
   function convertDateToYYYYMMDD(dateString) {
     try {
       // Create a Date object using a flexible format specifier
@@ -238,7 +263,9 @@ export default function Dashboard() {
 
       // Ensure the date is valid (avoids errors with invalid input)
       if (isNaN(dateObj.getTime())) {
-        throw new Error('Invalid date format. Please use "Month Day, Year" (e.g., "May 16, 2024").');
+        throw new Error(
+          'Invalid date format. Please use "Month Day, Year" (e.g., "May 16, 2024").'
+        );
       }
 
       // Format the date object in YYYY-MM-DD format
@@ -246,14 +273,14 @@ export default function Dashboard() {
       return formattedDate;
       //return dateObj;
     } catch (error) {
-      console.error('Error converting date:', error.message);
+      console.error("Error converting date:", error.message);
       // Handle errors gracefully (e.g., display error message to the user)
       return null; // Or return an alternative value (e.g., empty string)
     }
   }
 
   const handleAddGoal = async (category, data) => {
-    let { bills, totalAmount, deadline, priority, badges, id, amountPaid } =
+    let { bills, totalAmount, deadline, priority, badges, amountPaid } =
       data;
     console.log(convertDateToYYYYMMDD(deadline));
     const goalData = {
@@ -264,8 +291,8 @@ export default function Dashboard() {
       priority: priority.toLowerCase(), // Ensure consistent priority case
       saving_frequency: "bi-weekly", // Assuming not provided by the user
       reminder_interval: null, // Assuming not provided by the user
-      category: categories.find(c => c.category_name === category)["id"],
-      user: 1// Assuming category ID is used
+      category: categories.find((c) => c.category_name === category)["id"],
+      user: 1, // Assuming category ID is used
     };
 
     // Add badges data if provided (assuming badges is an array of objects)
@@ -274,36 +301,47 @@ export default function Dashboard() {
     }
 
     try {
-      const response = await axios.post('https://aim-hackathon-team-2.onrender.com/api/goals/', goalData); // POST request with goal data
+      const response = await axios.post(
+        "https://aim-hackathon-team-2.onrender.com/api/goals/",
+        goalData
+      ); // POST request with goal data
 
       // Handle successful response (e.g., clear form, update UI)
-      console.log('Goal added successfully:', response.data);
+      console.log("Goal added successfully:", response.data);
 
       // Update mockData locally (optional)
       // Assuming 'id' and 'completed_amount' are set after creation on the backend
       mockData[category].push(
-        createData(bills, totalAmount, deadline, priority, [badgeOptions[2], badgeOptions[3]], response.data.id, amountPaid)
+        createData(
+          bills,
+          totalAmount,
+          deadline,
+          priority,
+          [badgeOptions[2], badgeOptions[3]],
+          response.data.id,
+          amountPaid
+        )
       );
     } catch (error) {
-      console.error('Error adding goal:', error);
+      console.error("Error adding goal:", error);
       // Handle errors (e.g., display error message to the user)
     }
   };
 
-
   const handleCreateCategory = async (category) => {
-    //mockData[category] = [];
+    mockData[category] = [];
     try {
-      const response = await axios.post('https://aim-hackathon-team-2.onrender.com/api/categories/', { category_name: category, user: 1 }); // Send category name
+      const response = await axios.post(
+        "https://aim-hackathon-team-2.onrender.com/api/categories/",
+        { category_name: category, user: 1 }
+      ); // Send category name
 
       // Handle successful response
-      console.log('Category created successfully:', response.data);
-
+      console.log("Category created successfully:", response.data);
     } catch (error) {
-      console.error('Error creating category:', error);
+      console.error("Error creating category:", error);
     }
   };
-
   return (
     <Router>
       <Box sx={{ display: "flex" }}>

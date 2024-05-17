@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["aim-hackathon-team-2.onrender.com"]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5173", 
+    "http://localhost:5173" # Replace with your frontend application's origin
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,7 +62,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",  # Replace with your frontend application's origin
-    "http://localhost:5173/"
+    "http://localhost:5173",
 ]
 
 ROOT_URLCONF = "backend.urls"

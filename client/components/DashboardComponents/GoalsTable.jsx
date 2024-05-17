@@ -25,14 +25,14 @@ const priorityColorMap = {
 };
 
 const chipStyle = {
-  borderRadius: "4px", 
+  borderRadius: "4px",
 };
 
 const buttonStyle = {
-  borderRadius: "50%", 
-  width: "40px", 
+  borderRadius: "50%",
+  width: "40px",
   height: "40px",
-  backgroundColor: "#F1F3F4", 
+  backgroundColor: "#F1F3F4",
   color: "#706F6F",
   fontSize: 15,
 };
@@ -63,6 +63,7 @@ const GoalsTable = ({ goalData, category }) => {
     setTransferDialogOpen(false);
     setCurrentGoal(null);
   };
+
 
   const getPriorityCellStyle = (priority) => {
     const { backgroundColor, color } = priorityColorMap[priority] || {};
@@ -101,7 +102,7 @@ const GoalsTable = ({ goalData, category }) => {
                   <Checkbox />
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Link to={`/goal/${row.id}`}>{row.bills}</Link>
+                  {row.bills}
                   <LinearProgressWithLabel
                     variant="determinate"
                     value={(row.amountPaid / row.totalAmount) * 100}
@@ -125,6 +126,7 @@ const GoalsTable = ({ goalData, category }) => {
                   </Stack>
                 </TableCell>
                 <TableCell align="right">
+
                   <Stack direction={"row"} spacing={1}>
                     <IconButton style={buttonStyle} onClick={() => handleEditClick(row)}>
                       <PiPencilSimpleThin />

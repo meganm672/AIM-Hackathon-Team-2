@@ -21,7 +21,13 @@ class Goal(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     deadline = models.DateField(blank=True, null=True)
     priority = models.CharField(
-        max_length=255, choices=[("low", "Low"), ("medium", "Medium"), ("high", "High")]
+        max_length=255,
+        choices=[
+            ("low", "Low"),
+            ("medium", "Medium"),
+            ("high", "High"),
+            ("critical", "Critical"),
+        ],
     )
     saving_frequency = models.CharField(
         max_length=255,
