@@ -23,21 +23,21 @@ const priorityColorMap = {
 };
 
 const chipStyle = {
-  borderRadius: "4px", 
+  borderRadius: "4px",
 };
 
 const buttonStyle = {
-  borderRadius: "50%", 
-  width: "40px", 
+  borderRadius: "50%",
+  width: "40px",
   height: "40px",
-  backgroundColor: "#F1F3F4", 
+  backgroundColor: "#F1F3F4",
   color: "#706F6F",
   fontSize: 15,
 };
 
 const GoalsTable = ({ goalData, category }) => {
   const capitalizedCategory =
-    category.charAt(0).toUpperCase() + category.slice(1); 
+    category.charAt(0).toUpperCase() + category.slice(1);
 
   const getPriorityCellStyle = (priority) => {
     const { backgroundColor, color } = priorityColorMap[priority] || {};
@@ -74,7 +74,7 @@ const GoalsTable = ({ goalData, category }) => {
                   <Checkbox />
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Link to={`/goal/${row.id}`}>{row.bills}</Link>
+                  {row.bills}
                   <LinearProgressWithLabel
                     variant="determinate"
                     value={(row.amountPaid / row.totalAmount) * 100}
@@ -99,9 +99,11 @@ const GoalsTable = ({ goalData, category }) => {
                 </TableCell>
                 <TableCell align="right">
                   <Stack direction={"row"}>
-                    <IconButton style={buttonStyle}>
-                      <PiPencilSimpleThin />
-                    </IconButton>
+                    <Link to={`/goal/${row.id}`}>
+                      <IconButton style={buttonStyle}>
+                        <PiPencilSimpleThin />
+                      </IconButton>
+                    </Link>
                     <IconButton style={buttonStyle}>
                       <BiTransfer />
                     </IconButton>
