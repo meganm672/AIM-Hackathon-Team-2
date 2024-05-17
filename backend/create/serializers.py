@@ -25,6 +25,8 @@ class GoalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goal
         fields = "__all__"
+    total_amount = serializers.DecimalField(max_digits=10, decimal_places=2)
+    completed_amount = serializers.DecimalField(max_digits=10, decimal_places=2)
 
 
 class BadgeSerializer(serializers.ModelSerializer):

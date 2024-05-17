@@ -88,19 +88,21 @@ const DashboardTabs = ({
     }
     let currentGoalIndex;
     let foundCategory;
+    let currentGoalID;
     for (const [key, value] of Object.entries(goalData)) {
       value.filter((goal, i) => {
         if (goal.id === selectedGoalPrimary) {
           foundCategory = key;
           currentGoalIndex = i;
+          currentGoalID = goal.id;
           return goal;
         }
       });
     }
     handleCloseAddMoney();
     console.log("current goal");
-    console.log(currentGoalIndex);
-    const response = await fetch(`https://aim-hackathon-team-2.onrender.com/api/goals/${currentGoalIndex}`, {
+    console.log(currentGoalID);
+    const response = await fetch(`https://aim-hackathon-team-2.onrender.com/api/goals/${currentGoalID}/`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ completed_amount: goalData[foundCategory][currentGoalIndex].amountPaid += amountAdd })

@@ -47,9 +47,9 @@ class CRUDViewbyid(APIView):
         serializer = self.serializer_class(instance)
         return Response(serializer.data)
 
-    def put(self, request, pk):
+    def put(self, request, id):
         try:
-            object = self.model.objects.get(pk=pk)
+            object = self.model.objects.get(id=id)
         except Exception as e:
             return Response(
                 {"error": f"Object not found: {e}"}, status=status.HTTP_404_NOT_FOUND
@@ -60,9 +60,9 @@ class CRUDViewbyid(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
+    def delete(self, request, id):
         try:
-            object = self.model.objects.get(pk=pk)
+            object = self.model.objects.get(id=id)
             object.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Exception as e:

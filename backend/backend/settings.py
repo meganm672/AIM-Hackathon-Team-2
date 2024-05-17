@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-wg!@t*v9oixp%0(c#g&-(!@7=qiyeq=i$%gyfu7u4jtagi#ans
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["aim-hackathon-team-2.onrender.com"]
+ALLOWED_HOSTS = ["aim-hackathon-team-2.onrender.com", "127.0.0.1"]
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173", 
