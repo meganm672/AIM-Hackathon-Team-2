@@ -20,11 +20,19 @@ import { DatePicker } from "@mui/x-date-pickers";
 import CloseIcon from "@mui/icons-material/Close";
 import dayjs from "dayjs";
 
-const TransferForm = ({ open, handleClose, goal }) => {
+const TransferForm = ({
+  open,
+  handleClose,
+  goal,
+  listGoals,
+  handleTransferMoney,
+}) => {
   if (!goal) return null;
   const [deadline, setDeadline] = useState(dayjs(goal.deadline));
   const [priority, setPriority] = useState("");
   const [selectedGoalPrimary, setSelectedGoalPrimary] = useState("");
+  const [transferAmount, setTransferAmount] = useState(0);
+  const [selectedTransferTo, setSelectedTransferTo] = useState("");
   const handleReminderIntervalChange = (event) => {
     setReminderInterval(event.target.value);
   };
@@ -33,8 +41,15 @@ const TransferForm = ({ open, handleClose, goal }) => {
     const { value } = event.target;
     setPriority(Array.isArray(value) ? value : [value]);
   };
-  const handleChange = (event) => {
+  const handleChangePrimary = (event) => {
     setSelectedGoalPrimary(event.target.value);
+  };
+  const handleChangeSecondary = (event) => {
+    setSelectedTransferTo(event.target.value);
+  };
+
+  const onSubmit = () => {
+    handleTransferMoney(selectedGoalPrimary, selectedTransferTo);
   };
 
   return (
@@ -54,51 +69,51 @@ const TransferForm = ({ open, handleClose, goal }) => {
             id="demo-simple-select"
             value={selectedGoalPrimary}
             label="Select-Goal"
-            onChange={handleChange}
+            onChange={handleChangePrimary}
             sx={{ width: "100%" }}
           >
-            {/* {listGoals &&
-                        typeof listGoals === "function" &&
-                        listGoals().map((goal) => {
-                          return (
-                            <MenuItem key={goal.id} value={goal.id}>
-                              {goal.bills}
-                            </MenuItem>
-                          );
-                        })} */}
+            {listGoals &&
+              typeof listGoals === "function" &&
+              listGoals().map((goal) => {
+                return (
+                  <MenuItem key={goal.id} value={goal.id}>
+                    {goal.bills}
+                  </MenuItem>
+                );
+              })}
           </Select>
           <FormLabel>To</FormLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={selectedGoalPrimary}
+            value={selectedTransferTo}
             label="Select-Goal"
-            onChange={handleChange}
+            onChange={handleChangeSecondary}
             sx={{ width: "100%" }}
           >
-            {/* {listGoals &&
-                        typeof listGoals === "function" &&
-                        listGoals().map((goal) => {
-                          return (
-                            <MenuItem key={goal.id} value={goal.id}>
-                              {goal.bills}
-                            </MenuItem>
-                          );
-                        })} */}
+            {listGoals &&
+              typeof listGoals === "function" &&
+              listGoals().map((goal) => {
+                return (
+                  <MenuItem key={goal.id} value={goal.id}>
+                    {goal.bills}
+                  </MenuItem>
+                );
+              })}
           </Select>
           <Typography id="modal-modal-title">Amount</Typography>
           <TextField
             id="filled-basic"
             placeholder="$0.00"
             variant="outlined"
-            //   value={amountAdd}
-            //   onChange={(e) => {
-            //     let num = Number(e.target.value);
-            //     if (isNaN(num)) {
-            //       return setAmountAdd(0);
-            //     }
-            //     return setAmountAdd(num);
-            //   }}
+            value={transferAmount}
+            onChange={(e) => {
+              let num = Number(e.target.value);
+              if (isNaN(num)) {
+                return setTransferAmount(0);
+              }
+              return setTransferAmount(num);
+            }}
             sx={{ width: "100%" }}
           />
           <Stack direction="row" sx={{ width: "100%" }}>
