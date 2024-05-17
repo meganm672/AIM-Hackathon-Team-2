@@ -62,6 +62,7 @@ const GoalsTable = ({
 
   const handleTransferClick = (goal) => {
     setCurrentGoal(goal);
+    console.log(goal);
     setTransferDialogOpen(true);
   };
 
