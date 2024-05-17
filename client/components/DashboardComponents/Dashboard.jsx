@@ -280,7 +280,7 @@ export default function Dashboard() {
   }
 
   const handleAddGoal = async (category, data) => {
-    let { bills, totalAmount, deadline, priority, badges, id, amountPaid } =
+    let { bills, totalAmount, deadline, priority, badges, amountPaid } =
       data;
     console.log(convertDateToYYYYMMDD(deadline));
     const goalData = {

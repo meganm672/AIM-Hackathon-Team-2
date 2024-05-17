@@ -46,7 +46,6 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
       deadline: deadline.format("MMMM DD, YYYY"),
       totalAmount,
       priority: priority[0],
-      id: Math.floor(Math.random() * 1000),
       amountPaid: 0,
       badges: [],
     };
