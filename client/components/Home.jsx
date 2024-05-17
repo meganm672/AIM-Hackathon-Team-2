@@ -16,6 +16,7 @@ export default function Home({
   handleCreateCategory,
   listGoals,
   handleEditGoal,
+  deleteGoal,
   handleTransferMoney,
 }) {
   return (
@@ -58,6 +59,7 @@ export default function Home({
                 listGoals={listGoals}
                 handleEditGoal={handleEditGoal}
                 handleTransferMoney={handleTransferMoney}
+                deleteGoal={deleteGoal}
               />
             </Paper>
           </Grid>

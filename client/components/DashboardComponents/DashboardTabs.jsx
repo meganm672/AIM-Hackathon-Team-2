@@ -51,6 +51,7 @@ const DashboardTabs = ({
   listGoals,
   handleEditGoal,
   handleTransferMoney,
+  deleteGoal,
 }) => {
   const [open, setOpen] = useState(false);
   const [openAddMoney, setOpenAddMoney] = useState(false);
@@ -123,7 +124,7 @@ const DashboardTabs = ({
       <Box>
         <Box>
           <Tabs value={value} onChange={handleTabChange}>
-            <Tab label="Goal" />
+            <Tab label="Goals" />
             <Tab label="Transactions" disabled />
             <Tab label="Challenges" />
           </Tabs>
@@ -407,6 +408,7 @@ const DashboardTabs = ({
                 listGoals={listGoals}
                 handleEditGoal={handleEditGoal}
                 handleTransferMoney={handleTransferMoney}
+                deleteGoal={deleteGoal}
               />
             </Paper>
           </Box>

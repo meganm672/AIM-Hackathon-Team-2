@@ -43,6 +43,7 @@ const GoalsTable = ({
   category,
   listGoals,
   handleEditGoal,
+  deleteGoal,
   handleTransferMoney,
 }) => {
   const capitalizedCategory =
@@ -160,6 +161,7 @@ const GoalsTable = ({
         handleClose={handleEditDialogClose}
         goal={currentGoal}
         handleEditGoal={handleEditGoal}
+        deleteGoal={deleteGoal}
       />
       <TransferForm
         open={transferDialogOpen}
