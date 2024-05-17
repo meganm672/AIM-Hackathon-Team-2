@@ -76,12 +76,12 @@ export default function Dashboard() {
   ) {
     return {
       bills,
-      totalAmount: Number(totalAmount),
+      totalAmount,
       deadline,
       priority: priority.toLowerCase(),
       badges,
       id,
-      amountPaid: Number(amountPaid),
+      amountPaid,
     };
   }
 
@@ -185,17 +185,29 @@ export default function Dashboard() {
           "https://aim-hackathon-team-2.onrender.com/api/goals/"
         ); // Replace with your actual endpoint URL
         const goals = goalsData.data;
+        console.log(goals);
 
         const updatedMockData = {};
         fetchedCategories.forEach((category) => {
           updatedMockData[category.category_name] = [];
-        
-        goals.forEach(goal => {
-          const categoryName = fetchedCategories.find(cat => cat.id === goal.category)?.category_name;
-          const { goal_name, total_amount, completed_amount, deadline, priority } = goal; // Destructuring for cleaner code
-        
+        });
+
+        goals.forEach((goal) => {
+          const categoryName = fetchedCategories.find(
+            (cat) => cat.id === goal.category
+          )?.category_name;
+          console.log(goal);
+          const {
+            goal_name,
+            total_amount,
+            completed_amount,
+            deadline,
+            priority,
+          } = goal; // Destructuring for cleaner code
           const selectedBadges = [badgeOptions[0], badgeOptions[1]];
+          console.log(deadline);
           const deadline1 = convertDateToUserFormat(deadline);
+          console.log(deadline1);
 
           // Assuming "bills" is the field you want to represent in createData (adapt based on your needs)
           const bills = goal_name; // Replace with the appropriate field from your API response
@@ -241,7 +253,6 @@ export default function Dashboard() {
     for (const [key, value] of Object.entries(mockData)) {
       allGoals.push(value);
     }
-    //console.log(allGoals);
     return allGoals.flat(1);
   };
 
@@ -318,7 +329,7 @@ export default function Dashboard() {
   };
 
   const handleCreateCategory = async (category) => {
-    mockData[category] = [];
+    //mockData[category] = [];
     try {
       const response = await axios.post(
         "https://aim-hackathon-team-2.onrender.com/api/categories/",
