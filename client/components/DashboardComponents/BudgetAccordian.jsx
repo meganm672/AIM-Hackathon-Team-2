@@ -120,13 +120,13 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
               aria-controls="panel1-content"
               id="panel1-header"
             >
-              <Typography align="left">
+              <Typography align="left" sx={{marginTop:.6, marginRight: 2}}>
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </Typography>
               {accordionOpen[category] ? (
                 <>
                   <Button
-                    sx={{ color: "#1F648E", marginRight: "auto" }}
+                    sx={{ color: "#1F648E", marginRight: "auto"}}
                     onClick={() => {
                       setAddGoalToCategory(category);
                       handleOpenCreateGoalModal();
@@ -135,6 +135,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                     <FaCirclePlus />
                     Add Goals
                   </Button>
+
                   <Typography align="right">
                     ${calculateTotalSaved(category)}
                   </Typography>
