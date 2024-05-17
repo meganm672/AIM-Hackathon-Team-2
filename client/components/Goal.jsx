@@ -21,7 +21,7 @@ export default function Goal({ goalData }) {
   let [addMoney, setAddMoney] = useState(0);
   let { goalID } = useParams();
   let currentGoal = goalData().filter((data) => {
-    return data.id === goalID;
+    return data.id == goalID;
   });
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
