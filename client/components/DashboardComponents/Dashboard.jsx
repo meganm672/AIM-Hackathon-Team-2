@@ -177,7 +177,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
         const fetchedCategories = await fetchCategories();
         setCategories(fetchedCategories);
 
@@ -189,6 +188,7 @@ export default function Dashboard() {
         const updatedMockData = {};
         fetchedCategories.forEach((category) => {
           updatedMockData[category.category_name] = [];
+        });
         
         goals.forEach(goal => {
           const categoryName = fetchedCategories.find(cat => cat.id === goal.category)?.category_name;
@@ -215,11 +215,7 @@ export default function Dashboard() {
           }
         });
 
-        setMockData(updatedMockData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+      setMockData(updatedMockData);
 
     fetchData();
   }, []);
