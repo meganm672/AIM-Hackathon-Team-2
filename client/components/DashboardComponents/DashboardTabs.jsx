@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import { Modal, StepConnector, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import BudgetAccordian from "./BudgetAccordian";
-import ChallengesPage from "../ChallengesComponents/ChallengesPage"
+import ChallengesPage from "../ChallengesComponents/ChallengesPage";
 import Button from "@mui/material/Button";
 import PaidRoundedIcon from "@mui/icons-material/PaidRounded";
 import IconButton from "@mui/material/IconButton";
@@ -23,8 +23,7 @@ import Stack from "@mui/material/Stack";
 import { IoIosSearch } from "react-icons/io";
 import { IoFilterOutline } from "react-icons/io5";
 import { PiCurrencyCircleDollar } from "react-icons/pi";
-import CloseIcon from '@mui/icons-material/Close';
-
+import CloseIcon from "@mui/icons-material/Close";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,6 +49,8 @@ const DashboardTabs = ({
   handleAddGoal,
   handleCreateCategory,
   listGoals,
+  handleEditGoal,
+  handleTransferMoney,
 }) => {
   const [open, setOpen] = useState(false);
   const [openAddMoney, setOpenAddMoney] = useState(false);
@@ -206,8 +207,13 @@ const DashboardTabs = ({
               >
                 <form onSubmit={handleSubmitAddMoney}>
                   <Box sx={style}>
-                    <Stack direction="row" sx={{ justifyContent: "space-between" }}>
-                      <Typography sx={{ marginBottom: 1 }}>Add Funds</Typography>
+                    <Stack
+                      direction="row"
+                      sx={{ justifyContent: "space-between" }}
+                    >
+                      <Typography sx={{ marginBottom: 1 }}>
+                        Add Funds
+                      </Typography>
                       <IconButton onClick={handleCloseAddMoney}>
                         <CloseIcon />
                       </IconButton>
@@ -232,11 +238,7 @@ const DashboardTabs = ({
                           );
                         })}
                     </Select>
-                    <Typography
-                      id="modal-modal-title"
-                    >
-                      Amount
-                    </Typography>
+                    <Typography id="modal-modal-title">Amount</Typography>
                     <TextField
                       id="filled-basic"
                       placeholder="$0.00"
@@ -257,71 +259,140 @@ const DashboardTabs = ({
                         <Button
                           variant="outlined"
                           onClick={() => handleAddMoneyPush(5)}
-                          sx={{ margin: 1, color:"#2C2C2C", borderColor: "#2C2C2C", minWidth: "70px", maxWidth:"70px"  }}
+                          sx={{
+                            margin: 1,
+                            color: "#2C2C2C",
+                            borderColor: "#2C2C2C",
+                            minWidth: "70px",
+                            maxWidth: "70px",
+                          }}
                         >
                           $5
                         </Button>
                         <Button
                           variant="outlined"
                           onClick={() => handleAddMoneyPush(10)}
-                          sx={{ margin: 1, color:"#2C2C2C", borderColor: "#2C2C2C", minWidth: "70px", maxWidth:"70px" }}
+                          sx={{
+                            margin: 1,
+                            color: "#2C2C2C",
+                            borderColor: "#2C2C2C",
+                            minWidth: "70px",
+                            maxWidth: "70px",
+                          }}
                         >
                           $10
                         </Button>
                         <Button
                           variant="outlined"
                           onClick={() => handleAddMoneyPush(25)}
-                          sx={{ margin: 1, color:"#2C2C2C", borderColor: "#2C2C2C", minWidth: "70px", maxWidth:"70px" }}
+                          sx={{
+                            margin: 1,
+                            color: "#2C2C2C",
+                            borderColor: "#2C2C2C",
+                            minWidth: "70px",
+                            maxWidth: "70px",
+                          }}
                         >
                           $25
                         </Button>
                         <Button
                           variant="outlined"
                           onClick={() => handleAddMoneyPush(50)}
-                          sx={{ margin: 1, color:"#2C2C2C", borderColor: "#2C2C2C", minWidth: "70px", maxWidth:"70px" }}
+                          sx={{
+                            margin: 1,
+                            color: "#2C2C2C",
+                            borderColor: "#2C2C2C",
+                            minWidth: "70px",
+                            maxWidth: "70px",
+                          }}
                         >
                           $50
                         </Button>
                       </Box>
                       <Box>
-
                         <Button
                           variant="outlined"
                           onClick={() => handleAddMoneyPush(100)}
-                          sx={{ margin: 1, color:"#2C2C2C", borderColor: "#2C2C2C", minWidth: "70px", maxWidth:"70px" }}
+                          sx={{
+                            margin: 1,
+                            color: "#2C2C2C",
+                            borderColor: "#2C2C2C",
+                            minWidth: "70px",
+                            maxWidth: "70px",
+                          }}
                         >
                           $100
                         </Button>
                         <Button
                           variant="outlined"
                           onClick={() => handleAddMoneyPush(500)}
-                          sx={{ margin: 1, color:"#2C2C2C", borderColor: "#2C2C2C", minWidth: "70px", maxWidth:"70px" }}
+                          sx={{
+                            margin: 1,
+                            color: "#2C2C2C",
+                            borderColor: "#2C2C2C",
+                            minWidth: "70px",
+                            maxWidth: "70px",
+                          }}
                         >
                           $500
                         </Button>
                         <Button
                           variant="outlined"
                           onClick={() => handleAddMoneyPush(1000)}
-                          sx={{ margin: 1, color:"#2C2C2C", borderColor: "#2C2C2C", minWidth: "70px", maxWidth:"70px" }}
+                          sx={{
+                            margin: 1,
+                            color: "#2C2C2C",
+                            borderColor: "#2C2C2C",
+                            minWidth: "70px",
+                            maxWidth: "70px",
+                          }}
                         >
                           $1000
                         </Button>
                         <Button
                           variant="outlined"
                           onClick={() => handleAddMoneyPush(10000)}
-                          sx={{ margin: 1, color:"#2C2C2C",borderColor: "#2C2C2C", minWidth: "70px", maxWidth:"70px" }}
+                          sx={{
+                            margin: 1,
+                            color: "#2C2C2C",
+                            borderColor: "#2C2C2C",
+                            minWidth: "70px",
+                            maxWidth: "70px",
+                          }}
                         >
                           $10000
                         </Button>
                       </Box>
-
                     </Box>
-                    <Box sx={{ display: "flex", justifyContent: "flex-end", marginTop: 2 }}>
-
-                      <Button variant="contained" onClick={handleCloseAddMoney} sx={{ margin: 1, backgroundColor: "#EEF0F4", color: "#586A84", textTransform: "capitalize" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        marginTop: 2,
+                      }}
+                    >
+                      <Button
+                        variant="contained"
+                        onClick={handleCloseAddMoney}
+                        sx={{
+                          margin: 1,
+                          backgroundColor: "#EEF0F4",
+                          color: "#586A84",
+                          textTransform: "capitalize",
+                        }}
+                      >
                         Cancel
                       </Button>
-                      <Button variant="contained" type="submit" sx={{ margin: 1, color: "#FFFFFF", backgroundColor: "#1C7488", textTransform: "capitalize" }}>
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        sx={{
+                          margin: 1,
+                          color: "#FFFFFF",
+                          backgroundColor: "#1C7488",
+                          textTransform: "capitalize",
+                        }}
+                      >
                         Save
                       </Button>
                     </Box>
@@ -333,6 +404,9 @@ const DashboardTabs = ({
                 goalData={goalData}
                 selectedCategories={selectedCategories}
                 handleAddGoal={handleAddGoal}
+                listGoals={listGoals}
+                handleEditGoal={handleEditGoal}
+                handleTransferMoney={handleTransferMoney}
               />
             </Paper>
           </Box>
@@ -341,7 +415,7 @@ const DashboardTabs = ({
           transactions
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-         <ChallengesPage />
+          <ChallengesPage />
         </CustomTabPanel>
       </Box>
     </>

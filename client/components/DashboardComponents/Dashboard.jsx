@@ -280,8 +280,7 @@ export default function Dashboard() {
   }
 
   const handleAddGoal = async (category, data) => {
-    let { bills, totalAmount, deadline, priority, badges, amountPaid } =
-      data;
+    let { bills, totalAmount, deadline, priority, badges, amountPaid } = data;
     console.log(convertDateToYYYYMMDD(deadline));
     const goalData = {
       goal_name: bills, // Assuming 'bills' field maps to 'goal_name' in your API
@@ -342,6 +341,45 @@ export default function Dashboard() {
       console.error("Error creating category:", error);
     }
   };
+
+  const handleTransferMoney = (
+    fromGoal,
+    toGoal,
+    amount,
+    priority,
+    deadline
+  ) => {
+    let fromCategory;
+    let fromGoalIndex;
+    let toCategory;
+    let toGoalIndex;
+    console.log("Transfer money");
+    console.log(fromGoal);
+    console.log(toGoal);
+    for (const [key, value] of Object.entries(mockData)) {
+      value.filter((goal, i) => {
+        if (goal.id == fromGoal) {
+          fromCategory = key;
+          fromGoalIndex = i;
+        }
+        if (goal.id == toGoal) {
+          toCategory = key;
+          toGoalIndex = i;
+        }
+      });
+    }
+    console.log("Transfer Money From");
+    console.log(fromCategory, fromGoalIndex);
+    mockData[fromCategory][fromGoalIndex].amountPaid -= amount;
+
+    console.log("Transfer Money To");
+    console.log(toCategory, toGoalIndex);
+    mockData[toCategory][toGoalIndex].amountPaid += amount;
+    mockData[toCategory][toGoalIndex].deadline =
+      convertDateToYYYYMMDD(deadline);
+    mockData[toCategory][toGoalIndex].priority = `${priority}`.toLowerCase();
+  };
+  const handleEditGoal = () => {};
   return (
     <Router>
       <Box sx={{ display: "flex" }}>
@@ -385,6 +423,8 @@ export default function Dashboard() {
                 handleAddGoal={handleAddGoal}
                 handleCreateCategory={handleCreateCategory}
                 listGoals={listGoals}
+                handleTransferMoney={handleTransferMoney}
+                handleEditGoal={handleEditGoal}
               />
             }
           />
