@@ -48,8 +48,15 @@ const TransferForm = ({
     setSelectedTransferTo(event.target.value);
   };
 
-  const onSubmit = () => {
-    handleTransferMoney(selectedGoalPrimary, selectedTransferTo);
+  const submitTransfer = () => {
+    handleTransferMoney(
+      selectedGoalPrimary,
+      selectedTransferTo,
+      transferAmount,
+      priority,
+      deadline
+    );
+    handleClose();
   };
 
   return (
@@ -158,7 +165,7 @@ const TransferForm = ({
           </Button>
           <Button
             onClick={() => {
-              submitGoal(addGoalToCategory);
+              submitTransfer();
             }}
             sx={{
               backgroundColor: "#1C7488",

@@ -350,10 +350,33 @@ export default function Dashboard() {
     deadline
   ) => {
     let fromCategory;
+    let fromGoalIndex;
     let toCategory;
+    let toGoalIndex;
+    console.log("Transfer money");
+    console.log(fromGoal);
+    console.log(toGoal);
     for (const [key, value] of Object.entries(mockData)) {
-      console.log(key, value);
+      value.filter((goal, i) => {
+        if (goal.id == fromGoal) {
+          fromCategory = key;
+          fromGoalIndex = i;
+        }
+        if (goal.id == toGoal) {
+          toCategory = key;
+          toGoalIndex = i;
+        }
+      });
     }
+    console.log("Transfer Money From");
+    console.log(fromCategory, fromGoalIndex);
+    mockData[fromCategory][fromGoalIndex].amountPaid -= amount;
+
+    console.log("Transfer Money To");
+    console.log(toCategory, toGoalIndex);
+    mockData[toCategory][toGoalIndex].amountPaid += amount;
+    // mockData[toCategory][toGoalIndex].deadline = deadline;
+    mockData[toCategory][toGoalIndex].priority = `${priority}`.toLowerCase();
   };
   const handleEditGoal = () => {};
   return (
