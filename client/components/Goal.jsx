@@ -15,14 +15,18 @@ import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import LinearProgressWithLabel from "./DashboardComponents/Utils";
+import { current } from "@reduxjs/toolkit";
 
 export default function Goal({ goalData }) {
   let [open, setOpen] = useState(false);
   let [addMoney, setAddMoney] = useState(0);
   let { goalID } = useParams();
+  console.log(goalData());
   let currentGoal = goalData().filter((data) => {
-    return data.id === goalID;
+    return data.id == goalID;
   });
+  console.log("current goal");
+  console.log(currentGoal);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
   const handleAddMoneyPush = (value) => setAddMoney(value);
