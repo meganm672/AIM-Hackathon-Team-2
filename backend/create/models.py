@@ -8,7 +8,7 @@ class User(models.Model):
 
 
 class Category(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     category_name = models.CharField(max_length=255)
 
 
@@ -21,13 +21,7 @@ class Goal(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     deadline = models.DateField(blank=True, null=True)
     priority = models.CharField(
-        max_length=255,
-        choices=[
-            ("low", "Low"),
-            ("medium", "Medium"),
-            ("high", "High"),
-            ("critical", "Critical"),
-        ],
+        max_length=255, choices=[("low", "Low"), ("medium", "Medium"), ("high", "High")]
     )
     saving_frequency = models.CharField(
         max_length=255,
