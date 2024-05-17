@@ -366,26 +366,29 @@ export default function Dashboard() {
         }
       });
     }
-    // mockData[fromCategory][fromGoalIndex].amountPaid -= amount;
-
-    // mockData[toCategory][toGoalIndex].amountPaid += amount;
-    // mockData[toCategory][toGoalIndex].deadline =
-    //   convertDateToYYYYMMDD(deadline);
-    // mockData[toCategory][toGoalIndex].priority = `${priority}`.toLowerCase();
     if (
       fromCategory !== undefined &&
       fromGoalIndex !== undefined &&
       toCategory !== undefined &&
       toGoalIndex !== undefined
     ) {
+      console.log("Transfer money");
+      console.log(mockData[fromCategory][fromGoalIndex]);
       setMockData((prevData) => {
         const updatedFromCategory = [...prevData[fromCategory]];
-        const updatedToCategory = [...prevData[toCategory]];
 
         updatedFromCategory[fromGoalIndex] = {
           ...updatedFromCategory[fromGoalIndex],
           amountPaid: updatedFromCategory[fromGoalIndex].amountPaid - amount,
         };
+
+        return {
+          ...prevData,
+          [fromCategory]: updatedFromCategory,
+        };
+      });
+      setMockData((prevData) => {
+        const updatedToCategory = [...prevData[toCategory]];
 
         updatedToCategory[toGoalIndex] = {
           ...updatedToCategory[toGoalIndex],
@@ -396,10 +399,10 @@ export default function Dashboard() {
 
         return {
           ...prevData,
-          [fromCategory]: updatedFromCategory,
           [toCategory]: updatedToCategory,
         };
       });
+      console.log(mockData[fromCategory][fromGoalIndex]);
     }
   };
 
