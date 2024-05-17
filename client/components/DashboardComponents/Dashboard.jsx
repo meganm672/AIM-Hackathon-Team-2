@@ -76,12 +76,12 @@ export default function Dashboard() {
   ) {
     return {
       bills,
-      totalAmount,
+      totalAmount: Number(totalAmount),
       deadline,
       priority: priority.toLowerCase(),
       badges,
       id,
-      amountPaid,
+      amountPaid: Number(amountPaid),
     };
   }
 
@@ -329,7 +329,7 @@ export default function Dashboard() {
   };
 
   const handleCreateCategory = async (category) => {
-    //mockData[category] = [];
+    mockData[category] = [];
     try {
       const response = await axios.post(
         "https://aim-hackathon-team-2.onrender.com/api/categories/",
