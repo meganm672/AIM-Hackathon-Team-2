@@ -280,8 +280,7 @@ export default function Dashboard() {
   }
 
   const handleAddGoal = async (category, data) => {
-    let { bills, totalAmount, deadline, priority, badges, amountPaid } =
-      data;
+    let { bills, totalAmount, deadline, priority, badges, amountPaid } = data;
     console.log(convertDateToYYYYMMDD(deadline));
     const goalData = {
       goal_name: bills, // Assuming 'bills' field maps to 'goal_name' in your API
@@ -342,6 +341,21 @@ export default function Dashboard() {
       console.error("Error creating category:", error);
     }
   };
+
+  const handleTransferMoney = (
+    fromGoal,
+    toGoal,
+    amount,
+    priority,
+    deadline
+  ) => {
+    let fromCategory;
+    let toCategory;
+    for (const [key, value] of Object.entries(mockData)) {
+      console.log(key, value);
+    }
+  };
+  const handleEditGoal = () => {};
   return (
     <Router>
       <Box sx={{ display: "flex" }}>
@@ -385,6 +399,8 @@ export default function Dashboard() {
                 handleAddGoal={handleAddGoal}
                 handleCreateCategory={handleCreateCategory}
                 listGoals={listGoals}
+                handleTransferMoney={handleTransferMoney}
+                handleEditGoal={handleEditGoal}
               />
             }
           />

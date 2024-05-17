@@ -15,6 +15,8 @@ export default function Home({
   handleAddGoal,
   handleCreateCategory,
   listGoals,
+  handleEditGoal,
+  handleTransferMoney,
 }) {
   return (
     <Box
@@ -54,6 +56,8 @@ export default function Home({
                 handleAddGoal={handleAddGoal}
                 handleCreateCategory={handleCreateCategory}
                 listGoals={listGoals}
+                handleEditGoal={handleEditGoal}
+                handleTransferMoney={handleTransferMoney}
               />
             </Paper>
           </Grid>

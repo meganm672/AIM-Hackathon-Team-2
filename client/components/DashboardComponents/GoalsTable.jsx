@@ -37,9 +37,15 @@ const buttonStyle = {
   fontSize: 15,
 };
 
-const GoalsTable = ({ goalData, category }) => {
+const GoalsTable = ({
+  goalData,
+  category,
+  listGoals,
+  handleEditGoal,
+  handleTransferMoney,
+}) => {
   const capitalizedCategory =
-    category.charAt(0).toUpperCase() + category.slice(1); 
+    category.charAt(0).toUpperCase() + category.slice(1);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [currentGoal, setCurrentGoal] = useState(null);
   const [transferDialogOpen, setTransferDialogOpen] = useState(false);
@@ -64,7 +70,6 @@ const GoalsTable = ({ goalData, category }) => {
     setCurrentGoal(null);
   };
 
-
   const getPriorityCellStyle = (priority) => {
     const { backgroundColor, color } = priorityColorMap[priority] || {};
     return {
@@ -73,7 +78,6 @@ const GoalsTable = ({ goalData, category }) => {
       textTransform: "capitalize",
     };
   };
-
 
   return (
     <div>
@@ -85,10 +89,10 @@ const GoalsTable = ({ goalData, category }) => {
                 <Checkbox defaultChecked />
               </TableCell>
               <TableCell>{capitalizedCategory}</TableCell>
-              <TableCell >Due Date</TableCell>
-              <TableCell >Priority</TableCell>
-              <TableCell >Total Amount</TableCell>
-              <TableCell >Badges</TableCell>
+              <TableCell>Due Date</TableCell>
+              <TableCell>Priority</TableCell>
+              <TableCell>Total Amount</TableCell>
+              <TableCell>Badges</TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
@@ -108,8 +112,8 @@ const GoalsTable = ({ goalData, category }) => {
                     value={(row.amountPaid / row.totalAmount) * 100}
                   />
                 </TableCell>
-                <TableCell >{row.deadline}</TableCell>
-                <TableCell >
+                <TableCell>{row.deadline}</TableCell>
+                <TableCell>
                   <Chip
                     label={row.priority}
                     style={{
@@ -118,7 +122,7 @@ const GoalsTable = ({ goalData, category }) => {
                     }}
                   />
                 </TableCell>
-                <TableCell >${row.totalAmount}</TableCell>
+                <TableCell>${row.totalAmount}</TableCell>
                 <TableCell>
                   <Stack direction={"row"} spacing={1}>
                     <span>{row.badges[0].icon}</span>
@@ -126,12 +130,17 @@ const GoalsTable = ({ goalData, category }) => {
                   </Stack>
                 </TableCell>
                 <TableCell align="right">
-
                   <Stack direction={"row"} spacing={1}>
-                    <IconButton style={buttonStyle} onClick={() => handleEditClick(row)}>
+                    <IconButton
+                      style={buttonStyle}
+                      onClick={() => handleEditClick(row)}
+                    >
                       <PiPencilSimpleThin />
                     </IconButton>
-                    <IconButton style={buttonStyle} onClick={() => handleTransferClick(row) }>
+                    <IconButton
+                      style={buttonStyle}
+                      onClick={() => handleTransferClick(row)}
+                    >
                       <BiTransfer />
                     </IconButton>
                   </Stack>
@@ -146,11 +155,14 @@ const GoalsTable = ({ goalData, category }) => {
         open={editDialogOpen}
         handleClose={handleEditDialogClose}
         goal={currentGoal}
+        handleEditGoal={handleEditGoal}
       />
-      <TransferForm 
-      open={transferDialogOpen}
-      handleClose={handleTransferDialogClose}
-      goal={currentGoal}
+      <TransferForm
+        open={transferDialogOpen}
+        handleClose={handleTransferDialogClose}
+        goal={currentGoal}
+        listGoals={listGoals}
+        handleTransferMoney={handleTransferMoney}
       />
     </div>
   );

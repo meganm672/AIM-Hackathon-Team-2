@@ -20,12 +20,19 @@ import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import Divider from "@mui/material/Divider";
 
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import CloseIcon from '@mui/icons-material/Close';
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 
-const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
+const BudgetAccordian = ({
+  goalData,
+  selectedCategories,
+  handleAddGoal,
+  listGoals,
+  handleEditGoal,
+  handleTransferMoney,
+}) => {
   const [openCreateModal, setOpenCreateModel] = useState(false);
 
   const [addGoalToCategory, setAddGoalToCategory] = useState("");
@@ -90,7 +97,6 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
     setReminderInterval(event.target.value);
   };
 
-
   const calculateTotalSaved = (category) => {
     return goalData[category].reduce((total, goal) => {
       return total + goal.amountPaid;
@@ -115,18 +121,22 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
             sx={{ margin: 2 }}
           >
             <AccordionSummary
-              sx={{ flexDirection: "row-reverse", backgroundColor: "#F2F8FD", alignItems: "center" }}
+              sx={{
+                flexDirection: "row-reverse",
+                backgroundColor: "#F2F8FD",
+                alignItems: "center",
+              }}
               expandIcon={<ArrowDropDownIcon />}
               aria-controls="panel1-content"
               id="panel1-header"
             >
-              <Typography align="left" sx={{marginTop:.6, marginRight: 2}}>
+              <Typography align="left" sx={{ marginTop: 0.6, marginRight: 2 }}>
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </Typography>
               {accordionOpen[category] ? (
                 <>
                   <Button
-                    sx={{ color: "#1F648E", marginRight: "auto"}}
+                    sx={{ color: "#1F648E", marginRight: "auto" }}
                     onClick={() => {
                       setAddGoalToCategory(category);
                       handleOpenCreateGoalModal();
@@ -152,7 +162,13 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
             </AccordionSummary>
             <AccordionDetails sx={{ backgroundColor: "#F2F8FD" }}>
               {/* <CategoryTable goalData={goalData[category]} /> */}
-              <GoalsTable goalData={goalData[category]} category={category} />
+              <GoalsTable
+                listGoals={listGoals}
+                goalData={goalData[category]}
+                category={category}
+                handleEditGoal={handleEditGoal}
+                handleTransferMoney={handleTransferMoney}
+              />
             </AccordionDetails>
           </Accordion>
           {/* add goal form */}
@@ -163,7 +179,6 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
               onClose={handleCloseCreateGoalModal}
             >
               <Stack direction="row" sx={{ justifyContent: "space-between" }}>
-
                 <DialogTitle>Create Goal</DialogTitle>
                 <IconButton onClick={handleCloseCreateGoalModal}>
                   <CloseIcon />
@@ -173,7 +188,6 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
               <DialogContent>
                 <Box sx={{ m: 1, minWidth: 100 }}>
                   <Stack direction="column">
-
                     <FormLabel>Goal Name</FormLabel>
                     <TextField
                       id="goal-name"
@@ -199,9 +213,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                     />
                   </Stack>
                   <Stack direction="row">
-
                     <Stack sx={{ width: "50%", m: 1 }}>
-
                       <FormLabel>Due date</FormLabel>
                       <DatePicker
                         value={deadline}
@@ -236,29 +248,33 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                         onChange={handleAlignment}
                         aria-label="text alignment"
                         sx={{
-                          '& .Mui-selected': {
-                            backgroundColor: '#1C7488',
-                            color: '#FFFFFF',
-                          }
+                          "& .Mui-selected": {
+                            backgroundColor: "#1C7488",
+                            color: "#FFFFFF",
+                          },
                         }}
                       >
-                        <ToggleButton value="weekly"
-                        sx={{textTransform: "capitalize"}}
+                        <ToggleButton
+                          value="weekly"
+                          sx={{ textTransform: "capitalize" }}
                         >
                           Weekly
                         </ToggleButton>
-                        <ToggleButton value="monthly"
-                         sx={{textTransform: "capitalize"}}
+                        <ToggleButton
+                          value="monthly"
+                          sx={{ textTransform: "capitalize" }}
                         >
                           Monthly
                         </ToggleButton>
-                        <ToggleButton value="yearly"
-                         sx={{textTransform: "capitalize"}}
+                        <ToggleButton
+                          value="yearly"
+                          sx={{ textTransform: "capitalize" }}
                         >
                           Yearly
                         </ToggleButton>
-                        <ToggleButton value="custom"
-                         sx={{textTransform: "capitalize"}}
+                        <ToggleButton
+                          value="custom"
+                          sx={{ textTransform: "capitalize" }}
                         >
                           Custom
                         </ToggleButton>
@@ -283,7 +299,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                   sx={{
                     backgroundColor: "#F1F3F4", // Gray color
                     color: "#706F6F",
-                    textTransform: "capitalize"
+                    textTransform: "capitalize",
                   }}
                 >
                   Cancel
@@ -295,7 +311,7 @@ const BudgetAccordian = ({ goalData, selectedCategories, handleAddGoal }) => {
                   sx={{
                     backgroundColor: "#1C7488",
                     color: "#FFFFFF",
-                    textTransform: "capitalize"
+                    textTransform: "capitalize",
                   }}
                 >
                   Create Task
