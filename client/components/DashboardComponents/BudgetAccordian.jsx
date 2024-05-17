@@ -31,6 +31,7 @@ const BudgetAccordian = ({
   handleAddGoal,
   listGoals,
   handleEditGoal,
+  deleteGoal,
   handleTransferMoney,
 }) => {
   const [openCreateModal, setOpenCreateModel] = useState(false);
@@ -166,6 +167,7 @@ const BudgetAccordian = ({
                 listGoals={listGoals}
                 goalData={goalData[category]}
                 category={category}
+                deleteGoal={deleteGoal}
                 handleEditGoal={handleEditGoal}
                 handleTransferMoney={handleTransferMoney}
               />

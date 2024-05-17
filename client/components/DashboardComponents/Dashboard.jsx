@@ -353,11 +353,9 @@ export default function Dashboard() {
     let fromGoalIndex;
     let toCategory;
     let toGoalIndex;
-    console.log("Transfer money");
-    console.log(fromGoal);
-    console.log(toGoal);
+
     for (const [key, value] of Object.entries(mockData)) {
-      value.filter((goal, i) => {
+      value.map((goal, i) => {
         if (goal.id == fromGoal) {
           fromCategory = key;
           fromGoalIndex = i;
@@ -368,18 +366,92 @@ export default function Dashboard() {
         }
       });
     }
-    console.log("Transfer Money From");
-    console.log(fromCategory, fromGoalIndex);
-    mockData[fromCategory][fromGoalIndex].amountPaid -= amount;
+    // mockData[fromCategory][fromGoalIndex].amountPaid -= amount;
 
-    console.log("Transfer Money To");
-    console.log(toCategory, toGoalIndex);
-    mockData[toCategory][toGoalIndex].amountPaid += amount;
-    mockData[toCategory][toGoalIndex].deadline =
-      convertDateToYYYYMMDD(deadline);
-    mockData[toCategory][toGoalIndex].priority = `${priority}`.toLowerCase();
+    // mockData[toCategory][toGoalIndex].amountPaid += amount;
+    // mockData[toCategory][toGoalIndex].deadline =
+    //   convertDateToYYYYMMDD(deadline);
+    // mockData[toCategory][toGoalIndex].priority = `${priority}`.toLowerCase();
+    if (
+      fromCategory !== undefined &&
+      fromGoalIndex !== undefined &&
+      toCategory !== undefined &&
+      toGoalIndex !== undefined
+    ) {
+      setMockData((prevData) => {
+        const updatedFromCategory = [...prevData[fromCategory]];
+        const updatedToCategory = [...prevData[toCategory]];
+
+        updatedFromCategory[fromGoalIndex] = {
+          ...updatedFromCategory[fromGoalIndex],
+          amountPaid: updatedFromCategory[fromGoalIndex].amountPaid - amount,
+        };
+
+        updatedToCategory[toGoalIndex] = {
+          ...updatedToCategory[toGoalIndex],
+          amountPaid: updatedToCategory[toGoalIndex].amountPaid + amount,
+          deadline: convertDateToYYYYMMDD(deadline),
+          priority: `${priority}`.toLowerCase(),
+        };
+
+        return {
+          ...prevData,
+          [fromCategory]: updatedFromCategory,
+          [toCategory]: updatedToCategory,
+        };
+      });
+    }
   };
-  const handleEditGoal = () => {};
+
+  const handleEditGoal = (deadline, priority, goalID) => {
+    let category;
+    let goalIndex;
+
+    for (const [key, value] of Object.entries(mockData)) {
+      value.map((goal, i) => {
+        if (goal.id == goalID.id) {
+          category = key;
+          goalIndex = i;
+        }
+      });
+    }
+    if (category !== undefined && goalIndex !== undefined) {
+      const updatedGoals = [...mockData[category]];
+      updatedGoals[goalIndex] = {
+        ...updatedGoals[goalIndex],
+        deadline: convertDateToYYYYMMDD(deadline),
+        priority: `${priority}`.toLowerCase(),
+      };
+
+      setMockData((prevMockData) => ({
+        ...prevMockData,
+        [category]: updatedGoals,
+      }));
+    }
+  };
+  const deleteGoal = (goalID) => {
+    let category;
+    for (const [key, value] of Object.entries(mockData)) {
+      value.map((goal, i) => {
+        if (goal.id == goalID.id) {
+          category = key;
+          return;
+        }
+      });
+    }
+    // If the category was found, filter out the goal
+    if (category) {
+      const updatedCategoryGoals = mockData[category].filter(
+        (goal) => goal.id !== goalID.id
+      );
+
+      // Update the state with the new data
+      setMockData((prevMockData) => ({
+        ...prevMockData,
+        [category]: updatedCategoryGoals,
+      }));
+    }
+  };
   return (
     <Router>
       <Box sx={{ display: "flex" }}>
@@ -425,6 +497,7 @@ export default function Dashboard() {
                 listGoals={listGoals}
                 handleTransferMoney={handleTransferMoney}
                 handleEditGoal={handleEditGoal}
+                deleteGoal={deleteGoal}
               />
             }
           />
