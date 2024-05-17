@@ -27,12 +27,20 @@ export default function Goal({ goalData }) {
   const handleCloseModal = () => setOpen(false);
   const handleAddMoneyPush = (value) => setAddMoney(value);
 
-  const handleSubmitAddMoney = (e) => {
+  const handleSubmitAddMoney = async (e) => {
     e.preventDefault();
     if (typeof addMoney !== "number") {
       return;
     }
     handleCloseModal();
+    console.log("current goal");
+    console.log(currentGoal[0].id);
+    const response = await fetch(`https://aim-hackathon-team-2.onrender.com/api/goals/${currentGoal[0].id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ completed_amount: currentGoal[0].amountPaid + addMoney })
+    });
+    console.log(response);
     currentGoal[0].amountPaid += addMoney;
     setAddMoney(0);
   };
