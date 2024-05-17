@@ -80,7 +80,7 @@ const DashboardTabs = ({
   };
   const handleAddMoneyPush = (value) => setAmountAdd(value);
 
-  const handleSubmitAddMoney = (e) => {
+  const handleSubmitAddMoney = async (e) => {
     e.preventDefault();
 
     if (typeof amountAdd !== "number") {
@@ -98,6 +98,14 @@ const DashboardTabs = ({
       });
     }
     handleCloseAddMoney();
+    console.log("current goal");
+    console.log(currentGoalIndex);
+    const response = await fetch(`https://aim-hackathon-team-2.onrender.com/api/goals/${currentGoalIndex}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ completed_amount: goalData[foundCategory][currentGoalIndex].amountPaid += amountAdd })
+    });
+    console.log(response);
     goalData[foundCategory][currentGoalIndex].amountPaid += amountAdd;
 
     setAmountAdd(0);
