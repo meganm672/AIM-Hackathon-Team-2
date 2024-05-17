@@ -30,7 +30,7 @@ const TransferForm = ({
   if (!goal) return null;
   const [deadline, setDeadline] = useState(dayjs(goal.deadline));
   const [priority, setPriority] = useState("");
-  const [selectedGoalPrimary, setSelectedGoalPrimary] = useState("");
+  const [selectedGoalPrimary, setSelectedGoalPrimary] = useState(goal.id);
   const [transferAmount, setTransferAmount] = useState(0);
   const [selectedTransferTo, setSelectedTransferTo] = useState("");
   const handleReminderIntervalChange = (event) => {
