@@ -17,6 +17,7 @@ import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import EditGoal from "./EditGoal";
 import TransferForm from "./TransferForm";
+import dayjs from "dayjs";
 const priorityColorMap = {
   low: { backgroundColor: "#E4FDEB", color: "#48C76A" }, // Green
   medium: { backgroundColor: "#FFF3B4", color: "#E7B147" }, // Yellow
@@ -113,7 +114,9 @@ const GoalsTable = ({
                     value={(row.amountPaid / row.totalAmount) * 100}
                   />
                 </TableCell>
-                <TableCell>{row.deadline}</TableCell>
+                <TableCell>
+                  {dayjs(row.deadline).format("MMMM DD YYYY")}
+                </TableCell>
                 <TableCell>
                   <Chip
                     label={row.priority}

@@ -375,7 +375,8 @@ export default function Dashboard() {
     console.log("Transfer Money To");
     console.log(toCategory, toGoalIndex);
     mockData[toCategory][toGoalIndex].amountPaid += amount;
-    // mockData[toCategory][toGoalIndex].deadline = deadline;
+    mockData[toCategory][toGoalIndex].deadline =
+      convertDateToYYYYMMDD(deadline);
     mockData[toCategory][toGoalIndex].priority = `${priority}`.toLowerCase();
   };
   const handleEditGoal = () => {};
